@@ -10,9 +10,7 @@ export async function generateExperiment() {
     const tasks = generateTasksFromVariants(variants)
     //insert tasks
     const insertedTasks = await insertManyTasks(tasks)
-    console.log('insertedTasks', insertedTasks)
     const insertedTasksIds = Object.values(insertedTasks?.insertedIds ?? {})
-
     //insert experiment
     const experiment: ExperimentMeta = {
         tasksIds: Object.values(insertedTasksIds)

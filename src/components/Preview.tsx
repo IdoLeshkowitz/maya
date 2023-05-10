@@ -29,7 +29,7 @@ function getCurrentTaskMeta(state: RootState) {
 
 const Preview: FC = () => {
     const dispatch = useAppDispatch()
-    const [currentSnapshot, setCurrentSnapshot] = useState<Snapshot | null>(null)
+    const [currentActiveSnapshot, setCurrentActiveSnapshot] = useState<Snapshot | null>(null)
     const currentTaskStatus = useAppSelector(getCurrentTaskStatus)
     const currentTaskMeta = useAppSelector(getCurrentTaskMeta)
     useEffect(() => {
@@ -39,19 +39,19 @@ const Preview: FC = () => {
                 const currentSnapshot = leftSnapshots[i]
                 setTimeout(() => {
                     if (!currentSnapshot) {
-                        setCurrentSnapshot(null)
+                        setCurrentActiveSnapshot(null)
                         dispatch(finishLeftPreview())
                         return
                     }
                     /* set loading snapshot will appear for 2 sec*/
-                    setCurrentSnapshot({
+                    setCurrentActiveSnapshot({
                         groupIndex: currentSnapshot.groupIndex,
                         label     : '',
                         indicator : SnapshotIndicator.LOADING,
                     })
                     /* set real snapshot will appear for 1 sec */
                     setTimeout(() => {
-                        setCurrentSnapshot({
+                        setCurrentActiveSnapshot({
                             ...currentSnapshot,
                         })
                     }, 2000)
@@ -62,34 +62,33 @@ const Preview: FC = () => {
             const rightSnapshots = [...currentTaskMeta.preview.rightSnapshots]
             for (let i = 0; i < rightSnapshots.length + 1; i++) {
                 const currentSnapshot = rightSnapshots[i]
-                console.log(currentSnapshot)
                 setTimeout(() => {
                     if (!currentSnapshot) {
-                        setCurrentSnapshot(null)
+                        setCurrentActiveSnapshot(null)
                         dispatch(finishRightPreview())
                         return
                     }
                     /* set loading snapshot will appear for 2 sec*/
-                    setCurrentSnapshot({
+                    setCurrentActiveSnapshot({
                         groupIndex: currentSnapshot.groupIndex,
                         label     : '',
                         indicator : SnapshotIndicator.LOADING,
                     })
                     /* set real snapshot will appear for 1 sec */
                     setTimeout(() => {
-                        setCurrentSnapshot({
+                        setCurrentActiveSnapshot({
                             ...currentSnapshot,
                         })
                     }, 2000)
                 }, i * 3000)
             }
         }
-    }, [currentTaskMeta.preview.leftSnapshots, currentTaskMeta.preview.rightSnapshots, currentTaskStatus, dispatch])
+    }, [currentTaskStatus])
     return (
         <div className="flex flex-col gap-5">
             {/*current label*/}
             <div className="flex flex-col items-center justify-center">
-                <h1 className="font-bold text-black text-center h-10">{currentSnapshot?.label}</h1>
+                <h1 className="font-bold text-black text-center h-10">{currentActiveSnapshot?.label}</h1>
             </div>
 
             <div className="flex flex-row  items-stretch justify-evenly">
@@ -101,12 +100,12 @@ const Preview: FC = () => {
                     {
                         currentTaskMeta.leftOption.groupsNames.map((groupName, index) => {
                             function isSnapshot() {
-                                return currentTaskStatus === TaskStatus.LEFT_PREVIEW && currentSnapshot?.groupIndex === index
+                                return currentTaskStatus === TaskStatus.LEFT_PREVIEW && currentActiveSnapshot?.groupIndex === index
                             }
 
                             return (
                                 <Group
-                                    snapshot={isSnapshot() ? currentSnapshot : null}
+                                    snapshot={isSnapshot() ? currentActiveSnapshot : null}
                                     key={index}
                                     groupName={groupName}
                                 />
@@ -123,12 +122,12 @@ const Preview: FC = () => {
                     {
                         currentTaskMeta.rightOption.groupsNames.map((groupName, index) => {
                             function isSnapshot() {
-                                return currentTaskStatus === TaskStatus.RIGHT_PREVIEW && currentSnapshot?.groupIndex === index
+                                return currentTaskStatus === TaskStatus.RIGHT_PREVIEW && currentActiveSnapshot?.groupIndex === index
                             }
 
                             return (
                                 <Group
-                                    snapshot={isSnapshot() ? currentSnapshot : null}
+                                    snapshot={isSnapshot() ? currentActiveSnapshot : null}
                                     key={index}
                                     groupName={groupName}
                                 />
