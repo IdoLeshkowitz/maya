@@ -40,7 +40,9 @@ const Preview: FC = () => {
                 setTimeout(() => {
                     if (!currentSnapshot) {
                         setCurrentActiveSnapshot(null)
-                        dispatch(finishLeftPreview())
+                        setTimeout(() => {
+                            dispatch(finishLeftPreview())
+                        }, 1)
                         return
                     }
                     /* set loading snapshot will appear for 2 sec*/
@@ -65,7 +67,9 @@ const Preview: FC = () => {
                 setTimeout(() => {
                     if (!currentSnapshot) {
                         setCurrentActiveSnapshot(null)
-                        dispatch(finishRightPreview())
+                        setTimeout(() => {
+                            dispatch(finishRightPreview())
+                        }, 1)
                         return
                     }
                     /* set loading snapshot will appear for 2 sec*/
@@ -122,7 +126,13 @@ const Preview: FC = () => {
                     {
                         currentTaskMeta.rightOption.groupsNames.map((groupName, index) => {
                             function isSnapshot() {
-                                return currentTaskStatus === TaskStatus.RIGHT_PREVIEW && currentActiveSnapshot?.groupIndex === index
+                                if (currentActiveSnapshot === null) {
+                                    return false
+                                }
+                                if (currentTaskStatus === TaskStatus.LEFT_PREVIEW) {
+                                    return false
+                                }
+                                return currentActiveSnapshot.groupIndex === index
                             }
 
                             return (

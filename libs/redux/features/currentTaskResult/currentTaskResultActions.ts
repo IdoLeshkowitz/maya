@@ -1,3 +1,3 @@
 import {currentTaskResultSlice} from "./currentTaskResultSlice";
 
-export const {resetCurrentTaskResult,setScores,} = currentTaskResultSlice.actions
+export const {resetCurrentTaskResult,setCurrentTaskScores,setCurrentTaskOptionSelection} = currentTaskResultSlice.actions
