@@ -14,6 +14,6 @@ export interface Score {
 }
 
 export interface OptionSelection {
-    selectedOptionSide: 'left' | 'right'
-    selectedOptionSideConfidence: number
+    selectedSide: 'left' | 'right'
+    confidence: number
 }

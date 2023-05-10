@@ -1,5 +1,5 @@
 import {OptionSelection, Score} from "@/types/taskResult";
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 interface CurrentTaskResultState {
     optionSelection: OptionSelection | null
@@ -19,11 +19,11 @@ export const currentTaskResultSlice = createSlice({
             state.optionSelection = null
             state.scores = null
         },
-        setOptionSelection(state, action) {
+        setCurrentTaskScores(state, action:PayloadAction<Score[]>) {
+            state.scores = action.payload
+        },
+        setCurrentTaskOptionSelection(state, action:PayloadAction<OptionSelection>) {
             state.optionSelection = action.payload
         },
-        setScores(state, action) {
-            state.scores = action.payload
-        }
     }
 })

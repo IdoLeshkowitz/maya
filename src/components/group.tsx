@@ -1,7 +1,7 @@
 import {Snapshot as SnapshotType, SnapshotIndicator} from "@/types/preview";
 import {CheckIcon, XMarkIcon} from "@heroicons/react/24/solid";
 
-export default function Group({snapshot, groupName}: { snapshot: SnapshotType | null, groupName: string }) {
+export default function Group({snapshot, groupName}: { snapshot?: SnapshotType | null, groupName: string }) {
     return (
         <div className="flex flex-col m-3.5 gap-3">
             {/*frame*/}
