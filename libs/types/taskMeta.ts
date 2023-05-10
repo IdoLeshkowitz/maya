@@ -3,7 +3,7 @@ import {Option} from "@/types/option";
 import {Preview} from "@/types/preview";
 
 
-export interface TaskMetadata {
+export interface TaskMeta {
     _id?: ObjectId
     variantName: string
     leftOption: Option

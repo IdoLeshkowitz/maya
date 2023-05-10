@@ -1,26 +1,40 @@
 'use client'
-import {FC, useState} from "react";
-import {Task} from "@/types/task";
+import {FC} from "react";
+import {useAppSelector} from "../../libs/redux/hooks";
+import {RootState} from "../../libs/redux/store";
+import {TaskStatus} from "../../libs/redux/features/progress/progressSlice";
+import Preview from "@components/Preview";
 
-interface TaskProps {
-    task: Task
+function getCurrentTaskMeta(state: RootState) {
+    const currentTaskIndex = state.progress.currentTaskIndex
+    if (currentTaskIndex === null) {
+        throw new Error('currentTaskIndex is undefined')
+    }
+    const currentTask = state.tasksMeta?.at(currentTaskIndex)
+    if (!currentTask) {
+        throw new Error('currentTask is undefined')
+    }
+    return currentTask
 }
 
-enum TaskState {
-    PREVIEW,
-    IN_PROGRESS,
-    COMPLETE
-}
-
-const TaskComp: FC<TaskProps> = ({task}) => {
-    const [taskState, setTaskState] = useState(TaskState.PREVIEW)
-    return (
-        {
-
-        }
-    )
+function getCurrentTaskStatus(state: RootState) {
+    const currentTaskStatus = state.progress.currentTaskStatus
+    if (currentTaskStatus === null) {
+        throw new Error('currentTaskIndex is undefined')
+    }
+    return currentTaskStatus as TaskStatus
 }
 
 
-export default TaskComp
+const Task: FC = () => {
+    const currentTaskMeta = useAppSelector(getCurrentTaskMeta)
+    const currentTaskStatus = useAppSelector(getCurrentTaskStatus)
+    if (currentTaskStatus === TaskStatus.LEFT_PREVIEW || currentTaskStatus === TaskStatus.RIGHT_PREVIEW) {
+        return <Preview/>
+    }
+    return null
+}
+
+
+export default Task
 

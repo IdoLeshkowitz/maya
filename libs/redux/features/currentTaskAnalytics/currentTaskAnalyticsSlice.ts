@@ -7,12 +7,12 @@ export interface TaskAnalyticsState {
 
 const initialState: TaskAnalyticsState = {
     startTime: null,
-    endTime: null
+    endTime  : null
 }
 
-export const taskAnalyticsSlice = createSlice({
+export const currentTaskAnalyticsSlice = createSlice({
     initialState,
-    name: 'taskAnalytics',
+    name    : 'taskAnalytics',
     reducers: {
         setStartTime(state, action: PayloadAction<number>) {
             state.startTime = action.payload
@@ -20,5 +20,9 @@ export const taskAnalyticsSlice = createSlice({
         setEndTime(state, action: PayloadAction<number>) {
             state.endTime = action.payload
         },
+        resetCurrentTaskAnalytics(state) {
+            state.startTime = null
+            state.endTime = null
+        }
     }
 })

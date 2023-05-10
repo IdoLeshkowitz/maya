@@ -3,7 +3,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 type TaskResults = TaskResult[] | null
 const initialState: TaskResults = null
-export const tasksResultsSlice = createSlice({
+export const tasksResultSlice = createSlice({
     initialState: null as TaskResults,
     name        : 'taskResults',
     reducers    : {
@@ -11,6 +11,6 @@ export const tasksResultsSlice = createSlice({
             if (!action.payload) return state
             if (!state) return [action.payload]
             return [...state, action.payload]
-        }
+        },
     }
 })

@@ -1,6 +1,6 @@
 import {ObjectId} from "bson";
 
-export interface ExperimentMetadata {
+export interface ExperimentMeta {
     _id?: ObjectId
     tasksIds: ObjectId[]
 }

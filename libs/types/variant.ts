@@ -1,12 +1,12 @@
-import {GroupCollection} from "@/types/GroupCollection";
-import {Preview} from "@/types/Preview";
+import {Preview} from "@/types/preview";
 
-export interface TasksByVariant {
-    name: string
+export interface Variant {
+    variantName: string
     numberOfTasks: number
     optionsColors: string[][]
     optionsNames: string[][]
-    groupsCollections: GroupCollection[]
+    groupsNames: string[][]
+
     previews: Preview[]
 }
 

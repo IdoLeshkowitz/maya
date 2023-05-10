@@ -1,3 +1,3 @@
-import {currentTaskResultSlice} from "../currentTaskResult/currentTaskResultSlice";
+import {currentTaskAnalyticsSlice} from "./currentTaskAnalyticsSlice";
 
-export const {resetCurrentTaskResult} = currentTaskResultSlice.actions
+export const {setStartTime, setEndTime, resetCurrentTaskAnalytics} = currentTaskAnalyticsSlice.actions

@@ -1,40 +1,46 @@
 [
   {
-    "name"             : "stocks",
-    "numberOfTasks"    : 2,
-    "optionsColors"    : [
+    "variantName"  : "stocks",
+    "numberOfTasks": 2,
+    "optionsColors": [
       ["red", "green"],
       ["blue", "yellow"]
     ],
-    "optionsNames"     : [
+    "optionsNames" : [
       ["option1", "option2"],
       ["option3", "option4"]
     ],
-    "groupsCollections": [
-      {
-        "name"  : "tech stocks",
-        "groups": ["stock1", "stock2", "stock3", "stock4", "stock5", "stock6"]
-      },
-      {
-        "name"  : "bank stocks",
-        "groups": ["stock7", "stock8", "stock9", "stock10", "stock11", "stock12"]
-      }
+    "groupsNames"  : [
+      ["stock1", "stock2", "stock3", "stock4", "stock5", "stock6"],
+      ["stock7", "stock8", "stock9", "stock10", "stock11", "stock12"]
     ],
-    "previews"         : [
+    "previews"     : [
       {
-        "optionSide" : "left",
-        "name": "bad",
-        "snapshots"  : [
-          {"groupIndex": 0, "indicator": "cross"},
-          {"groupIndex": 1, "indicator": "check"}
+        "rightSnapshotsName": "bad",
+        "leftSnapshotsName" : "good",
+        "rightSnapshots"    : [
+          {"groupIndex": 0, "label": "company1", "indicator": "cross"},
+          {"groupIndex": 1, "label": "company2", "indicator": "cross"},
+          {"groupIndex": 2, "label": "company3", "indicator": "cross"}
+        ],
+        "leftSnapshots"     : [
+          {"groupIndex": 0, "label": "company1", "indicator": "check"},
+          {"groupIndex": 1, "label": "company2", "indicator": "check"},
+          {"groupIndex": 2, "label": "company3", "indicator": "check"}
         ]
       },
       {
-        "optionSide" : "right",
-        "name": "good",
-        "snapshots"  : [
-          {"groupIndex": 0, "indicator": "check"},
-          {"groupIndex": 1, "indicator": "cross"}
+        "rightSnapshotsName": "good",
+        "leftSnapshotsName" : "bad",
+        "rightSnapshots"    : [
+          {"groupIndex": 0, "label": "company1", "indicator": "check"},
+          {"groupIndex": 1, "label": "company2", "indicator": "check"},
+          {"groupIndex": 2, "label": "company3", "indicator": "check"}
+        ],
+        "leftSnapshots"     : [
+          {"groupIndex": 0, "label": "company1", "indicator": "cross"},
+          {"groupIndex": 1, "label": "company2", "indicator": "cross"},
+          {"groupIndex": 2, "label": "company3", "indicator": "cross"}
         ]
       }
     ]
