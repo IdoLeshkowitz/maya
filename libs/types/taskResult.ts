@@ -1,12 +1,13 @@
 import {ObjectId} from "bson";
 
 export interface TaskResult {
+    _id?: ObjectId
     taskId: ObjectId
     duration: number
     optionSelection: OptionSelection
-    scores: Score[]
+    leftScores: Score[]
+    rightScores: Score[]
 }
-
 
 export interface Score {
     value: number

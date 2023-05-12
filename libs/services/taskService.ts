@@ -3,6 +3,7 @@ import client from "../client";
 import {Variant} from "@/types/variant";
 import {shuffle} from "../utils/shuffle";
 import {splitArray} from "../utils/splitArray";
+import {TaskResult} from "@/types/taskResult";
 
 export async function insertManyTasks(tasks: TaskMeta[]) {
     try {
@@ -51,4 +52,24 @@ export function generateTasksFromVariants(variants: Variant[]): TaskMeta[] {
         }
     }
     return output
+}
+
+export async function getAllTasksResults(): Promise<TaskResult[]> {
+    try {
+        await client.connect()
+        return await client.db("test").collection("taskResults").find().toArray() as TaskResult[]
+    } catch (e) {
+        console.error(e)
+        return Promise.reject(e)
+    }
+}
+
+export async function getAllTasksMeta(): Promise<TaskMeta[]> {
+    try {
+        await client.connect()
+        return await client.db("test").collection("tasks").find().toArray() as TaskMeta[]
+    } catch (e) {
+        console.error(e)
+        return Promise.reject(e)
+    }
 }

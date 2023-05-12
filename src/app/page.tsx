@@ -1,7 +1,7 @@
 import {Inter} from 'next/font/google'
 import {generateExperiment} from "../../libs/services/experimentService";
-import ReduxProvider from "@components/reduxProvider";
 import Experiment from "@components/experiment";
+import ReduxProvider from "@components/reduxProvider";
 
 const inter = Inter({subsets: ['latin']})
 

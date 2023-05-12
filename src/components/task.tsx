@@ -5,6 +5,7 @@ import {RootState} from "../../libs/redux/store";
 import {TaskStatus} from "../../libs/redux/features/progress/progressSlice";
 import Preview from "@components/Preview";
 import OptionSelection from "@components/optionSelection";
+import Scores from "@components/scores";
 
 function getCurrentTaskMeta(state: RootState) {
     const currentTaskIndex = state.progress.currentTaskIndex
@@ -36,8 +37,8 @@ const Task: FC = () => {
     if (currentTaskStatus === TaskStatus.OPTION_SELECTION) {
         return <OptionSelection/>
     }
-    if (currentTaskStatus === TaskStatus.GROUP_SCORING) {
-
+    if (currentTaskStatus === TaskStatus.LEFT_SCORES || currentTaskStatus === TaskStatus.RIGHT_SCORES) {
+        return <Scores/>
     }
     return null
 }

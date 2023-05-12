@@ -19,5 +19,8 @@ export const startOptionSelection = createAction('userGesture/startOptionSelecti
 export const finishOptionSelection = createAction('userGesture/finishOptionSelection');
 
 
-export const startGroupScoring = createAction('userGesture/startScores');
-export const finishGroupScoring = createAction('userGesture/finishScores');
+export const startLeftOptionScoring = createAction('userGesture/startLeftGroupScoring');
+export const finishLeftOptionScoring = createAction('userGesture/finishLeftGroupScoring');
+export const startRightOptionScoring = createAction('userGesture/startRightGroupScoring');
+export const finishRightOptionScoring = createAction('userGesture/finishRightGroupScoring');
+

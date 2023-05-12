@@ -4,7 +4,8 @@ export enum TaskStatus {
     "LEFT_PREVIEW",
     "RIGHT_PREVIEW",
     "OPTION_SELECTION",
-    "GROUP_SCORING",
+    "LEFT_SCORES",
+    "RIGHT_SCORES",
     "FINISHED"
 }
 
@@ -12,6 +13,7 @@ export enum ExperimentStatus {
     IDLE,
     INSTRUCTIONS,
     TASKS,
+    RESULTS_PENDING,
     ENDED
 }
 

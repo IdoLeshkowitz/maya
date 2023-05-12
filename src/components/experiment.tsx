@@ -7,7 +7,7 @@ import {ExperimentStatus} from "../../libs/redux/features/progress/progressSlice
 import Instructions from "@components/instructions";
 import {setExperimentMeta} from "../../libs/redux/features/experimentMeta/experimentMetaActions";
 import {setTasksMeta} from "../../libs/redux/features/tasksMeta/tasksMetaActions";
-import {startInstructions} from "../../libs/redux/features/userGesture/userGestureActions";
+import {startExperiment, startInstructions} from "../../libs/redux/features/userGesture/userGestureActions";
 import Task from "@components/task";
 
 interface ExperimentProps {
@@ -18,7 +18,6 @@ interface ExperimentProps {
 const Experiment: FC<ExperimentProps> = ({tasksMetadataStringify, experimentMetadataStringify}) => {
     const dispatch = useAppDispatch()
     const experimentStatus = useAppSelector(state => state.progress.experimentStatus)
-    const currentTaskIndex = useAppSelector(state => state.progress.currentTaskIndex)
     const tasksMetadata: TaskMeta[] = useMemo(() => JSON.parse(tasksMetadataStringify), [tasksMetadataStringify])
     const experimentMetadata: ExperimentMeta = useMemo(() => JSON.parse(experimentMetadataStringify), [experimentMetadataStringify])
     useEffect(() => {
@@ -28,7 +27,8 @@ const Experiment: FC<ExperimentProps> = ({tasksMetadataStringify, experimentMeta
         if (tasksMetadata) {
             dispatch(setTasksMeta(tasksMetadata))
         }
-    }, [dispatch, experimentMetadata, tasksMetadata])
+        dispatch(startExperiment())
+    }, [])
     if (experimentStatus === ExperimentStatus.IDLE) {
         return (
             <div className="flex flex-col justify-center items-center relative m-3.5 gap-3">
@@ -47,6 +47,23 @@ const Experiment: FC<ExperimentProps> = ({tasksMetadataStringify, experimentMeta
     }
     if (experimentStatus === ExperimentStatus.TASKS) {
         return <Task/>
+    }
+    if (experimentStatus === ExperimentStatus.RESULTS_PENDING) {
+        // return loader
+        return (
+            <div className="flex flex-col justify-center items-center relative m-3.5 gap-3">
+                <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-64 w-64"/>
+            </div>
+        )
+    }
+    if (experimentStatus === ExperimentStatus.ENDED) {
+        return (
+            <div className="flex flex-col justify-center items-center relative m-3.5 gap-3">
+                <h1 className="text-2xl font-bold text-center text-black">
+                    Thank you for participating!
+                </h1>
+            </div>
+        )
     }
     return null
 }

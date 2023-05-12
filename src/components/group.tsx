@@ -1,11 +1,19 @@
 import {Snapshot as SnapshotType, SnapshotIndicator} from "@/types/preview";
 import {CheckIcon, XMarkIcon} from "@heroicons/react/24/solid";
+import {FC} from "react";
 
-export default function Group({snapshot, groupName}: { snapshot?: SnapshotType | null, groupName: string }) {
+interface GroupProps {
+    snapshot?: SnapshotType | null
+    groupName: string
+    focused?: boolean
+}
+
+const Group: FC<GroupProps> = ({groupName, focused, snapshot}) => {
+    const focusedClassName = focused ? 'border-4 border-black bg-white' : 'border-2'
     return (
         <div className="flex flex-col m-3.5 gap-3">
             {/*frame*/}
-            <div className="flex text-black border-2 px-2 py-1">
+            <div className={`flex text-black px-2 py-1 ${focusedClassName}`}>
                 {groupName}
             </div>
             {/*snapshot*/}
@@ -32,3 +40,4 @@ function Snapshot({snapshot}: { snapshot: SnapshotType }) {
     return null
 }
 
+export default Group

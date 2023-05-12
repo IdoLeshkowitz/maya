@@ -6,7 +6,6 @@ import {useAppDispatch, useAppSelector} from "../../libs/redux/hooks";
 import {setCurrentTaskOptionSelection} from "../../libs/redux/features/currentTaskResult/currentTaskResultActions";
 import {finishOptionSelection} from "../../libs/redux/features/userGesture/userGestureActions";
 import Option from "@components/option";
-import {TaskStatus} from "../../libs/redux/features/progress/progressSlice";
 import Group from "@components/group";
 import {RootState} from "../../libs/redux/store";
 import {TaskMeta} from "@/types/taskMeta";
@@ -68,6 +67,7 @@ export default function OptionSelection() {
                         onClick={() => {
                             setSelectedSide('left')
                             setStep(OptionSelectionSteps.SET_CONDFIDENCE)
+                            setConfidence(0)
                         }}
                     >
                         {
@@ -90,6 +90,7 @@ export default function OptionSelection() {
                         onClick={() => {
                             setSelectedSide('right')
                             setStep(OptionSelectionSteps.SET_CONDFIDENCE)
+                            setConfidence(0)
                         }}
                     >
                         {

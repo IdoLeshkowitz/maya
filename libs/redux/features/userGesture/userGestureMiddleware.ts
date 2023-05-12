@@ -1,18 +1,20 @@
 import {Middleware} from "redux";
 import {
     finishExperiment,
-    finishGroupScoring,
     finishInstructions,
+    finishLeftOptionScoring,
     finishLeftPreview,
     finishOptionSelection,
+    finishRightOptionScoring,
     finishRightPreview,
     finishTask,
     startExperiment,
-    startGroupScoring,
     startInstructions,
+    startLeftOptionScoring,
     startLeftPreview,
     startNextTask,
     startOptionSelection,
+    startRightOptionScoring,
     startRightPreview
 } from "./userGestureActions";
 import {setCurrentTaskIndex, setCurrentTaskStatus, setExperimentStatus} from "../progress/progressActions";
@@ -21,7 +23,7 @@ import {RootState} from "../../store";
 import {TaskResult} from "@/types/taskResult";
 import {addTaskResult} from "../tasksResult/tasksResultActions";
 import {resetCurrentTaskResult} from "../currentTaskResult/currentTaskResultActions";
-import {resetCurrentTaskAnalytics} from "../currentTaskAnalytics/currentTaskAnalyticsActions";
+import {resetCurrentTaskAnalytics, setEndTime, setStartTime} from "../currentTaskAnalytics/currentTaskAnalyticsActions";
 
 /* experiment */
 const startExperimentM: Middleware = ({dispatch}) => next => action => {
@@ -30,9 +32,26 @@ const startExperimentM: Middleware = ({dispatch}) => next => action => {
         dispatch(startInstructions())
     }
 }
-const finishExperimentM: Middleware = ({dispatch}) => next => action => {
+const finishExperimentM: Middleware = ({getState, dispatch}) => next => async (action) => {
     next(action)
     if (action.type === finishExperiment.type) {
+        dispatch(setExperimentStatus(ExperimentStatus.RESULTS_PENDING))
+        /* send the results to the server */
+        const state: RootState = getState()
+        const {tasksResults} = state
+        if (tasksResults === null) {
+            throw new Error("tasksResults is null")
+        }
+        const res = await fetch("/api/taskResults", {
+            method : "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body   : JSON.stringify(tasksResults)
+        })
+        if (!res.ok) {
+            throw new Error("failed to send the results to the server")
+        }
         dispatch(setExperimentStatus(ExperimentStatus.ENDED))
     }
 }
@@ -88,38 +107,50 @@ const startOptionSelectionM: Middleware = ({dispatch}) => next => action => {
 const finishOptionSelectionM: Middleware = ({dispatch}) => next => action => {
     next(action)
     if (action.type === finishOptionSelection.type) {
-        dispatch(startGroupScoring())
+        dispatch(startLeftOptionScoring())
     }
 }
 
 /* scores */
-const startGroupScoringM: Middleware = ({dispatch}) => next => action => {
+const startLeftGroupScoringM: Middleware = ({dispatch}) => next => action => {
     next(action)
-    if (action.type === startGroupScoring.type) {
-        dispatch(setCurrentTaskStatus(TaskStatus.GROUP_SCORING))
+    if (action.type === startLeftOptionScoring.type) {
+        dispatch(setCurrentTaskStatus(TaskStatus.LEFT_SCORES))
     }
 }
-const finishGroupScoringM: Middleware = ({dispatch}) => next => action => {
+const finishLeftGroupScoringM: Middleware = ({dispatch}) => next => action => {
     next(action)
-    if (action.type === finishGroupScoring.type) {
+    if (action.type === finishLeftOptionScoring.type) {
+        dispatch(startRightOptionScoring())
+    }
+}
+const startRightGroupScoringM: Middleware = ({dispatch}) => next => action => {
+    next(action)
+    if (action.type === startRightOptionScoring.type) {
+        dispatch(setCurrentTaskStatus(TaskStatus.RIGHT_SCORES))
+    }
+}
+const finishRightGroupScoringM: Middleware = ({dispatch}) => next => action => {
+    next(action)
+    if (action.type === finishRightOptionScoring.type) {
         dispatch(finishTask())
     }
 }
-
 /* task */
 const startNextTaskM: Middleware = ({getState, dispatch}) => next => action => {
     next(action)
     if (action.type === startNextTask.type) {
-        /* check current task index */
+        /* increase current task index */
         const state: RootState = getState()
-        const {progress: {currentTaskIndex}} = state
-        /* if current index is null initialize it to 0 */
-        if (currentTaskIndex === null) {
-            dispatch(setCurrentTaskIndex(0))
-        } else {
-            /* increment currentTaskIndex */
-            dispatch(setCurrentTaskIndex(currentTaskIndex + 1))
-        }
+        const {progress} = state
+        const nextTaskIndex = progress.currentTaskIndex === null ? 0 : progress.currentTaskIndex + 1
+        dispatch(setCurrentTaskIndex(nextTaskIndex))
+        /* reset currentTaskResult */
+        dispatch(resetCurrentTaskResult())
+        /* reset currentTaskAnalytics */
+        dispatch(resetCurrentTaskAnalytics())
+        /* set start time */
+        dispatch(setStartTime(Date.now()))
         /* start left preview */
         dispatch(startLeftPreview())
     }
@@ -127,6 +158,11 @@ const startNextTaskM: Middleware = ({getState, dispatch}) => next => action => {
 const finishTaskM: Middleware = ({getState, dispatch}) => next => action => {
     next(action)
     if (action.type === finishTask.type) {
+        /* set end time */
+        dispatch(setEndTime(Date.now()))
+        /* set task status */
+        dispatch(setCurrentTaskStatus(TaskStatus.FINISHED))
+
         /* add task result to results */
         const state: RootState = getState()
         const {currentTaskAnalytics, currentTaskResult, tasksMeta, progress} = state
@@ -134,9 +170,13 @@ const finishTaskM: Middleware = ({getState, dispatch}) => next => action => {
         if (optionSelection === null) {
             throw new Error('currentTaskAnalytics.optionSelection is null')
         }
-        const scores = currentTaskResult.scores
-        if (scores === null) {
-            throw new Error('currentTaskAnalytics.scores is null')
+        const rightScores = currentTaskResult.rightScores
+        if (rightScores === null) {
+            throw new Error('currentTaskAnalytics.rightScores is null')
+        }
+        const leftScores = currentTaskResult.leftScores
+        if (leftScores === null) {
+            throw new Error('currentTaskAnalytics.leftScores is null')
         }
         if (progress.currentTaskIndex === null) {
             throw new Error('progress.currentTaskIndex is null')
@@ -151,18 +191,13 @@ const finishTaskM: Middleware = ({getState, dispatch}) => next => action => {
         }
         const duration = endTime - startTime
         const taskResult: TaskResult = {
+            leftScores,
+            rightScores,
             optionSelection,
-            scores,
             taskId: currentTaskId,
             duration
         }
         dispatch(addTaskResult(taskResult))
-
-        /* reset currentTaskResult */
-        dispatch(resetCurrentTaskResult())
-        /* reset currentTaskAnalytics */
-        dispatch(resetCurrentTaskAnalytics())
-
         /* check if this is the last task */
         if (progress.currentTaskIndex + 1 === tasksMeta?.length) {
             /* if it does finish experiment */
@@ -187,8 +222,10 @@ export const userGestureMiddleware: Middleware[] = [
     finishRightPreviewM,
     startOptionSelectionM,
     finishOptionSelectionM,
-    startGroupScoringM,
-    finishGroupScoringM,
+    startLeftGroupScoringM,
+    finishLeftGroupScoringM,
+    startRightGroupScoringM,
+    finishRightGroupScoringM,
     startNextTaskM,
     finishTaskM,
 ]

@@ -1,50 +1,53 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
+    "target"                          : "es5",
+    "lib"                             : [
       "dom",
       "dom.iterable",
       "esnext"
     ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
+    "allowJs"                         : true,
+    "skipLibCheck"                    : true,
+    "strict"                          : true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
+    "noEmit"                          : true,
+    "esModuleInterop"                 : true,
+    "module"                          : "esnext",
+    "moduleResolution"                : "node",
+    "resolveJsonModule"               : true,
+    "isolatedModules"                 : true,
+    "jsx"                             : "preserve",
+    "incremental"                     : true,
+    "plugins"                         : [
       {
         "name": "next"
       }
     ],
-    "paths": {
-      "@/*": [
+    "paths"                           : {
+      "@/*"          : [
         "./src/*"
       ],
       "@components/*": [
         "./src/components/*"
       ],
-      "@assets/*": [
+      "@assets/*"    : [
         "./libs/assets/*"
       ],
-      "@/types/*": [
+      "@/types/*"     : [
         "./libs/types/*"
       ],
+      "@client"      : [
+        "./libs/client"
+      ]
     }
   },
-  "include": [
+  "include"        : [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
   ],
-  "exclude": [
+  "exclude"        : [
     "node_modules"
   ]
 }
