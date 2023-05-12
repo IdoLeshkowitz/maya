@@ -58,7 +58,7 @@ export default async function AdminPage() {
                                     <>
                                         {groupHeaders.map((header) => {
                                             return (
-                                                <th className="border border-slate-500" key={index+header}>
+                                                <th className="border border-slate-500" key={index + header}>
                                                     {`R${index} ${header}`}
                                                 </th>
                                             )
@@ -171,3 +171,5 @@ function Row({taskMeta, taskResult, experimentId}: {
 
 
 }
+
+export const revalidate = 60
