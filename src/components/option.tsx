@@ -13,7 +13,7 @@ interface OptionProps {
 
 const Option: FC<OptionProps> = (props) => {
     const {optionName, optionColor, children, selectable, onClick, hidden, tabIndex} = props
-    const bgClass = `bg-${optionColor}`
+    const bgClass = "bg-" + optionColor
     if (selectable) {
         return (
             <div

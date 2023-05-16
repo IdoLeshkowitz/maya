@@ -1,6 +1,5 @@
 const experimentConfig = require('./public/experimentConfig.json')
 
-console.log(experimentConfig.colors)
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: [
@@ -8,7 +7,7 @@ module.exports = {
         './src/components/**/*.{js,ts,jsx,tsx,mdx}',
         './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     ],
-    theme:{
+    theme: {
         colors: experimentConfig.colors,
     },
     plugins: [],
