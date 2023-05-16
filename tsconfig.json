@@ -41,7 +41,10 @@
       ],
       "@services/*"  : [
         "./libs/services/*"
-      ]
+      ],
+      "@client"    : [
+        "./libs/client"
+      ],
     }
   },
   "include"        : [
