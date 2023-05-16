@@ -2,43 +2,35 @@
 import {FC} from "react";
 import {useAppSelector} from "../../libs/redux/hooks";
 import {RootState} from "../../libs/redux/store";
-import {TaskStatus} from "../../libs/redux/features/progress/progressSlice";
-import Preview from "@components/Preview";
-import OptionSelection from "@components/optionSelection";
-import Scores from "@components/scores";
+import {TaskStep} from "../../libs/redux/features/tasks/tasksSlice";
+import Welcome from "@components/taskSteps/welcome";
+import TaskInstructions from "@components/taskSteps/taskInstructions";
+import Performance from "@components/taskSteps/performance";
+import OptionSelection from "@components/taskSteps/optionSelection";
+import GroupScoring from "@components/taskSteps/groupScoring";
 
-function getCurrentTaskMeta(state: RootState) {
-    const currentTaskIndex = state.progress.currentTaskIndex
-    if (currentTaskIndex === null) {
-        throw new Error('currentTaskIndex is undefined')
-    }
-    const currentTask = state.tasksMeta?.at(currentTaskIndex)
-    if (!currentTask) {
-        throw new Error('currentTask is undefined')
-    }
-    return currentTask
-}
-
-function getCurrentTaskStatus(state: RootState) {
-    const currentTaskStatus = state.progress.currentTaskStatus
-    if (currentTaskStatus === null) {
-        throw new Error('currentTaskIndex is undefined')
-    }
-    return currentTaskStatus as TaskStatus
+function getCurrentTaskState(state: RootState) {
+    return state.tasks.allTasks.at(state.tasks.currentTaskIndex!)!
 }
 
 
 const Task: FC = () => {
-    const currentTaskMeta = useAppSelector(getCurrentTaskMeta)
-    const currentTaskStatus = useAppSelector(getCurrentTaskStatus)
-    if (currentTaskStatus === TaskStatus.LEFT_PREVIEW || currentTaskStatus === TaskStatus.RIGHT_PREVIEW) {
-        return <Preview/>
+    const currentTaskState = useAppSelector(getCurrentTaskState)
+    const currentTaskStep = currentTaskState.taskStep
+    if (currentTaskStep === TaskStep.IDLE) {
+        return <Welcome/>
     }
-    if (currentTaskStatus === TaskStatus.OPTION_SELECTION) {
+    if (currentTaskStep === TaskStep.INSTRUCTIONS) {
+        return <TaskInstructions/>
+    }
+    if (currentTaskStep === TaskStep.PERFORMANCE) {
+        return <Performance/>
+    }
+    if (currentTaskStep === TaskStep.OPTION_SELECTION) {
         return <OptionSelection/>
     }
-    if (currentTaskStatus === TaskStatus.LEFT_SCORES || currentTaskStatus === TaskStatus.RIGHT_SCORES) {
-        return <Scores/>
+    if (currentTaskStep === TaskStep.GROUP_SCORING) {
+        return <GroupScoring/>
     }
     return null
 }

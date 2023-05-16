@@ -1,6 +1,6 @@
 import {ObjectId} from "bson";
 import {Option} from "@/types/option";
-import {Preview} from "@/types/preview";
+import {Performance} from "@/types/performance";
 
 
 export interface TaskMeta {
@@ -8,5 +8,5 @@ export interface TaskMeta {
     variantName: string
     leftOption: Option
     rightOption: Option
-    preview: Preview
+    performance: Performance
 }

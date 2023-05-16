@@ -1,4 +1,4 @@
-import {Preview} from "@/types/preview";
+import {Performance} from "@/types/performance";
 
 export interface Variant {
     variantName: string
@@ -7,6 +7,6 @@ export interface Variant {
     optionsNames: string[][]
     groupsNames: string[][]
 
-    previews: Preview[]
+    performances: Performance[]
 }
 

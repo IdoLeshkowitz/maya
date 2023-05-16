@@ -30,14 +30,17 @@
       "@components/*": [
         "./src/components/*"
       ],
-      "@assets/*"    : [
-        "./libs/assets/*"
-      ],
-      "@/types/*"     : [
+      "@/types/*"    : [
         "./libs/types/*"
       ],
-      "@client"      : [
-        "./libs/client"
+      "@public/*"    : [
+        "./public/*"
+      ],
+      "@/utils/*"    : [
+        "./libs/utils/*"
+      ],
+      "@services/*"  : [
+        "./libs/services/*"
       ]
     }
   },

@@ -1,23 +1,19 @@
 import {configureStore} from "@reduxjs/toolkit";
-import {progressSlice} from "./features/progress/progressSlice";
-import {tasksResultSlice} from "./features/tasksResult/tasksResultSlice";
-import {tasksMetaSlice} from "./features/tasksMeta/tasksMetaSlice";
-import {experimentMetaSlice} from "./features/experimentMeta/experimentMetaSlice";
-import {currentTaskResultSlice} from "./features/currentTaskResult/currentTaskResultSlice";
-import {userGestureMiddleware} from "./features/userGesture/userGestureMiddleware";
-import {currentTaskAnalyticsSlice} from "./features/currentTaskAnalytics/currentTaskAnalyticsSlice";
+import {experimentSlice} from "./features/experiment/experimentSlice";
+import {tasksSlice} from "./features/tasks/tasksSlice";
+import {tasksMiddleware} from "./features/tasks/tasksMiddleware";
+import {experimentMiddleware} from "./features/experiment/experimentMiddleware";
+import {apiMiddleware} from "./features/api/apiMiddleware";
 
 export const store = configureStore({
     reducer   : {
-        tasksMeta           : tasksMetaSlice.reducer,
-        experimentMeta      : experimentMetaSlice.reducer,
-        progress            : progressSlice.reducer,
-        tasksResults        : tasksResultSlice.reducer,
-        currentTaskResult   : currentTaskResultSlice.reducer,
-        currentTaskAnalytics: currentTaskAnalyticsSlice.reducer
+        experiment: experimentSlice.reducer,
+        tasks     : tasksSlice.reducer,
     },
     middleware: [
-        ...userGestureMiddleware,
+        ...experimentMiddleware,
+        ...apiMiddleware,
+        ...tasksMiddleware
     ]
 })
 

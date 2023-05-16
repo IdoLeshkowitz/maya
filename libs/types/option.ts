@@ -1,4 +1,4 @@
-import {Preview} from "@/types/preview";
+import {Performance} from "@/types/performance";
 
 export interface Option {
     optionName: string

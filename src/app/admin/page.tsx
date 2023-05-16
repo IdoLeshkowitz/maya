@@ -1,7 +1,7 @@
 import {getAllTasksMeta, getAllTasksResults} from "../../../libs/services/taskService";
 import {TaskResult} from "@/types/taskResult";
 import {TaskMeta} from "@/types/taskMeta";
-import {getAllExperiments} from "../../../libs/services/experimentService";
+import {getAllExperiments} from "../../../libs/services/experimentMetaService";
 
 const groupHeaders = [
     "group name",
