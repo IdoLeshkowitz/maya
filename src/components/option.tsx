@@ -1,8 +1,9 @@
 import React, {FC, ReactNode} from "react";
+import {colors} from "@public/experimentConfig.json"
 
 interface OptionProps {
     optionName: string
-    optionColor: string
+    optionColor: "red" | "green" | "blue" | "yellow"
     children: ReactNode
     selectable?: boolean
     onClick?: () => void
@@ -23,8 +24,9 @@ const Option: FC<OptionProps> = (props) => {
                     }
                 }}
                 tabIndex={tabIndex}
-                className={`flex flex-col basis-1/3 items-center justify-evenly border-black border-2 cursor-pointer hover:bg-opacity-50 focus:bg-opacity-50 ${bgClass}`}
+                className={`flex flex-col basis-1/3 items-center justify-evenly border-black border-2 cursor-pointer hover:bg-opacity-50 focus:bg-opacity-50`}
                 onClick={onClick}
+                style={{backgroundColor: '#FFD700'}}
             >
                 <h2 className="text-2xl font-bold text-black text-center py-2">{optionName}</h2>
                 <div className="flex justify-center gap-4 basis-1/2 self-stretch px-6">
@@ -40,7 +42,9 @@ const Option: FC<OptionProps> = (props) => {
     }
     return (
         <div
-            className={`flex flex-col basis-1/3 items-center justify-evenly border-black border-2 ${bgClass}`}>
+            className={`flex flex-col basis-1/3 items-center justify-evenly border-black border-2`}
+            style={{backgroundColor: colors[optionColor]}}
+        >
             <h2 className="text-2xl font-bold text-black text-center py-2">{optionName}</h2>
             <div className="flex justify-center gap-4 basis-1/2 self-stretch px-6">
                 {children}
