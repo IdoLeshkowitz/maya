@@ -18,7 +18,7 @@ export const CommonButton: FC<ButtonProps> = (props) => {
         <button
             disabled={!!disabled}
             onClick={onClick}
-            className={`font-bold py-2 px-4 rounded-full border border-blue transition ease-in-out delay-75 duration-200 ${cursorClass} ${hoverClass} ${focusClass} ${bgClass} ${textClass} ${scaleClass}`}
+            className={`font-bold py-3 px-5 rounded-full border border-blue transition ease-in-out delay-75 duration-200 ${cursorClass} ${hoverClass} ${focusClass} ${bgClass} ${textClass} ${scaleClass}`}
         >
             {children}
         </button>

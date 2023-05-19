@@ -10,7 +10,7 @@ import OptionSelection from "@components/taskSteps/optionSelection";
 import GroupScoring from "@components/taskSteps/groupScoring";
 
 function getCurrentTaskState(state: RootState) {
-    return state.tasks.allTasks.at(state.tasks.currentTaskIndex!)!
+    return state.tasks.tasksStates.at(state.tasks.currentTaskIndex!)!
 }
 
 
@@ -20,7 +20,7 @@ const Task: FC = () => {
     if (currentTaskStep === TaskStep.IDLE) {
         return <Welcome/>
     }
-    if (currentTaskStep === TaskStep.INSTRUCTIONS) {
+    if (currentTaskStep === TaskStep.TASK_INSTRUCTIONS) {
         return <TaskInstructions/>
     }
     if (currentTaskStep === TaskStep.PERFORMANCE) {

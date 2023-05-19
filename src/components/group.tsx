@@ -1,41 +1,60 @@
 import {Snapshot as SnapshotType, SnapshotIndicator} from "@/types/performance";
-import {CheckIcon, XMarkIcon} from "@heroicons/react/24/solid";
 import {FC} from "react";
 
 interface GroupProps {
-    snapshot?: SnapshotType | null
+    snapshot?: SnapshotType
     groupName: string
     focused?: boolean
+    hidden?: boolean
 }
 
-const Group: FC<GroupProps> = ({groupName, focused, snapshot}) => {
+const Group: FC<GroupProps> = ({groupName, focused, snapshot, hidden}) => {
     const focusedClassName = focused ? 'border-4 border-black bg-white' : 'border'
-    return (
-        <div className="flex flex-col grow-0 basis-1/3 justify-stretch">
-            {/*frame*/}
-            <div className={`flex text-black basis-2/3 justify-center items-center shrink-0 ${focusedClassName}`}>
-                {groupName}
-            </div>
-            {/*/!*snapshot*!/*/}
-            {
-                snapshot &&
-                <div className="flex justify-center items-center text-black basis-1/3 grow-0 shrink">
-                    <Snapshot snapshot={snapshot}/>
-                </div>
-            }
+    if (hidden) return (
+        <div className="flex text-black items-center relative justify-center aspect-square">
         </div>
+    )
+    return (
+        <>
+            <div
+                className={`flex text-black items-center relative justify-center aspect-square ${focusedClassName}`}>
+                {groupName}
+                {
+                    snapshot &&
+                    <div className="absolute -bottom-32">
+                        <Snapshot snapshot={snapshot}/>
+                    </div>
+                }
+            </div>
+        </>
     )
 }
 
 function Snapshot({snapshot}: { snapshot: SnapshotType }) {
     if (snapshot.indicator === SnapshotIndicator.CROSS) {
-        return <XMarkIcon className="text-black p-0 md:h-5 lg:h-10 h-0"/>
+        return <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="3"
+                    stroke="currentColor" className="w-14 h-14 text-red">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+
     }
     if (snapshot.indicator === SnapshotIndicator.LOADING) {
-        return <div className="w-5 h-5 animate-pulse bg-black rounded-full"/>
+        return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" strokeWidth="3"
+                    stroke="currentColor" className="w-20 h-14">
+            <circle cx="2" cy="10" r="2" className="animate-bounce" style={{animation: 'bounce 1s infinite'}}/>
+            <circle cx="10" cy="10" r="2" className="animate-bounce"
+                    style={{animation: 'bounce 1s infinite', animationDelay: '50ms'}}/>
+            <circle cx="18" cy="10" r="2" className="animate-bounce"
+                    style={{animation: 'bounce 1s infinite', animationDelay: '100ms'}}/>
+        </svg>
+
     }
     if (snapshot.indicator === SnapshotIndicator.CHECK) {
-        return <CheckIcon className="w-10 h-10 text-black"/>
+        return <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="3"
+                    stroke="currentColor" className="w-14 h-14 text-green">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+        </svg>
+
     }
     return null
 }

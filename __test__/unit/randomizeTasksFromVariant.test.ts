@@ -1,7 +1,8 @@
-import {assertType, describe, expect, expectTypeOf, test} from "vitest";
+import {describe, expect, test} from "vitest";
 import {variants} from "../../public/experimentConfig.json"
 import {randomizeTasksFromVariant} from "../../libs/utils/randomizeTasksFromVariant";
-import {TaskMeta} from "@/types/taskMeta";
+import {TaskMeta, taskMetaSchema} from "../../libs/types/taskMeta";
+
 /*
     taskMeta example:
     {
@@ -37,54 +38,28 @@ import {TaskMeta} from "@/types/taskMeta";
     }
     }
  */
+
+async function validateTaskMeta(taskMeta: TaskMeta) {
+    return await taskMetaSchema.validate(taskMeta)
+}
+
 describe("randomizeTasksFromVariant", () => {
     const variant = variants[0]
-    test("should return an array of tasksMeta", () => {
-        const randomizedTasksMeta1 = randomizeTasksFromVariant(variant)
-        /* check number of tasks */
-        expect(randomizedTasksMeta1.length).toBe(variant.numberOfTasks)
-
-        /* check taskMeta properties */
-        randomizedTasksMeta1.forEach(taskMeta => {
-            /* variantName */
-            expect(taskMeta).toHaveProperty("variantName")
-            expect(taskMeta.variantName).toBe(variant.variantName)
-
-            expect(taskMeta).toHaveProperty("leftOption")
-            expect(taskMeta.leftOption).toMatchObject({
-                optionName : expect.any(String),
-                optionColor: expect.any(String),
-                groupsNames: expect.arrayContaining([expect.any(String)])
-            })
-            expect(taskMeta).toHaveProperty("rightOption")
-            expect(taskMeta.rightOption).toMatchObject({
-                optionName : expect.any(String),
-                optionColor: expect.any(String),
-                groupsNames: expect.arrayContaining([expect.any(String)])
-            })
-            expect(taskMeta).toHaveProperty("performance")
-            expect(taskMeta.performance).toMatchObject({
-                overallPerformanceTitle: expect.any(String),
-                leftOption             : {
-                    optionPerformanceTitle: expect.any(String),
-                    snapshots             : expect.arrayContaining([expect.objectContaining({
-                        indicator : expect.any(String),
-                        groupIndex: expect.any(Number),
-                        label     : expect.any(String)
-                    })])
-                },
-                rightOption            : {
-                    optionPerformanceTitle: expect.any(String),
-                    snapshots             : expect.arrayContaining([expect.objectContaining({
-                        indicator : expect.any(String),
-                        groupIndex: expect.any(Number),
-                        label     : expect.any(String)
-                    })])
-                }
-            })
+    test("should return an array of tasksMeta", async () => {
+        const tasksMeta = randomizeTasksFromVariant(variant)
+        const validationPromises = tasksMeta.map(async (taskMeta) => {
+            try {
+                await validateTaskMeta(taskMeta)
+                expect(true).toBe(true)
+            } catch (e) {
+                expect(e).toBeUndefined()
+            }
         })
-        /*  generate another array of tasksMeta and check if it's different from the first one */
-        const randomizedTasksMeta2 = randomizeTasksFromVariant(variant)
-        expect(randomizedTasksMeta1).not.toEqual(randomizedTasksMeta2)
+        await Promise.all(validationPromises)
+    })
+    test("each task meta should be unique", () => {
+        const generatedTasksMeta1 = randomizeTasksFromVariant(variant)
+        const generatedTasksMeta2 = randomizeTasksFromVariant(variant)
+        expect(generatedTasksMeta1).not.toEqual(generatedTasksMeta2)
     })
 })

@@ -34,7 +34,7 @@ const Experiment: FC<ExperimentProps> = ({tasksMetadataStringify, experimentMeta
     if (experimentStep === ExperimentStep.CONSENT) {
         return <Consent/>
     }
-    if (experimentStep === ExperimentStep.INSTRUCTIONS) {
+    if (experimentStep === ExperimentStep.INTRO) {
         return <ExperimentInstructions/>
     }
     if (experimentStep === ExperimentStep.TASKS) {

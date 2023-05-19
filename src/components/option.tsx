@@ -5,7 +5,6 @@ interface OptionProps {
     optionName: string
     optionColor: string
     children: ReactNode
-    selectable?: boolean
     onClick?: () => void
     hidden?: boolean
     tabIndex?: number
@@ -13,7 +12,7 @@ interface OptionProps {
 
 
 const Option: FC<OptionProps> = (props) => {
-    const {optionName, optionColor, children, selectable, onClick, hidden, tabIndex} = props
+    const {optionName, optionColor, children, onClick, hidden, tabIndex} = props
     let bgColor;
     switch (optionColor) {
         case 'red':
@@ -31,26 +30,6 @@ const Option: FC<OptionProps> = (props) => {
         default:
             bgColor = experimentConfig.colors.white
     }
-    if (selectable) {
-        return (
-            <div
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                        onClick && onClick()
-                    }
-                }}
-                tabIndex={tabIndex}
-                className={`flex flex-col basis-1/3 items-center justify-evenly border-black border-2 cursor-pointer hover:bg-opacity-50 focus:bg-opacity-50`}
-                onClick={onClick}
-                style={{backgroundColor: bgColor}}
-            >
-                <h2 className="text-2xl font-bold text-black text-center py-2">{optionName}</h2>
-                <div className="flex justify-center gap-4 basis-1/2 self-stretch px-6">
-                    {children}
-                </div>
-            </div>
-        )
-    }
     if (hidden === true) {
         return (
             <div className={`flex flex-col basis-1/3 items-center justify-evenly`}/>
@@ -58,15 +37,37 @@ const Option: FC<OptionProps> = (props) => {
     }
     return (
         <div
-            className={`flex flex-col basis-1/3 items-center justify-evenly border-black border-2`}
+            className={`flex flex-col grow-0 items-center justify-between border-black border-2 ${onClick ? "cursor-pointer" : ""}`}
             style={{backgroundColor: bgColor}}
+            onClick={onClick}
+            tabIndex={tabIndex}
+            onKeyDown={onClick && ((e) => {
+                if (e.key === "Enter") {
+                    onClick()
+                }
+            })}
         >
-            <h2 className="text-2xl font-bold text-black text-center py-2">{optionName}</h2>
-            <div className="flex justify-center gap-4 basis-1/2 self-stretch px-6">
+            <h2 className="text-2xl font-bold text-black text-center py-2 justify-self-center mt-8">{optionName}</h2>
+            <GroupsContainer>
                 {children}
-            </div>
+            </GroupsContainer>
         </div>
     )
 }
 
+
+const GroupsContainer = ({children}: { children: ReactNode }) => {
+    const gridContainerStyle = {
+        display            : "grid",
+        gridTemplateColumns: "repeat(3,1fr)",
+    }
+    return (
+        <div
+            style={gridContainerStyle}
+            className="self-stretch gap-5 mx-3 my-8"
+        >
+            {children}
+        </div>
+    )
+}
 export default Option

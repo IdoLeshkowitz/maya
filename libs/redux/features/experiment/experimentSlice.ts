@@ -4,7 +4,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 export enum ExperimentStep {
     IDLE,
     CONSENT,
-    INSTRUCTIONS,
+    INTRO,
     TASKS,
     FORM,
     RESULTS_SENT,

@@ -4,7 +4,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 export enum TaskStep {
     IDLE,
-    INSTRUCTIONS,
+    TASK_INSTRUCTIONS,
     PERFORMANCE,
     OPTION_SELECTION,
     GROUP_SCORING,
@@ -17,36 +17,43 @@ export interface TaskState {
     taskStep: TaskStep
     startTime: number | null
     endTime: number | null
+    currentSnapshotIndex: number | null
 }
 
 interface TasksState {
-    allTasks: TaskState[]
+    tasksStates: TaskState[]
     currentTaskIndex: number | null
 }
 
 const initialState: TasksState = {
-    allTasks        : [],
+    tasksStates     : [],
     currentTaskIndex: null
 }
 
-export const tasksSlice = createSlice( {
+export const tasksSlice = createSlice({
     initialState,
     name    : 'tasks',
     reducers: {
         setAllTasksState(state, action: PayloadAction<TaskState[]>) {
-            state.allTasks = action.payload
+            state.tasksStates = action.payload
         },
         setTaskStepByIndex(state, action: PayloadAction<{ taskIndex: number, taskStep: TaskStep }>) {
-            state.allTasks[action.payload.taskIndex].taskStep = action.payload.taskStep
+            state.tasksStates[action.payload.taskIndex].taskStep = action.payload.taskStep
         },
         setTaskResultByIndex(state, action: PayloadAction<{ taskIndex: number, taskResult: TaskResult }>) {
-            state.allTasks[action.payload.taskIndex].taskResult = action.payload.taskResult
+            state.tasksStates[action.payload.taskIndex].taskResult = action.payload.taskResult
         },
         setTaskStartTimeByIndex(state, action: PayloadAction<{ taskIndex: number, startTime: number }>) {
-            state.allTasks[action.payload.taskIndex].startTime = action.payload.startTime
+            state.tasksStates[action.payload.taskIndex].startTime = action.payload.startTime
         },
         setTaskEndTimeByIndex(state, action: PayloadAction<{ taskIndex: number, endTime: number }>) {
-            state.allTasks[action.payload.taskIndex].endTime = action.payload.endTime
+            state.tasksStates[action.payload.taskIndex].endTime = action.payload.endTime
+        },
+        setTaskCurrentSnapshotIndexByIndex(state, action: PayloadAction<{
+            taskIndex: number,
+            snapshotIndex: number | null
+        }>) {
+            state.tasksStates[action.payload.taskIndex].currentSnapshotIndex = action.payload.snapshotIndex
         },
         setCurrentTaskIndex(state, action: PayloadAction<number | null>) {
             state.currentTaskIndex = action.payload

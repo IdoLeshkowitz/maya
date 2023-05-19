@@ -4,9 +4,10 @@ import Board from "@components/board";
 import React, {cloneElement, DetailedReactHTMLElement, useState} from "react";
 import {CommonButton} from "@components/button";
 import {stepForward} from "../../../libs/redux/features/experiment/experimentActions";
+import CommonLayout from "@components/commonLayout";
 
 function getCurrentTaskMetaFromState(state: RootState) {
-    return state.tasks.allTasks.at(state.tasks.currentTaskIndex!)!.taskMeta
+    return state.tasks.tasksStates.at(state.tasks.currentTaskIndex!)!.taskMeta
 }
 
 export default function TaskInstructions() {
@@ -21,13 +22,13 @@ export default function TaskInstructions() {
         <Board
             key={4}
             taskMeta={currentTaskMeta}
-            snapshot={{snapshot: {label: 'company 1', indicator: 'check', groupIndex: 0}, side: 'right'}}
+            snapshot={{indicator: 'check', groupIndex: 0, optionSide: 'right', label: 'company 1'}}
         />,
         "And this is how it would look if the value of the company's stock from a certain portfolio and industry fell.",
         <Board
             key={6}
             taskMeta={currentTaskMeta}
-            snapshot={{snapshot: {label: 'company 2', indicator: 'cross', groupIndex: 0}, side: 'right'}}
+            snapshot={{indicator: 'cross', groupIndex: 0, optionSide: 'right', label: 'company 2'}}
         />,
         `The performance of all the stocks in the portfolios will be presented one after the other. Please pay close attention. After the presentation, you will be asked questions about the portfolios. \n When you are ready please start the task.`,
     ]
@@ -44,22 +45,27 @@ export default function TaskInstructions() {
 
     if (typeof instructionsSteps.at(currentStep) === "string") {
         return (
-            <div className="flex flex-col items-center justify-center text-black gap-10">
-                <p className="text-start text-base line-b whitespace-break-spaces">
+            <CommonLayout
+                footer={
+                    <div className="flex justify-center items-center">
+                        <CommonButton onClick={next}>
+                            Next
+                        </CommonButton>
+                    </div>
+                }
+            >
+                <p className="text-start text-black text-base line-b whitespace-break-spaces">
                     {instructionsSteps[currentStep]}
                 </p>
-                <CommonButton onClick={next}>
-                    Next
-                </CommonButton>
-            </div>
+            </CommonLayout>
         )
     }
     if (typeof instructionsSteps.at(currentStep) === "object") {
-        const reactElement = instructionsSteps[currentStep] as DetailedReactHTMLElement<any, any>
+        const boardElement = instructionsSteps[currentStep] as DetailedReactHTMLElement<any, any>
         return (
             <>
                 {
-                    cloneElement(reactElement, {children: <CommonButton onClick={next}>Next</CommonButton>})
+                    cloneElement(boardElement, {children: <CommonButton onClick={next}>Next</CommonButton>})
                 }
             </>
         )

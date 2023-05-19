@@ -6,6 +6,7 @@ import {TaskMeta} from "@/types/taskMeta";
 import {stepForward} from "../../../libs/redux/features/experiment/experimentActions";
 import Board from "@components/board";
 import {CommonButton} from "@components/button";
+import {SnapshotIndicator} from "@/types/performance";
 
 enum GroupScoringSteps {
     LEFT_OPTION_SCORING,
@@ -13,7 +14,7 @@ enum GroupScoringSteps {
 }
 
 function getCurrentTaskMeta(state: RootState): TaskMeta {
-    return state.tasks.allTasks.at(state.tasks.currentTaskIndex!)!.taskMeta
+    return state.tasks.tasksStates.at(state.tasks.currentTaskIndex!)!.taskMeta
 }
 
 export default function GroupScoring() {
@@ -66,12 +67,9 @@ export default function GroupScoring() {
             taskMeta={currentTaskMeta}
             title="Based on your observations, what was the performance of this industry on a scale of 0-100, where 0 is very bad and 100 is very good?"
             snapshot={{
-                side    : step === GroupScoringSteps.LEFT_OPTION_SCORING ? 'left' : 'right',
-                snapshot: {
-                    groupIndex: currentGroupIndex,
-                    label     : '',
-                    indicator : 'loading'
-                }
+                optionSide: step === GroupScoringSteps.LEFT_OPTION_SCORING ? "left" : "right",
+                groupIndex: currentGroupIndex,
+                indicator : SnapshotIndicator.NONE
             }}
         >
             <div className="flex flex-col self-stretch items-center justify-center gap-8">

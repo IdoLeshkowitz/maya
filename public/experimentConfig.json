@@ -16,51 +16,39 @@
         ["blue", "yellow"]
       ],
       "optionsNames" : [
-        ["option1", "option2"],
-        ["option3", "option4"]
+        ["Portfolio ABG", "Portfolio QYN"],
+        ["Portfolio BGH", "Portfolio ZQN"]
       ],
       "groupsNames"  : [
-        ["stock1", "stock2", "stock3", "stock4", "stock5", "stock6"],
-        ["stock7", "stock8", "stock9", "stock10", "stock11", "stock12"]
+        ["Banking", "Food", "Products", "Insurance", "Materials", "Utilities"],
+        ["Real Estate", "Fashion", "Automobiles", "Tourism", "Transportation", "Entertainment"]
       ],
       "performances" : [
         {
-          "overallPerformanceTitle": "right good - left bad",
-          "leftOption"             : {
-            "optionPerformanceTitle": "bad",
-            "snapshots"             : [
-              {"groupIndex": 0, "label": "company1", "indicator": "cross"},
-              {"groupIndex": 1, "label": "company2", "indicator": "cross"},
-              {"groupIndex": 2, "label": "company3", "indicator": "cross"}
-            ]
-          },
-          "rightOption"            : {
-            "optionPerformanceTitle": "good",
-            "snapshots"             : [
-              {"groupIndex": 0, "label": "company1", "indicator": "check"},
-              {"groupIndex": 1, "label": "company2", "indicator": "check"},
-              {"groupIndex": 2, "label": "company3", "indicator": "check"}
-            ]
-          }
+          "overallPerformanceTitle": "left good - right bad",
+          "leftPerformanceTitle"   : "good",
+          "rightPerformanceTitle"  : "bad",
+          "snapshots"              : [
+            {"groupIndex": 0, "label": "company1", "indicator": "check", "optionSide": "left"},
+            {"groupIndex": 1, "label": "company2", "indicator": "check", "optionSide": "left"},
+            {"groupIndex": 2, "label": "company3", "indicator": "check", "optionSide": "left"},
+            {"groupIndex": 1, "label": "company4", "indicator": "cross", "optionSide": "right"},
+            {"groupIndex": 2, "label": "company5", "indicator": "cross", "optionSide": "right"},
+            {"groupIndex": 0, "label": "company6", "indicator": "cross", "optionSide": "right"}
+          ]
         },
         {
           "overallPerformanceTitle": "right bad - left good",
-          "leftOption"             : {
-            "optionPerformanceTitle": "good",
-            "snapshots"             : [
-              {"groupIndex": 0, "label": "company1", "indicator": "check"},
-              {"groupIndex": 1, "label": "company2", "indicator": "check"},
-              {"groupIndex": 2, "label": "company3", "indicator": "check"}
-            ]
-          },
-          "rightOption"            : {
-            "optionPerformanceTitle": "bad",
-            "snapshots"             : [
-              {"groupIndex": 0, "label": "company1", "indicator": "cross"},
-              {"groupIndex": 1, "label": "company2", "indicator": "cross"},
-              {"groupIndex": 2, "label": "company3", "indicator": "cross"}
-            ]
-          }
+          "leftPerformanceTitle"   : "good",
+          "rightPerformanceTitle"  : "bad",
+          "snapshots"              : [
+            {"groupIndex": 0, "label": "company1", "indicator": "check", "optionSide": "right"},
+            {"groupIndex": 1, "label": "company2", "indicator": "check", "optionSide": "right"},
+            {"groupIndex": 2, "label": "company3", "indicator": "check", "optionSide": "right"},
+            {"groupIndex": 1, "label": "company4", "indicator": "cross", "optionSide": "left"},
+            {"groupIndex": 0, "label": "company5", "indicator": "cross", "optionSide": "left"},
+            {"groupIndex": 2, "label": "company6", "indicator": "cross", "optionSide": "left"}
+          ]
         }
       ]
     }

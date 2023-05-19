@@ -22,8 +22,8 @@ export const submitTasksResultM: Middleware = ({dispatch, getState}) => (next) =
         /* set experiment step */
         dispatch(setExperimentStep(ExperimentStep.RESULTS_SENT))
         /* extract tasks results from state*/
-        const {tasks: {allTasks}}: RootState = getState()
-        const taskResults = allTasks.map(task => task.taskResult)
+        const {tasks: {tasksStates}}: RootState = getState()
+        const taskResults = tasksStates.map(task => task.taskResult)
         /* send results to server */
         const res = await fetch("/api/taskResults", {
             method : "POST",
@@ -70,7 +70,8 @@ export const fetchTaskMetaSuccessM: Middleware = ({dispatch, getState}) => (next
                 taskId: taskMeta._id!,
             },
             endTime   : null,
-            startTime : null
+            startTime : null,
+            currentSnapshotIndex: null
         }))
         dispatch(setAllTasksState(tasksStateToAdd))
     }

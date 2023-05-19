@@ -9,6 +9,11 @@ module.exports = {
     ],
     theme: {
         colors: experimentConfig.colors,
+        extend: {
+            fontSize: {
+                'base': '2rem',
+            }
+        }
     },
     plugins: [],
 }
