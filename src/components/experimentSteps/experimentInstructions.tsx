@@ -32,7 +32,7 @@ export default function ExperimentInstructions() {
                 </div>
             }
         >
-            <p className="text-center text-base text-black"
+            <p className="text-start text-base text-black"
                dangerouslySetInnerHTML={{__html: experimentInstructions[currentInstruction]}}>
             </p>
         </CommonLayout>

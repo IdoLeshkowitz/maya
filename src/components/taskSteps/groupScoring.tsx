@@ -12,6 +12,7 @@ import {
     setCurrentTaskResultLeftScores,
     setCurrentTaskResultRightScores
 } from "../../../libs/redux/features/tasks/tasksActions";
+import Header from "@components/header";
 
 enum GroupScoringSteps {
     LEFT_OPTION_SCORING,
@@ -88,7 +89,12 @@ export default function GroupScoring() {
     return (
         <Board
             taskMeta={currentTaskMeta}
-            title="Based on your observations, what was the performance of this industry on a scale of 0-100, where 0 is very bad and 100 is very good?"
+            header={
+                <Header>
+                    Based on your observations, what was the performance of this industry on a scale of 0-100, where 0
+                    is very bad and 100 is very good?
+                </Header>
+            }
             snapshot={{
                 optionSide: step === GroupScoringSteps.LEFT_OPTION_SCORING ? "left" : "right",
                 groupIndex: currentGroupIndex,

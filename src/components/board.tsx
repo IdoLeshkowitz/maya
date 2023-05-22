@@ -2,20 +2,19 @@ import {TaskMeta} from "@/types/taskMeta";
 import Option from "@components/option";
 import Group from "@components/group";
 import {Snapshot} from "@/types/performance";
-import {ReactNode} from "react";
+import React, {ReactNode} from "react";
 import '../app/globals.css'
 
 interface BoardProps {
     taskMeta: TaskMeta,
     snapshot?: Snapshot
     children?: ReactNode
-    title?: string
+    header?: ReactNode
     onOptionSelected?: (side: 'left' | 'right') => void
-    titleCentered?: boolean
 }
 
 export default function Board(props: BoardProps) {
-    const {taskMeta, children, snapshot, title, onOptionSelected,titleCentered} = props
+    const {taskMeta, children, snapshot, header, onOptionSelected} = props
     const optionsContainerStyle = {
         display            : 'grid',
         gridTemplateColumns: "repeat(2,1fr)",
@@ -28,10 +27,8 @@ export default function Board(props: BoardProps) {
     }
     return (
         <main className="container my-10" style={boardContainerStyle}>
-            {/*title*/}
-            <h1 className={`flex justify-center items-center text-3xl font-bold text-black whitespace-pre-wrap ${titleCentered ? 'text-center':'text-start'}`}>
-                {title || snapshot?.label}
-            </h1>
+            {/* header */}
+            {header ?? <div/>}
             {/*options*/}
             <div style={optionsContainerStyle}>
                 {/*left option*/}

@@ -54,7 +54,7 @@ export default function TaskInstructions() {
                     </div>
                 }
             >
-                <p className="text-start text-black text-base line-b whitespace-break-spaces">
+                <p className="text-start text-black text-base whitespace-break-spaces">
                     {instructionsSteps[currentStep]}
                 </p>
             </CommonLayout>

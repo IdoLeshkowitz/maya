@@ -1,10 +1,12 @@
 import {FC, useMemo, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../../libs/redux/hooks";
 import {RootState} from "../../../libs/redux/store";
-import {Snapshot} from "@/types/performance";
+import {Snapshot, SnapshotIndicator} from "@/types/performance";
 import Board from "@components/board";
 import {CommonButton} from "@components/button";
 import {stepForward} from "../../../libs/redux/features/experiment/experimentActions";
+import {Headers} from "next/dist/compiled/@edge-runtime/primitives/fetch";
+import Header from "@components/header";
 
 enum SnapshotStep {
     IDLE,
@@ -26,21 +28,14 @@ const Performance: FC = () => {
     const dispatch = useAppDispatch()
     const [currentSnapshotStep, setCurrentSnapshotStep] = useState(SnapshotStep.IDLE)
     let currentSnapshot: Snapshot | undefined = useAppSelector(getCurrentSnapshot)
-    if (currentSnapshotStep === SnapshotStep.IDLE) {
-        currentSnapshot = undefined
-    }
-    if (currentSnapshotStep === SnapshotStep.LOADER) {
-        currentSnapshot = {
-            ...currentSnapshot!,
-            indicator: "loading"
-        }
-    }
     return (
         <>
             {/*board*/}
             <Board
-                title={useAppSelector(getCurrentSnapshot).label}
-                snapshot={currentSnapshot}
+                header={<Header centered={true}>{currentSnapshot.label}</Header>}
+                snapshot={
+                    currentSnapshotStep === SnapshotStep.SNAPSHOT ? currentSnapshot : currentSnapshotStep === SnapshotStep.LOADER ?
+                        {...currentSnapshot, indicator: SnapshotIndicator.LOADING} : undefined}
                 taskMeta={useAppSelector(getCurrentTaskMeta)}
             >
                 {

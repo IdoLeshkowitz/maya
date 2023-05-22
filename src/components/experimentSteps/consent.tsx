@@ -4,13 +4,14 @@ import {useAppDispatch} from "../../../libs/redux/hooks";
 import {stepForward} from "../../../libs/redux/features/experiment/experimentActions";
 import CommonLayout from "@components/commonLayout";
 import {CommonButton} from "@components/button";
+import Header from "@components/header";
 
 export default function Consent() {
     const [consent, setConsent] = useState(false)
     const dispatch = useAppDispatch()
     return (
         <CommonLayout
-            header={<ConsentHeader/>}
+            header={<Header centered={true}>Informed Consent</Header>}
             footer={<ConsentFooter consent={consent} setConsent={setConsent} dispatch={dispatch}/>}
         >
             <div className="overflow-scroll border-black border p-5 rounded whitespace-pre-wrap ">
@@ -105,11 +106,5 @@ function ConsentFooter({setConsent, consent, dispatch}: {
                 </CommonButton>
             </div>
         </div>
-    )
-}
-
-function ConsentHeader() {
-    return (
-        <h2 className="text-black text-base text-center">Informed Consent</h2>
     )
 }

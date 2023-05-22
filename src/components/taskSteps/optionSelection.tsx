@@ -11,6 +11,7 @@ import {stepForward} from "../../../libs/redux/features/experiment/experimentAct
 import {CommonButton} from "@components/button";
 import CommonLayout from "@components/commonLayout";
 import Slider from "@components/slider";
+import Header from "@components/header";
 
 enum OptionSelectionSteps {
     SELECT_SIDE,
@@ -46,7 +47,7 @@ export default function OptionSelection() {
         return (
             <Board
                 taskMeta={currentTaskMeta}
-                title={`Based on your observations, which portfolio performed better?\nClick on the name of the portfolio that performed better.`}
+                header={<Header>{`Based on your observations, which portfolio performed better?\nClick on the name of the portfolio that performed better.`}</Header>}
                 onOptionSelected={(side) => {
                     setStep(OptionSelectionSteps.SET_CONDFIDENCE)
                     setSelectedSide(side)
