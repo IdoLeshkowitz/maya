@@ -13,20 +13,15 @@ function getTotalNumberOfTasks(state: RootState) {
 }
 
 export default function Welcome() {
+    /*
+        story
+        This is the first screen that the user sees when he starts a new task.
+        on the first task it should say -->The experiment is divided to several tasks.Click to start the first task.
+        on the other tasks it should say --> You will now start the next part of the task, which is unrelated to the previous part.
+     */
     const dispatch = useAppDispatch()
     const currentTaskIndex = useAppSelector(getCurrentTaskIndex)
     const totalNumberOfTasks = useAppSelector(getTotalNumberOfTasks)
-    const currentTaskString = () => {
-        if (currentTaskIndex === 0) {
-            return "first "
-        }
-        if (currentTaskIndex === 1) {
-            return "second "
-        }
-        if (currentTaskIndex === 2) {
-            return "third "
-        }
-    }
     return (
         <CommonLayout
             footer={
@@ -41,7 +36,12 @@ export default function Welcome() {
             }
         >
             <p className="text-base text-black text-center">
-                {`You are about to start ${currentTaskString()} task`}
+                {
+                    currentTaskIndex === 0 ?
+                        `The experiment is divided to several tasks. Click to start the first task.`
+                        :
+                        `You will now start the next part of the task, which is unrelated to the previous part.`
+                }
             </p>
         </CommonLayout>
     )

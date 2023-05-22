@@ -2,14 +2,15 @@ import {ExperimentMeta} from "@/types/experimentMeta";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 export enum ExperimentStep {
-    IDLE,
-    CONSENT,
-    INTRO,
-    TASKS,
-    FORM,
-    RESULTS_SENT,
-    ENDED_SUCCESS,
-    ENDED_ERROR
+    IDLE = "IDLE",
+    CONSENT = "CONSENT",
+    INTRO = "INTRO",
+    TASKS = "TASKS",
+    FORM = "FORM",
+    RESULTS_SENT = "RESULTS_SENT",
+    ENDED_SUCCESS = "ENDED_SUCCESS",
+    ENDED_ERROR = "ENDED_ERROR",
+
 }
 
 interface ExperimentState {

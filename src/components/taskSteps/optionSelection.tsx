@@ -10,6 +10,7 @@ import {setCurrentTaskResultOptionSelection} from "../../../libs/redux/features/
 import {stepForward} from "../../../libs/redux/features/experiment/experimentActions";
 import {CommonButton} from "@components/button";
 import CommonLayout from "@components/commonLayout";
+import Slider from "@components/slider";
 
 enum OptionSelectionSteps {
     SELECT_SIDE,
@@ -75,20 +76,12 @@ export default function OptionSelection() {
                 }
             >
                 {/*confidence slider*/}
-                <div className="flex flex-col justify-center gap-5 text-center mb-3">
-                    <input
-                        type="range"
-                        min="0"
-                        max="100"
-                        value={confidence ?? 0}
-                        onChange={(event) => {
-                            setConfidence(parseInt(event.target.value))
-                        }}
-                    />
-                    <p className="text-2xl font-bold text-black">
-                        {confidence ?? 0}
-                    </p>
-                </div>
+                <Slider
+                    value={confidence ?? undefined}
+                    onChange={(value) => {
+                        setConfidence(value)
+                    }}
+                />
             </CommonLayout>
         )
     }

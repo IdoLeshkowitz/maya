@@ -8,7 +8,6 @@ const experimentInstructions: string[] = [
     "In this experiment, you will be asked to make investment decisions. But first, we will explain some concepts regarding stocks and investments. Please read them and make sure you understand the concepts and their meaning as we use them.",
     "Buying a stock is like buying your share of a company. Every stock has a value, which reflects the value of the company, and this value changes over time.",
     `To diversify investment you can buy a stock <strong>portfolio</strong>, which is like buying several stocks from different companies. <br>A portfolio may include stocks of companies from several industries. <br>The total <strong>profit</strong> from the portfolio will be according to the gains and losses of all of the stocks.`,
-    `The experiment is divided to several tasks. <br> Click to start the first task.`
 ]
 export default function ExperimentInstructions() {
     const dispatch = useAppDispatch()

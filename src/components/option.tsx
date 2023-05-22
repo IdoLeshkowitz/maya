@@ -37,7 +37,7 @@ const Option: FC<OptionProps> = (props) => {
     }
     return (
         <div
-            className={`flex flex-col grow-0 items-center justify-between border-black border-2 ${onClick ? "cursor-pointer" : ""}`}
+            className={`flex flex-col grow-0 items-center justify-between border-black border ${onClick ? "cursor-pointer" : ""}`}
             style={{backgroundColor: bgColor}}
             onClick={onClick}
             tabIndex={tabIndex}
@@ -47,7 +47,7 @@ const Option: FC<OptionProps> = (props) => {
                 }
             })}
         >
-            <h2 className="text-2xl font-bold text-black text-center py-2 justify-self-center mt-8">{optionName}</h2>
+            <h2 className="text-base font-bold text-black text-center py-2 justify-self-center mt-8">{optionName}</h2>
             <GroupsContainer>
                 {children}
             </GroupsContainer>
@@ -64,7 +64,7 @@ const GroupsContainer = ({children}: { children: ReactNode }) => {
     return (
         <div
             style={gridContainerStyle}
-            className="self-stretch gap-5 mx-3 my-8"
+            className="self-stretch mx-3 my-8 flex justify-between gap-2"
         >
             {children}
         </div>

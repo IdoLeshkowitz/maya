@@ -16,8 +16,9 @@ import {
 } from "./tasksActions";
 import {RootState} from "../../store";
 import {OptionSelection, TaskResult} from "@/types/taskResult";
+import {TaskStep} from "./tasksSlice";
 
-const setCurrentTaskStepM: Middleware = ({dispatch, getState}) => (next) => (action: PayloadAction<number>) => {
+const setCurrentTaskStepM: Middleware = ({dispatch, getState}) => (next) => (action: PayloadAction<TaskStep>) => {
     next(action)
     if (action.type === setCurrentTaskStep.type) {
         /* set current task step to  */

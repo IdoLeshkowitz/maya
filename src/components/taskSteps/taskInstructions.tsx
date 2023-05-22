@@ -65,7 +65,15 @@ export default function TaskInstructions() {
         return (
             <>
                 {
-                    cloneElement(boardElement, {children: <CommonButton onClick={next}>Next</CommonButton>})
+                    cloneElement(boardElement, {
+                        children: (
+                            <div className="flex items-center justify-center">
+                                <CommonButton onClick={next}>
+                                    Next
+                                </CommonButton>
+                            </div>
+                        )
+                    })
                 }
             </>
         )

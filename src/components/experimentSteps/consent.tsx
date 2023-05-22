@@ -3,6 +3,7 @@ import {useState} from "react";
 import {useAppDispatch} from "../../../libs/redux/hooks";
 import {stepForward} from "../../../libs/redux/features/experiment/experimentActions";
 import CommonLayout from "@components/commonLayout";
+import {CommonButton} from "@components/button";
 
 export default function Consent() {
     const [consent, setConsent] = useState(false)
@@ -76,7 +77,7 @@ function ConsentFooter({setConsent, consent, dispatch}: {
     dispatch: Function
 }) {
     return (
-        <div className="flex flex-col items-start gap-2">
+        <div className="flex flex-col justify-between gap-4">
             <div>
                 <input
                     type="checkbox"
@@ -91,22 +92,24 @@ function ConsentFooter({setConsent, consent, dispatch}: {
                 </label>
             </div>
             {/*next button*/}
-            <button
-                className={`text-black rounded-full px-5 py-2 border self-center ${consent ? 'bg-blue bg-opacity-50 hover:scale-110 scale-105' : 'cursor-not-allowed'} transition ease-in-out delay-75 duration-500`}
-                onClick={() => {
-                    if (consent) {
-                        dispatch(stepForward())
-                    }
-                }}
-            >
-                Next
-            </button>
+            <div className="flex self-center">
+                <CommonButton
+                    onClick={() => {
+                        if (consent) {
+                            dispatch(stepForward())
+                        }
+                    }}
+                    disabled={!consent}
+                >
+                    Next
+                </CommonButton>
+            </div>
         </div>
     )
 }
 
 function ConsentHeader() {
     return (
-        <h2 className="text-black text-2xl text-center">Informed Consent</h2>
+        <h2 className="text-black text-base text-center">Informed Consent</h2>
     )
 }

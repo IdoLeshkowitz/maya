@@ -14,7 +14,7 @@ const CommonLayout: FC<CommonLayoutProps> = ({header, footer, children}) => {
     }
     return (
         <main style={layoutGridStyle} className="py-24 px-32">
-            {header ?? <div/>}
+            {header || <div/>}
             {children}
             {footer}
         </main>

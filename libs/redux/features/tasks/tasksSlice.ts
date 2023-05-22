@@ -3,12 +3,12 @@ import {TaskResult} from "@/types/taskResult";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 export enum TaskStep {
-    IDLE,
-    TASK_INSTRUCTIONS,
-    PERFORMANCE,
-    OPTION_SELECTION,
-    GROUP_SCORING,
-    FINISHED
+    IDLE="IDLE",
+    TASK_INSTRUCTIONS="TASK_INSTRUCTIONS",
+    PERFORMANCE="PERFORMANCE",
+    OPTION_SELECTION="OPTION_SELECTION",
+    GROUP_SCORING="GROUP_SCORING",
+    FINISHED="FINISHED"
 }
 
 export interface TaskState {

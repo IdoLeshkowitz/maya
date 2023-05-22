@@ -3,6 +3,7 @@ import {setExperimentStep, stepForward} from "./experimentActions";
 import {ExperimentStep} from "./experimentSlice";
 import {RootState} from "../../store";
 import {
+    setCurrentTaskEndTime,
     setCurrentTaskIndex,
     setCurrentTaskSnapshotIndex,
     setCurrentTaskStartTime,
@@ -103,17 +104,15 @@ const stepForwardSplit: Middleware = ({dispatch, getState}) => next => action =>
             */
             if (currentTaskStep === TaskStep.GROUP_SCORING) {
                 /* set end time */
-                dispatch(setCurrentTaskStartTime(Date.now()))
+                dispatch(setCurrentTaskEndTime(Date.now()))
                 /* check if there are any tasks left */
                 const numberOfAvailableTasks = state.tasks.tasksStates.length
                 const currentTaskIndex = state.tasks.currentTaskIndex!
                 const tasksLeft = numberOfAvailableTasks - currentTaskIndex - 1
-                /* if there are no tasks left head to next task  */
                 if (!tasksLeft) {
+                    /* if there are no tasks left head to form  */
                     /* set current task index to null */
                     dispatch(setCurrentTaskIndex(null))
-                    /* set current task step to finished */
-                    dispatch(setCurrentTaskStep(TaskStep.FINISHED))
                     /* set experiment step to form */
                     dispatch(setExperimentStep(ExperimentStep.FORM))
                     return;
@@ -133,6 +132,7 @@ const stepForwardSplit: Middleware = ({dispatch, getState}) => next => action =>
             const tasksResultsToSend = state.tasks.tasksStates.map(taskState => {
                 return taskState.taskResult
             })
+            console.log(tasksResultsToSend)
             /* send the results */
             dispatch(submitTasksResult(tasksResultsToSend))
         }

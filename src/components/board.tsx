@@ -11,11 +11,11 @@ interface BoardProps {
     children?: ReactNode
     title?: string
     onOptionSelected?: (side: 'left' | 'right') => void
-    footer?: ReactNode
+    titleCentered?: boolean
 }
 
 export default function Board(props: BoardProps) {
-    const {taskMeta, children, snapshot, title, onOptionSelected} = props
+    const {taskMeta, children, snapshot, title, onOptionSelected,titleCentered} = props
     const optionsContainerStyle = {
         display            : 'grid',
         gridTemplateColumns: "repeat(2,1fr)",
@@ -29,7 +29,7 @@ export default function Board(props: BoardProps) {
     return (
         <main className="container my-10" style={boardContainerStyle}>
             {/*title*/}
-            <h1 className="flex justify-center items-center text-2xl font-bold text-start text-black whitespace-pre-wrap">
+            <h1 className={`flex justify-center items-center text-3xl font-bold text-black whitespace-pre-wrap ${titleCentered ? 'text-center':'text-start'}`}>
                 {title || snapshot?.label}
             </h1>
             {/*options*/}
@@ -49,7 +49,7 @@ export default function Board(props: BoardProps) {
                                     key={index}
                                     groupName={groupName}
                                     snapshot={(snapshot && snapshot.optionSide === "left" && snapshot.groupIndex === index) ? snapshot : undefined}
-                                    hidden={snapshot?.optionSide === "right" || snapshot?.groupIndex !== index}
+                                    hidden={snapshot && (snapshot?.optionSide === "right" || snapshot?.groupIndex !== index)}
                                 />
                             )
                         })
@@ -70,7 +70,7 @@ export default function Board(props: BoardProps) {
                                     key={index}
                                     groupName={groupName}
                                     snapshot={(snapshot && snapshot.optionSide === "right" && snapshot.groupIndex === index) ? snapshot : undefined}
-                                    hidden={snapshot?.optionSide === "left" || snapshot?.groupIndex !== index}
+                                    hidden={snapshot && (snapshot?.optionSide === "left" || snapshot?.groupIndex !== index)}
                                 />
                             )
                         })
@@ -79,9 +79,7 @@ export default function Board(props: BoardProps) {
             </div>
 
             {/*footer*/}
-            <div className="flex items-center justify-center">
-                {children}
-            </div>
+            {children}
         </main>
     )
 }

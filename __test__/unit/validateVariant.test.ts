@@ -23,18 +23,18 @@ const validVariant: Variant = {
             "leftPerformanceTitle"   : "good",
             "rightPerformanceTitle"  : "bad",
             "snapshots"              : [
-                {"groupIndex": 0, "label": "company1", "indicator": "loading", "optionSide": "left"},
-                {"groupIndex": 0, "label": "company1", "indicator": "check", "optionSide": "left"},
-                {"groupIndex": 1, "label": "company2", "indicator": "loading", "optionSide": "left"},
-                {"groupIndex": 1, "label": "company2", "indicator": "check", "optionSide": "left"},
-                {"groupIndex": 2, "label": "company3", "indicator": "loading", "optionSide": "left"},
-                {"groupIndex": 2, "label": "company3", "indicator": "check", "optionSide": "left"},
-                {"groupIndex": 3, "label": "company4", "indicator": "loading", "optionSide": "right"},
-                {"groupIndex": 3, "label": "company4", "indicator": "cross", "optionSide": "right"},
-                {"groupIndex": 4, "label": "company5", "indicator": "loading", "optionSide": "right"},
-                {"groupIndex": 4, "label": "company5", "indicator": "cross", "optionSide": "right"},
-                {"groupIndex": 5, "label": "company6", "indicator": "loading", "optionSide": "right"},
-                {"groupIndex": 5, "label": "company6", "indicator": "cross", "optionSide": "right"}
+                {"groupIndex": 0, "label": "Company1", "indicator": "loading", "optionSide": "left"},
+                {"groupIndex": 0, "label": "Company1", "indicator": "check", "optionSide": "left"},
+                {"groupIndex": 1, "label": "Company2", "indicator": "loading", "optionSide": "left"},
+                {"groupIndex": 1, "label": "Company2", "indicator": "check", "optionSide": "left"},
+                {"groupIndex": 2, "label": "Company3", "indicator": "loading", "optionSide": "left"},
+                {"groupIndex": 2, "label": "Company3", "indicator": "check", "optionSide": "left"},
+                {"groupIndex": 3, "label": "Company4", "indicator": "loading", "optionSide": "right"},
+                {"groupIndex": 3, "label": "Company4", "indicator": "cross", "optionSide": "right"},
+                {"groupIndex": 4, "label": "Company5", "indicator": "loading", "optionSide": "right"},
+                {"groupIndex": 4, "label": "Company5", "indicator": "cross", "optionSide": "right"},
+                {"groupIndex": 5, "label": "Company6", "indicator": "loading", "optionSide": "right"},
+                {"groupIndex": 5, "label": "Company6", "indicator": "cross", "optionSide": "right"}
             ]
         },
         {
@@ -42,18 +42,18 @@ const validVariant: Variant = {
             "leftPerformanceTitle"   : "good",
             "rightPerformanceTitle"  : "bad",
             "snapshots"              : [
-                {"groupIndex": 0, "label": "company1", "indicator": "loading", "optionSide": "right"},
-                {"groupIndex": 0, "label": "company1", "indicator": "check", "optionSide": "right"},
-                {"groupIndex": 1, "label": "company2", "indicator": "loading", "optionSide": "right"},
-                {"groupIndex": 1, "label": "company2", "indicator": "check", "optionSide": "right"},
-                {"groupIndex": 2, "label": "company3", "indicator": "loading", "optionSide": "right"},
-                {"groupIndex": 2, "label": "company3", "indicator": "check", "optionSide": "right"},
-                {"groupIndex": 3, "label": "company4", "indicator": "loading", "optionSide": "left"},
-                {"groupIndex": 3, "label": "company4", "indicator": "cross", "optionSide": "left"},
-                {"groupIndex": 4, "label": "company5", "indicator": "loading", "optionSide": "left"},
-                {"groupIndex": 4, "label": "company5", "indicator": "cross", "optionSide": "left"},
-                {"groupIndex": 5, "label": "company6", "indicator": "loading", "optionSide": "left"},
-                {"groupIndex": 5, "label": "company6", "indicator": "cross", "optionSide": "left"}
+                {"groupIndex": 0, "label": "Company1", "indicator": "loading", "optionSide": "right"},
+                {"groupIndex": 0, "label": "Company1", "indicator": "check", "optionSide": "right"},
+                {"groupIndex": 1, "label": "Company2", "indicator": "loading", "optionSide": "right"},
+                {"groupIndex": 1, "label": "Company2", "indicator": "check", "optionSide": "right"},
+                {"groupIndex": 2, "label": "Company3", "indicator": "loading", "optionSide": "right"},
+                {"groupIndex": 2, "label": "Company3", "indicator": "check", "optionSide": "right"},
+                {"groupIndex": 3, "label": "Company4", "indicator": "loading", "optionSide": "left"},
+                {"groupIndex": 3, "label": "Company4", "indicator": "cross", "optionSide": "left"},
+                {"groupIndex": 4, "label": "Company5", "indicator": "loading", "optionSide": "left"},
+                {"groupIndex": 4, "label": "Company5", "indicator": "cross", "optionSide": "left"},
+                {"groupIndex": 5, "label": "Company6", "indicator": "loading", "optionSide": "left"},
+                {"groupIndex": 5, "label": "Company6", "indicator": "cross", "optionSide": "left"}
             ]
         }
     ]

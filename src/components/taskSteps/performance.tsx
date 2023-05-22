@@ -39,30 +39,33 @@ const Performance: FC = () => {
         <>
             {/*board*/}
             <Board
+                title={useAppSelector(getCurrentSnapshot).label}
                 snapshot={currentSnapshot}
                 taskMeta={useAppSelector(getCurrentTaskMeta)}
             >
                 {
                     currentSnapshotStep === SnapshotStep.IDLE &&
-                    <CommonButton
-                        onClick={() => {
-                            /* show loader for 1s */
-                            setCurrentSnapshotStep(SnapshotStep.LOADER)
-                            /* then show snapshot for another sec */
-                            setTimeout(() => {
-                                setCurrentSnapshotStep(SnapshotStep.SNAPSHOT)
-                            }, 1000)
-                            /* then go to next step */
-                            setTimeout(() => {
+                    <div className="flex items-center justify-center">
+                        <CommonButton
+                            onClick={() => {
+                                /* show loader for 1s */
+                                setCurrentSnapshotStep(SnapshotStep.LOADER)
+                                /* then show snapshot for another sec */
                                 setTimeout(() => {
-                                    dispatch(stepForward())
-                                }, 1)
-                                setCurrentSnapshotStep(SnapshotStep.IDLE)
-                            }, 2000)
-                        }}
-                    >
-                        Next
-                    </CommonButton>
+                                    setCurrentSnapshotStep(SnapshotStep.SNAPSHOT)
+                                }, 500)
+                                /* then go to next step */
+                                setTimeout(() => {
+                                    setTimeout(() => {
+                                        dispatch(stepForward())
+                                    }, 1)
+                                    setCurrentSnapshotStep(SnapshotStep.IDLE)
+                                }, 1000)
+                            }}
+                        >
+                            Next
+                        </CommonButton>
+                    </div>
                 }
             </Board>
         </>
