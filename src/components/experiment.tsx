@@ -1,5 +1,5 @@
 'use client'
-import {FC, useEffect, useMemo} from "react";
+import {FC, useEffect, useMemo, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../libs/redux/hooks";
 import Consent from "@components/experimentSteps/consent";
 import {TaskMeta} from "@/types/taskMeta";
@@ -9,6 +9,7 @@ import {ExperimentStep} from "../../libs/redux/features/experiment/experimentSli
 import Welcome from "@components/experimentSteps/welcome";
 import ExperimentInstructions from "@components/experimentSteps/experimentInstructions";
 import Task from "@components/task";
+import logUpdate from "log-update";
 
 interface ExperimentProps {
     experimentMetadataStringify: string
@@ -20,6 +21,7 @@ const Experiment: FC<ExperimentProps> = ({tasksMetadataStringify, experimentMeta
     const experimentStep = useAppSelector(state => state.experiment.experimentStep)
     const tasksMetadata: TaskMeta[] = useMemo(() => JSON.parse(tasksMetadataStringify), [tasksMetadataStringify])
     const experimentMetadata: ExperimentMeta = useMemo(() => JSON.parse(experimentMetadataStringify), [experimentMetadataStringify])
+    const [screenSizeError, setScreenSizeError] = useState<boolean>(false)
     useEffect(() => {
         if (experimentMetadata) {
             dispatch(fetchExperimentMetaSuccess(experimentMetadata))
@@ -28,6 +30,23 @@ const Experiment: FC<ExperimentProps> = ({tasksMetadataStringify, experimentMeta
             dispatch(fetchTaskMetaSuccess(tasksMetadata))
         }
     }, [])
+
+    useEffect(() => {
+        window.addEventListener('resize', () => {
+            if (window.innerWidth < 1024) {
+                setScreenSizeError(true)
+            } else {
+                setScreenSizeError(false)
+            }
+        })
+    }, [])
+    if (screenSizeError) {
+        return (
+            <div className="flex flex-col justify-center items-center">
+                <h1 className="text-4xl font-bold">Please visit the website on a desktop computer.</h1>
+            </div>
+        )
+    }
     if (experimentStep === ExperimentStep.IDLE) {
         return <Welcome/>
     }
