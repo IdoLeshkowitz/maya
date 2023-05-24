@@ -4,7 +4,7 @@ export function middleware(request: NextRequest) {
     /* check if the user is browsing from mobile */
     const {device} = userAgent(request)
     if (device.type === "mobile") {
-        const urlToGo = `${request.nextUrl.host}/mobileBlock`
+        const urlToGo = `${request.nextUrl.origin}/mobileBlock`
         return NextResponse.redirect('http://localhost:3000/mobileBlock')
     }
 }
