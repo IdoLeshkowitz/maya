@@ -14,7 +14,7 @@ export default function Consent() {
             header={<Header centered={true}>Informed Consent</Header>}
             footer={<ConsentFooter consent={consent} setConsent={setConsent} dispatch={dispatch}/>}
         >
-            <div className="overflow-scroll border-black border p-5 rounded whitespace-pre-wrap ">
+            <div className="overflow-scroll border-black border p-5 rounded whitespace-pre-wrap px-10 mx-10">
                 <div className="flex flex-col gap-10">
                     <p className="text-black text-md">
                         You are invited to participate in a web-based online survey on human perception.
@@ -78,8 +78,8 @@ function ConsentFooter({setConsent, consent, dispatch}: {
     dispatch: Function
 }) {
     return (
-        <div className="flex flex-col justify-between gap-4">
-            <div>
+        <div className="flex flex-col justify-center relative">
+            <div className="absolute -top-3 ps-10">
                 <input
                     type="checkbox"
                     id="consent"

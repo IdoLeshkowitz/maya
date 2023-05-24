@@ -12,8 +12,8 @@ module.exports = {
         extend: {
             fontSize: {
                 'base': '2rem',
-            }
-        }
+            },
+        },
     },
     plugins: [],
 }

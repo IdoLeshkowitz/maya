@@ -29,12 +29,12 @@
           "leftPerformanceTitle"   : "good",
           "rightPerformanceTitle"  : "bad",
           "snapshots"              : [
-            {"groupIndex": 0, "label": "company1", "indicator": "check", "optionSide": "left"},
-            {"groupIndex": 1, "label": "company2", "indicator": "check", "optionSide": "left"},
-            {"groupIndex": 2, "label": "company3", "indicator": "check", "optionSide": "left"},
-            {"groupIndex": 1, "label": "company4", "indicator": "cross", "optionSide": "right"},
-            {"groupIndex": 2, "label": "company5", "indicator": "cross", "optionSide": "right"},
-            {"groupIndex": 0, "label": "company6", "indicator": "cross", "optionSide": "right"}
+            {"groupIndex": 0, "label": "Company 1", "indicator": "check", "optionSide": "left"},
+            {"groupIndex": 1, "label": "Company 2", "indicator": "check", "optionSide": "left"},
+            {"groupIndex": 2, "label": "Company 3", "indicator": "check", "optionSide": "left"},
+            {"groupIndex": 1, "label": "Company 4", "indicator": "cross", "optionSide": "right"},
+            {"groupIndex": 2, "label": "Company 5", "indicator": "cross", "optionSide": "right"},
+            {"groupIndex": 0, "label": "Company 6", "indicator": "cross", "optionSide": "right"}
           ]
         },
         {
@@ -42,12 +42,12 @@
           "leftPerformanceTitle"   : "good",
           "rightPerformanceTitle"  : "bad",
           "snapshots"              : [
-            {"groupIndex": 0, "label": "company1", "indicator": "check", "optionSide": "right"},
-            {"groupIndex": 1, "label": "company2", "indicator": "check", "optionSide": "right"},
-            {"groupIndex": 2, "label": "company3", "indicator": "check", "optionSide": "right"},
-            {"groupIndex": 1, "label": "company4", "indicator": "cross", "optionSide": "left"},
-            {"groupIndex": 0, "label": "company5", "indicator": "cross", "optionSide": "left"},
-            {"groupIndex": 2, "label": "company6", "indicator": "cross", "optionSide": "left"}
+            {"groupIndex": 0, "label": "Company 1", "indicator": "check", "optionSide": "right"},
+            {"groupIndex": 1, "label": "Company 2", "indicator": "check", "optionSide": "right"},
+            {"groupIndex": 2, "label": "Company 3", "indicator": "check", "optionSide": "right"},
+            {"groupIndex": 1, "label": "Company 4", "indicator": "cross", "optionSide": "left"},
+            {"groupIndex": 0, "label": "Company 5", "indicator": "cross", "optionSide": "left"},
+            {"groupIndex": 2, "label": "Company 6", "indicator": "cross", "optionSide": "left"}
           ]
         }
       ]

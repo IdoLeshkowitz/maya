@@ -15,7 +15,7 @@ export default function Welcome() {
                 </div>
             }
         >
-            <h1 className="text-base font-bold text-center text-black">
+            <h1 className="flex justify-center items-center text-base font-bold text-center text-black">
                 Welcome to the experiment!
             </h1>
         </CommonLayout>

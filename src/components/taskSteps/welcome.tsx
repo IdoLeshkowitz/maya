@@ -35,7 +35,7 @@ export default function Welcome() {
                 </div>
             }
         >
-            <p className="text-base text-black text-center">
+            <p className="text-base text-black text-start">
                 {
                     currentTaskIndex === 0 ?
                         `The experiment is divided to several tasks. Click to start the first task.`

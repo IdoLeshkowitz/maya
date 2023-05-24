@@ -9,11 +9,11 @@ interface CommonLayoutProps {
 const CommonLayout: FC<CommonLayoutProps> = ({header, footer, children}) => {
     const layoutGridStyle = {
         display         : 'grid',
-        gridTemplateRows: '1fr 3fr 1fr',
-        gridGap         : '5rem',
+        gridTemplateRows: '0.5fr 3fr 1fr',
+        gridGap         : '2rem',
     }
     return (
-        <main style={layoutGridStyle} className="py-24 px-32">
+        <main style={layoutGridStyle} className="bg-white h-screen py-8 px-10">
             {header || <div/>}
             {children}
             {footer}

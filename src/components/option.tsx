@@ -36,21 +36,23 @@ const Option: FC<OptionProps> = (props) => {
         )
     }
     return (
-        <div
-            className={`flex flex-col grow-0 items-center justify-between border-black border ${onClick ? "cursor-pointer" : ""}`}
-            style={{backgroundColor: bgColor}}
-            onClick={onClick}
-            tabIndex={tabIndex}
-            onKeyDown={onClick && ((e) => {
-                if (e.key === "Enter") {
-                    onClick()
-                }
-            })}
-        >
-            <h2 className="text-base font-bold text-black text-center py-2 justify-self-center mt-8">{optionName}</h2>
-            <GroupsContainer>
-                {children}
-            </GroupsContainer>
+        <div className="flex flex-col justify-center">
+            <div
+                className={`flex flex-col items-center justify-center border-black border ${onClick ? "cursor-pointer" : ""}`}
+                style={{backgroundColor: bgColor}}
+                onClick={onClick}
+                tabIndex={tabIndex}
+                onKeyDown={onClick && ((e) => {
+                    if (e.key === "Enter") {
+                        onClick()
+                    }
+                })}
+            >
+                <h2 className="text-base font-bold text-black text-center py-2 justify-self-center mt-8">{optionName}</h2>
+                <GroupsContainer>
+                    {children}
+                </GroupsContainer>
+            </div>
         </div>
     )
 }

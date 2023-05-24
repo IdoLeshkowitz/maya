@@ -22,11 +22,11 @@ export default function Board(props: BoardProps) {
     }
     const boardContainerStyle = {
         display         : 'grid',
-        gridTemplateRows: "1fr 1.5fr 1fr",
+        gridTemplateRows: ".5fr 3fr 1fr",
         gridGap         : "1rem",
     }
     return (
-        <main className="container my-10" style={boardContainerStyle}>
+        <main className= "py-8 px-10 bg-white h-screen" style={boardContainerStyle}>
             {/* header */}
             {header ?? <div/>}
             {/*options*/}

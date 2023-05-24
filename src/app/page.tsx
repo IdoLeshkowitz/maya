@@ -23,7 +23,7 @@ export default async function Home() {
         tasksIds: Object.values(insertedTasksMetaResult.insertedIds),
     })
     return (
-        <main className="flex h-screen bg-white justify-center">
+        <>
             <ReduxProvider>
                 <Experiment
                     tasksMetadataStringify={JSON.stringify(tasksMeta.map((taskMeta, index) => {
@@ -38,7 +38,7 @@ export default async function Home() {
                     } as ExperimentMeta)}
                 />
             </ReduxProvider>
-        </main>
+        </>
     )
 }
 
