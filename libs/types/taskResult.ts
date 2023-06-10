@@ -2,9 +2,11 @@ import {ObjectId} from "bson";
 
 export interface TaskResult {
     _id?: ObjectId// task result id
-    taskId: ObjectId
-    duration?: number | null
-    optionSelection?: OptionSelection | null
+    startTime?: number
+    belongsToTask?: ObjectId
+    endTime?: number
+    selectedOption?: string
+    optionSelectionConfidence?: number
     leftScores?: number[] | null
     rightScores?: number[] | null
 }

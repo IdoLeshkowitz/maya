@@ -9,9 +9,7 @@ import {
     setCurrentTaskStartTime,
     setCurrentTaskStep,
     setTaskCurrentSnapshotIndexByIndex,
-    setTaskEndTimeByIndex,
-    setTaskResultByIndex,
-    setTaskStartTimeByIndex,
+    setTaskResultByIndex, setTaskStateByIndex,
     setTaskStepByIndex
 } from "./tasksActions";
 import {RootState} from "../../store";
@@ -31,8 +29,17 @@ const setCurrentTaskStartTimeM: Middleware = ({dispatch, getState}) => (next) =>
         /* get the current task index */
         const state: RootState = getState()
         const currentTaskIndex = state.tasks.currentTaskIndex!
-        /* dispatch set task step */
-        dispatch(setTaskStartTimeByIndex({taskIndex: currentTaskIndex, startTime: action.payload}))
+        const currentTaskState = state.tasks.tasksStates[currentTaskIndex]
+        dispatch(setTaskStateByIndex({
+            taskIndex: currentTaskIndex,
+            taskState: {
+                ...currentTaskState,
+                taskResult:{
+                    ...currentTaskState.taskResult!,
+                    startTime: action.payload
+                }
+            }
+        }))
     }
 }
 const setCurrentTaskEndTimeM: Middleware = ({dispatch, getState}) => (next) => (action: PayloadAction<number>) => {
@@ -41,12 +48,21 @@ const setCurrentTaskEndTimeM: Middleware = ({dispatch, getState}) => (next) => (
         /* get the current task index */
         const state: RootState = getState()
         const currentTaskIndex = state.tasks.currentTaskIndex!
-        /* dispatch set task step */
-        dispatch(setTaskEndTimeByIndex({taskIndex: currentTaskIndex, endTime: action.payload}))
+        const currentTaskState = state.tasks.tasksStates[currentTaskIndex]
+        dispatch(setTaskStateByIndex({
+            taskIndex: currentTaskIndex,
+            taskState: {
+                ...currentTaskState,
+                taskResult:{
+                    ...currentTaskState.taskResult!,
+                    endTime: action.payload
+                }
+            }
+        }))
     }
 }
 
-const setCurrentTaskResultOptionSelectionM: Middleware = ({dispatch, getState}) => (next) => (action: PayloadAction<OptionSelection>) => {
+const setCurrentTaskResultOptionSelectionM: Middleware = ({dispatch, getState}) => (next) => (action: PayloadAction<string>) => {
     next(action)
     if (action.type === setCurrentTaskResultOptionSelection.type) {
         /* get current task result */
@@ -55,7 +71,7 @@ const setCurrentTaskResultOptionSelectionM: Middleware = ({dispatch, getState}) 
         const currentTaskResult = state.tasks.tasksStates[currentTaskIndex].taskResult!
         const updatedTaskResult: TaskResult = {
             ...currentTaskResult,
-            optionSelection: action.payload
+            selectedOption: action.payload
         }
         /* dispatch set task result */
         dispatch(setTaskResultByIndex({taskIndex: currentTaskIndex, taskResult: updatedTaskResult}))
@@ -91,7 +107,7 @@ const setCurrenTaskResultRightScoresM: Middleware = ({dispatch, getState}) => (n
         dispatch(setTaskResultByIndex({taskIndex: currentTaskIndex, taskResult: updatedTaskResult}))
     }
 }
-const setCurrentTaskSnapshotIndexM: Middleware = ({dispatch, getState}) => (next) => (action: PayloadAction<number | null>) => {
+const setCurrentTaskSnapshotIndexM: Middleware = ({dispatch, getState}) => (next) => (action: PayloadAction<number >) => {
     next(action)
     if (action.type === setCurrentTaskSnapshotIndex.type) {
         /* get current task index */

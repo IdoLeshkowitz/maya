@@ -13,9 +13,9 @@ const CommonLayout: FC<CommonLayoutProps> = ({header, footer, children}) => {
         gridGap         : '2rem',
     }
     return (
-        <main style={layoutGridStyle} className="bg-white h-screen py-8 px-10">
+        <main style={layoutGridStyle} className="bg-white min-h-screen py-8 px-10">
             {header || <div/>}
-            {children}
+                {children}
             {footer}
         </main>
     )

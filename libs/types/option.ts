@@ -1,4 +1,4 @@
-import {object, string} from "yup";
+import {array, object, string} from "yup";
 
 export interface Option {
     optionName: string
@@ -8,4 +8,6 @@ export interface Option {
 
 export const optionSchema = object().shape({
     optionName: string().required(),
+    optionColor: string().required(),
+    groupsNames: array().of(string()).required()
 })

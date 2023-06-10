@@ -8,7 +8,6 @@ module.exports = {
         './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     ],
     theme: {
-        colors: experimentConfig.colors,
         extend: {
             fontSize: {
                 'base': '2rem',

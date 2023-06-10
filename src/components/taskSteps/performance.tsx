@@ -1,7 +1,7 @@
 import {FC, useMemo, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../../libs/redux/hooks";
 import {RootState} from "../../../libs/redux/store";
-import {Snapshot, SnapshotIndicator} from "@/types/performance";
+import {Snapshot, SnapshotIndicator} from "@/types/preview";
 import Board from "@components/board";
 import {CommonButton} from "@components/button";
 import {stepForward} from "../../../libs/redux/features/experiment/experimentActions";

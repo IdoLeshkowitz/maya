@@ -1,22 +1,25 @@
-import {Performance, performanceSchema} from "@/types/performance";
+import {Preview, previewSchema} from "@/types/preview";
 import {array, number, object, string} from "yup";
 
-export const variantSchema = object().shape({
+export const configSchema = object().shape({
+    colors       : object().required(),
     variantName  : string().required(),
     numberOfTasks: number().required(),
     optionsColors: array(array(string())).required(),
     optionsNames : array(array(string())).required(),
     groupsNames  : array(array(string())).required(),
-    performances : array().of(performanceSchema).required()
+    previews : array().of(previewSchema).required(),
 })
 
-export interface Variant {
+export interface Config {
     variantName: string
+    experimentName: string
+    experimentVersion : string
     numberOfTasks: number
     optionsColors: string[][]
     optionsNames: string[][]
     groupsNames: string[][]
 
-    performances: Performance[]
+    previews: Preview[]
 }
 

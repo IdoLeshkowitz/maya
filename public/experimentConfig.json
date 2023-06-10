@@ -1,5 +1,5 @@
 {
-  "colors"  : {
+  "colors"        : {
     "blue"  : "#1fb6ff",
     "red"   : "#E0245E",
     "yellow": "#FFD700",
@@ -7,49 +7,51 @@
     "white" : "#FFFFFF",
     "black" : "#000000"
   },
-  "variants": [
+  "experimentName": "alpha experiment",
+  "experimentVersion": "1.0.0",
+  "variantName"   : "alpha variant",
+  "numberOfTasks" : 2,
+  "optionsColors" : [
+    ["red", "green"],
+    ["blue", "yellow"]
+  ],
+  "optionsNames"  : [
+    ["Portfolio ABG", "Portfolio QYN"],
+    ["Portfolio BGH", "Portfolio ZQN"]
+  ],
+  "groupsNames"   : [
+    ["Banking", "Food", "Products", "Insurance", "Materials", "Utilities"],
+    ["Real Estate", "Fashion", "Automobiles", "Tourism", "Transportation", "Entertainment"]
+  ],
+  "previews"      : [
     {
-      "variantName"  : "stocks",
-      "numberOfTasks": 2,
-      "optionsColors": [
-        ["red", "green"],
-        ["blue", "yellow"]
-      ],
-      "optionsNames" : [
-        ["Portfolio ABG", "Portfolio QYN"],
-        ["Portfolio BGH", "Portfolio ZQN"]
-      ],
-      "groupsNames"  : [
-        ["Banking", "Food", "Products", "Insurance", "Materials", "Utilities"],
-        ["Real Estate", "Fashion", "Automobiles", "Tourism", "Transportation", "Entertainment"]
-      ],
-      "performances" : [
-        {
-          "overallPerformanceTitle": "left good - right bad",
-          "leftPerformanceTitle"   : "good",
-          "rightPerformanceTitle"  : "bad",
-          "snapshots"              : [
-            {"groupIndex": 0, "label": "Company 1", "indicator": "check", "optionSide": "left"},
-            {"groupIndex": 1, "label": "Company 2", "indicator": "check", "optionSide": "left"},
-            {"groupIndex": 2, "label": "Company 3", "indicator": "check", "optionSide": "left"},
-            {"groupIndex": 1, "label": "Company 4", "indicator": "cross", "optionSide": "right"},
-            {"groupIndex": 2, "label": "Company 5", "indicator": "cross", "optionSide": "right"},
-            {"groupIndex": 0, "label": "Company 6", "indicator": "cross", "optionSide": "right"}
-          ]
-        },
-        {
-          "overallPerformanceTitle": "right bad - left good",
-          "leftPerformanceTitle"   : "good",
-          "rightPerformanceTitle"  : "bad",
-          "snapshots"              : [
-            {"groupIndex": 0, "label": "Company 1", "indicator": "check", "optionSide": "right"},
-            {"groupIndex": 1, "label": "Company 2", "indicator": "check", "optionSide": "right"},
-            {"groupIndex": 2, "label": "Company 3", "indicator": "check", "optionSide": "right"},
-            {"groupIndex": 1, "label": "Company 4", "indicator": "cross", "optionSide": "left"},
-            {"groupIndex": 0, "label": "Company 5", "indicator": "cross", "optionSide": "left"},
-            {"groupIndex": 2, "label": "Company 6", "indicator": "cross", "optionSide": "left"}
-          ]
-        }
+      "previewName"           : "preview1",
+      "leftPreviewGroupName"  : "left preview group name",
+      "rightPreviewGroupName" : "right preview group name",
+      "leftPreviewSimpleName" : "left preview simple name",
+      "rightPreviewSimpleName": "right preview simple name",
+      "snapshots"             : [
+        {"groupIndex": 0, "label": "Company 1", "indicator": "check", "optionSide": "left"},
+        {"groupIndex": 1, "label": "Company 2", "indicator": "check", "optionSide": "left"},
+        {"groupIndex": 2, "label": "Company 3", "indicator": "check", "optionSide": "left"},
+        {"groupIndex": 1, "label": "Company 4", "indicator": "cross", "optionSide": "right"},
+        {"groupIndex": 2, "label": "Company 5", "indicator": "cross", "optionSide": "right"},
+        {"groupIndex": 0, "label": "Company 6", "indicator": "cross", "optionSide": "right"}
+      ]
+    },
+    {
+      "previewName"           : "preview2",
+      "leftPreviewGroupName"  : "left preview group name",
+      "rightPreviewGroupName" : "right preview group name",
+      "leftPreviewSimpleName" : "left preview simple name",
+      "rightPreviewSimpleName": "right preview simple name",
+      "snapshots"             : [
+        {"groupIndex": 0, "label": "Company 1", "indicator": "check", "optionSide": "right"},
+        {"groupIndex": 1, "label": "Company 2", "indicator": "check", "optionSide": "right"},
+        {"groupIndex": 2, "label": "Company 3", "indicator": "check", "optionSide": "right"},
+        {"groupIndex": 1, "label": "Company 4", "indicator": "cross", "optionSide": "left"},
+        {"groupIndex": 0, "label": "Company 5", "indicator": "cross", "optionSide": "left"},
+        {"groupIndex": 2, "label": "Company 6", "indicator": "cross", "optionSide": "left"}
       ]
     }
   ]

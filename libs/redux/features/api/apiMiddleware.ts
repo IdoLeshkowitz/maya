@@ -1,92 +1,115 @@
-import {TaskResult} from "@/types/taskResult";
 import {Middleware} from "redux";
-import {PayloadAction} from "@reduxjs/toolkit";
-import {
-    fetchExperimentMetaSuccess,
-    fetchTaskMetaSuccess,
-    submitTasksResult,
-    submitTasksResultFailure,
-    submitTasksResultSuccess
-} from "./apiActions";
-import {setExperimentMeta, setExperimentStep} from "../experiment/experimentActions";
-import {ExperimentStep} from "../experiment/experimentSlice";
+import {submitCurrentTaskResults, submitPersonalDetails} from "./apiActions";
+import {PersonalDetails} from "@/types/personalDetails";
 import {RootState} from "../../store";
-import {TaskMeta} from "@/types/taskMeta";
-import {TaskState, TaskStep} from "../tasks/tasksSlice";
-import {setAllTasksState} from "../tasks/tasksActions";
-import {ExperimentMeta} from "@/types/experimentMeta";
+import {setTaskResultByIndex} from "../tasks/tasksActions";
+import {Task} from "@/types/task";
+import {Experiment} from "@/types/experiment";
+import {setExperimentStep} from "../experiment/experimentActions";
+import {ExperimentStep} from "../experiment/experimentSlice";
 
-export const submitTasksResultM: Middleware = ({dispatch, getState}) => (next) => async (action: PayloadAction<TaskResult[]>) => {
+const submitPersonalDetailsM: Middleware = ({dispatch, getState}) => next => async (action) => {
     next(action)
-    if (action.type === submitTasksResult.type) {
-        /* set experiment step */
-        dispatch(setExperimentStep(ExperimentStep.RESULTS_SENT))
-        /* extract tasks results from state*/
-        const {tasks: {tasksStates}}: RootState = getState()
-        const taskResults = tasksStates.map(task => task.taskResult)
-        /* send results to server */
-        const res = await fetch("/api/taskResults", {
-            method : "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body   : JSON.stringify(taskResults)
-        })
-        if (!res.ok) {
-            dispatch(submitTasksResultFailure())
-            return
+    if (action.type === submitPersonalDetails.type) {
+        const state: RootState = getState()
+        const personalDetails: PersonalDetails = {
+            ...state.experiment.personalDetails!,
+            belongsToExperiment: state.experiment.experimentId!
         }
-        dispatch(submitTasksResultSuccess())
-    }
-}
-export const submitTasksResultSuccessM: Middleware = ({dispatch, getState}) => (next) => (action) => {
-    next(action)
-    if (action.type === submitTasksResultSuccess.type) {
-        /* set experiment step */
-        dispatch(setExperimentStep(ExperimentStep.ENDED_SUCCESS))
-    }
-}
-export const submitTasksResultFailureM: Middleware = ({dispatch, getState}) => (next) => (action) => {
-    next(action)
-    if (action.type === submitTasksResultFailure.type) {
-        /* set experiment step */
-        dispatch(setExperimentStep(ExperimentStep.ENDED_ERROR))
-    }
-}
-export const fetchTaskMetaSuccessM: Middleware = ({dispatch, getState}) => (next) => (action: PayloadAction<TaskMeta[]>) => {
-    next(action)
-    if (action.type === fetchTaskMetaSuccess.type) {
-        /* check if experiment is in progress */
-        const {experiment: {experimentStep}}: RootState = getState()
-        if (experimentStep !== ExperimentStep.IDLE) {
-            /* if in progress, do nothing */
-            return
+        try {
+            const response = await fetch('/api/personalDetails', {
+                method : 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body   : JSON.stringify(personalDetails)
+            })
+            if (!response.ok) {
+                dispatch(setExperimentStep(ExperimentStep.ENDED_ERROR))
+                return Promise.reject(response.statusText)
+            }
+            dispatch(setExperimentStep(ExperimentStep.ENDED_SUCCESS))
+        } catch (e) {
+            console.error(e)
+            dispatch(setExperimentStep(ExperimentStep.ENDED_ERROR))
         }
-        /* if not in progress initialize tasks state with taskMeta */
-        const tasksStateToAdd: TaskState[] = action.payload.map(taskMeta => ({
-            taskMeta,
-            taskStep  : TaskStep.IDLE,
-            taskResult: {
-                taskId: taskMeta._id!,
-            },
-            endTime   : null,
-            startTime : null,
-            currentSnapshotIndex: null
-        }))
-        dispatch(setAllTasksState(tasksStateToAdd))
-    }
-}
-export const fetchExperimentMetaSuccessM: Middleware = ({dispatch, getState}) => (next) => (action: PayloadAction<ExperimentMeta>) => {
-    next(action)
-    if (action.type === fetchExperimentMetaSuccess.type) {
-        /* check if experiment is in progress */
-        const {experiment: {experimentStep}}: RootState = getState()
-        if (experimentStep !== ExperimentStep.IDLE) {
-            /* if in progress, do nothing */
-            return
+        const experiment: Experiment = {
+            experimentMetaId : state.experiment.experimentMeta?._id!,
+            personalDetailsId: personalDetails._id!,
+            _id              : state.experiment.experimentId!
         }
-        /* if not in progress set experimentMeta */
-        dispatch(setExperimentMeta(action.payload))
+        try {
+            const response = await fetch('/api/experiment', {
+                method : 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body   : JSON.stringify(experiment)
+            })
+            if (!response.ok) {
+                return Promise.reject(response.statusText)
+            }
+        } catch (e) {
+            console.error(e)
+            return Promise.reject(e)
+        }
     }
 }
-export const apiMiddleware = [submitTasksResultM, submitTasksResultSuccessM, submitTasksResultFailureM, fetchTaskMetaSuccessM, fetchExperimentMetaSuccessM]
+
+const submitCurrentTaskResultM: Middleware = ({dispatch, getState}) => next => async (action) => {
+    next(action)
+    if (action.type === submitCurrentTaskResults.type) {
+        const state: RootState = getState()
+        const taskState = state.tasks.tasksStates[state.tasks.currentTaskIndex!]
+        const currentTaskIndex = state.tasks.currentTaskIndex!
+        const taskResult = state.tasks.tasksStates[currentTaskIndex].taskResult!
+        /* insert TaskResult to DB */
+        try {
+            const response = await fetch('/api/taskResult', {
+                method : 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body   : JSON.stringify(taskResult)
+            })
+            if (!response.ok) {
+                return Promise.reject(response.statusText)
+            }
+            const data = await response.json()
+            dispatch(setTaskResultByIndex({
+                taskIndex : currentTaskIndex,
+                taskResult: {
+                    ...taskResult,
+                    _id: data.insertedId
+                }
+            }))
+            const task: Task = {
+                _id         : taskState._id,
+                taskResultId: data.insertedId,
+                taskMetaId  : taskState.taskMeta._id!,
+            }
+            /* update task with taskResultId */
+            try {
+                const response = await fetch('/api/task', {
+                    method : 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body   : JSON.stringify(task)
+                })
+                const data = await response.json()
+                console.log(data)
+                if (!response.ok) {
+                    return Promise.reject(response.statusText)
+                }
+            } catch (e) {
+                console.error(e)
+                return Promise.reject(e)
+            }
+        } catch (e) {
+            console.error(e)
+            return Promise.reject(e)
+        }
+    }
+}
+export const apiMiddleware = [submitCurrentTaskResultM, submitPersonalDetailsM]

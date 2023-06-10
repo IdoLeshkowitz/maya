@@ -1,7 +1,7 @@
 import {TaskMeta} from "@/types/taskMeta";
 import Option from "@components/option";
 import Group from "@components/group";
-import {Snapshot} from "@/types/performance";
+import {Snapshot} from "@/types/preview";
 import React, {ReactNode} from "react";
 import '../app/globals.css'
 
@@ -26,9 +26,11 @@ export default function Board(props: BoardProps) {
         gridGap         : "1rem",
     }
     return (
-        <main className= "py-8 px-10 bg-white h-screen" style={boardContainerStyle}>
+        <main className="py-8 px-10 bg-white h-screen" style={boardContainerStyle}>
             {/* header */}
-            {header ?? <div/>}
+            <div className="px-20">
+                {header ?? <div/>}
+            </div>
             {/*options*/}
             <div style={optionsContainerStyle}>
                 {/*left option*/}
@@ -37,7 +39,6 @@ export default function Board(props: BoardProps) {
                     onClick={onOptionSelected ? () => onOptionSelected("left") : undefined}
                     optionName={taskMeta.leftOption.optionName}
                     optionColor={taskMeta.leftOption.optionColor}
-                    hidden={!!(snapshot && snapshot.optionSide === "right")}
                 >
                     {
                         taskMeta.leftOption.groupsNames.map((groupName, index) => {
@@ -58,7 +59,6 @@ export default function Board(props: BoardProps) {
                     onClick={onOptionSelected ? () => onOptionSelected("right") : undefined}
                     optionName={taskMeta.rightOption.optionName}
                     optionColor={taskMeta.rightOption.optionColor}
-                    hidden={!!(snapshot && snapshot.optionSide === "left")}
                 >
                     {
                         taskMeta.rightOption.groupsNames.map((groupName, index) => {

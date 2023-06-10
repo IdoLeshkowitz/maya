@@ -1,7 +1,10 @@
 import {ExperimentMeta} from "@/types/experimentMeta";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {PersonalDetails} from "@/types/personalDetails";
+import {ObjectId} from "bson";
 
 export enum ExperimentStep {
+    "LOADING" = "LOADING",
     IDLE = "IDLE",
     CONSENT = "CONSENT",
     INTRO = "INTRO",
@@ -14,17 +17,20 @@ export enum ExperimentStep {
 }
 
 interface ExperimentState {
+    experimentId?: ObjectId
     experimentMeta: ExperimentMeta | null
     experimentStep: ExperimentStep
     startTime: number | null,
     endTime: number | null,
+    personalDetails : PersonalDetails | null
 }
 
 const initialState: ExperimentState = {
     experimentMeta: null,
-    experimentStep: ExperimentStep.IDLE,
+    experimentStep: ExperimentStep.LOADING,
     startTime     : null,
     endTime       : null,
+    personalDetails : null
 }
 
 export const experimentSlice = createSlice({
@@ -43,5 +49,11 @@ export const experimentSlice = createSlice({
         setExperimentEndTime(state, action: PayloadAction<number>) {
             state.endTime = action.payload
         },
+        setPersonalDetails(state, action: PayloadAction<PersonalDetails>) {
+            state.personalDetails = action.payload
+        },
+        setExperimentId(state, action: PayloadAction<ObjectId>) {
+            state.experimentId = action.payload
+        }
     }
 })

@@ -47,7 +47,8 @@ export default function OptionSelection() {
         return (
             <Board
                 taskMeta={currentTaskMeta}
-                header={<Header>{`Based on your observations, which portfolio performed better?\nClick on the name of the portfolio that performed better.`}</Header>}
+                header={
+                    <Header>{`Based on your observations, which portfolio performed better?\nClick on the name of the portfolio that performed better.`}</Header>}
                 onOptionSelected={(side) => {
                     setStep(OptionSelectionSteps.SET_CONDFIDENCE)
                     setSelectedSide(side)
@@ -59,12 +60,6 @@ export default function OptionSelection() {
     if (step === OptionSelectionSteps.SET_CONDFIDENCE) {
         return (
             <CommonLayout
-                header={
-                    <p className="text-black text-base">
-                        How confident are you in your selection, on a scale of 0-100, where 0 is not confident at all
-                        and 100 is extremely confident?
-                    </p>
-                }
                 footer={
                     <div className="flex justify-center items-center">
                         <CommonButton
@@ -76,13 +71,19 @@ export default function OptionSelection() {
                     </div>
                 }
             >
-                {/*confidence slider*/}
-                <Slider
-                    value={confidence ?? undefined}
-                    onChange={(value) => {
-                        setConfidence(value)
-                    }}
-                />
+                <div className="flex flex-col justify-evenly items-center px-20">
+                    <p className="text-black text-base">
+                        How confident are you in your selection, on a scale of 0-100, where 0 is not confident at all
+                        and 100 is extremely confident?
+                    </p>
+                    {/*confidence slider*/}
+                    <Slider
+                        value={confidence ?? undefined}
+                        onChange={(value) => {
+                            setConfidence(value)
+                        }}
+                    />
+                </div>
             </CommonLayout>
         )
     }

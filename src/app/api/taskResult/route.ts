@@ -4,11 +4,11 @@ import {TaskResult} from "@/types/taskResult";
 import client from "@client";
 
 export async function POST(request: Request) {
-    const taskResultsToInsert: TaskResult[] = await request.json()
+    const taskResultToInsert: TaskResult = await request.json()
     try {
         await client.connect()
-        const insertedTaskResults = await client.db("test").collection("taskResults").insertMany(taskResultsToInsert)
-        return NextResponse.json(insertedTaskResults)
+        const insertedTaskResult = await client.db(process.env.DB_NAME).collection("taskResults").insertOne(taskResultToInsert)
+        return NextResponse.json(insertedTaskResult)
     } catch (e) {
         console.error(e)
         return NextResponse.error()
@@ -16,3 +16,4 @@ export async function POST(request: Request) {
         await client.close()
     }
 }
+

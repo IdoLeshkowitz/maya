@@ -21,17 +21,21 @@ export const snapshotSchema = object().shape({
     optionSide: string().required()
 })
 
-export interface Performance {
-    overallPerformanceTitle: string
-    leftPerformanceTitle: string
-    rightPerformanceTitle: string
+export interface Preview {
+    previewName: string
+    leftPreviewGroupName: string
+    rightPreviewGroupName: string
+    leftPreviewSimpleName: string
+    rightPreviewSimpleName: string
     snapshots: Snapshot[]
 }
 
-export const performanceSchema = object().shape({
-    overallPerformanceTitle: string().required(),
-    leftPerformanceTitle   : string().required(),
-    rightPerformanceTitle  : string(),
+export const previewSchema = object().shape({
+    previewName          : string().required(),
+    leftPreviewGroupName : string().required(),
+    rightPreviewGroupName: string().required(),
+    leftPreviewSimpleName: string().required(),
+    rightPreviewSimpleName: string().required(),
     snapshots              : array().of(snapshotSchema).required()
 })
 

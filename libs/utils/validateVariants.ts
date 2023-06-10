@@ -1,10 +1,10 @@
-import {Variant, variantSchema} from "@/types/variant";
+import {Config, configSchema} from "@/types/config";
 
 
 export async function validateVariant(variant: unknown) {
     /* check against the variant schema */
-    await variantSchema.validate(variant)
-    const validVariant = <Variant>variant
+    await configSchema.validate(variant)
+    const validVariant = <Config>variant
 
     const numberOfTasks = validVariant.numberOfTasks
     /* check that the number of option colors is equal to the number of tasks */

@@ -1,23 +1,23 @@
 import {TaskMeta} from "@/types/taskMeta";
 import {TaskResult} from "@/types/taskResult";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {ObjectId} from "bson";
 
 export enum TaskStep {
-    IDLE="IDLE",
-    TASK_INSTRUCTIONS="TASK_INSTRUCTIONS",
-    PERFORMANCE="PERFORMANCE",
-    OPTION_SELECTION="OPTION_SELECTION",
-    GROUP_SCORING="GROUP_SCORING",
-    FINISHED="FINISHED"
+    IDLE = "IDLE",
+    TASK_INSTRUCTIONS = "TASK_INSTRUCTIONS",
+    PERFORMANCE = "PERFORMANCE",
+    OPTION_SELECTION = "OPTION_SELECTION",
+    GROUP_SCORING = "GROUP_SCORING",
+    FINISHED = "FINISHED"
 }
 
 export interface TaskState {
+    _id?: ObjectId
     taskMeta: TaskMeta
-    taskResult: TaskResult
+    taskResult?: TaskResult
     taskStep: TaskStep
-    startTime: number | null
-    endTime: number | null
-    currentSnapshotIndex: number | null
+    currentSnapshotIndex?: number
 }
 
 interface TasksState {
@@ -43,20 +43,21 @@ export const tasksSlice = createSlice({
         setTaskResultByIndex(state, action: PayloadAction<{ taskIndex: number, taskResult: TaskResult }>) {
             state.tasksStates[action.payload.taskIndex].taskResult = action.payload.taskResult
         },
-        setTaskStartTimeByIndex(state, action: PayloadAction<{ taskIndex: number, startTime: number }>) {
-            state.tasksStates[action.payload.taskIndex].startTime = action.payload.startTime
-        },
-        setTaskEndTimeByIndex(state, action: PayloadAction<{ taskIndex: number, endTime: number }>) {
-            state.tasksStates[action.payload.taskIndex].endTime = action.payload.endTime
-        },
         setTaskCurrentSnapshotIndexByIndex(state, action: PayloadAction<{
             taskIndex: number,
-            snapshotIndex: number | null
+            snapshotIndex: number
         }>) {
             state.tasksStates[action.payload.taskIndex].currentSnapshotIndex = action.payload.snapshotIndex
         },
         setCurrentTaskIndex(state, action: PayloadAction<number | null>) {
             state.currentTaskIndex = action.payload
         },
+        setTaskStateByIndex(state, action: PayloadAction<{ taskIndex: number, taskState: TaskState }>) {
+            state.tasksStates[action.payload.taskIndex] = action.payload.taskState
+        },
+        setTaskResultIdByIndex(state, action: PayloadAction<{ taskIndex: number, taskResultId: ObjectId }>) {
+            const taskState = state.tasksStates[action.payload.taskIndex]
+            taskState.taskResult!._id = action.payload.taskResultId
+        }
     }
 })

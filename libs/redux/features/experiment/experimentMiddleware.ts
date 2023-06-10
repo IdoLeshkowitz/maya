@@ -1,17 +1,25 @@
 import {Middleware} from "redux";
-import {setExperimentStep, stepForward} from "./experimentActions";
+import {
+    initializeExperiment,
+    setExperimentId,
+    setExperimentMeta,
+    setExperimentStartTime,
+    setExperimentStep,
+    stepForward
+} from "./experimentActions";
 import {ExperimentStep} from "./experimentSlice";
 import {RootState} from "../../store";
 import {
+    setAllTasksState,
     setCurrentTaskEndTime,
     setCurrentTaskIndex,
     setCurrentTaskSnapshotIndex,
-    setCurrentTaskStartTime,
     setCurrentTaskStep,
     setTaskCurrentSnapshotIndexByIndex
 } from "../tasks/tasksActions";
-import {TaskStep} from "../tasks/tasksSlice";
-import {submitTasksResult} from "../api/apiActions";
+import {TaskState, TaskStep} from "../tasks/tasksSlice";
+import {Task} from "@/types/task";
+import {submitCurrentTaskResults, submitPersonalDetails} from "../api/apiActions";
 
 function getCurrentTaskIndex(state: RootState) {
     return state.tasks.currentTaskIndex
@@ -21,7 +29,7 @@ function getExperimentStep(state: RootState) {
     return state.experiment.experimentStep
 }
 
-const stepForwardSplit: Middleware = ({dispatch, getState}) => next => action => {
+const stepForwardSplit: Middleware = ({dispatch, getState}) => next => async (action) => {
     next(action)
     if (action.type === stepForward.type) {
         /* check the current experiment step */
@@ -50,8 +58,6 @@ const stepForwardSplit: Middleware = ({dispatch, getState}) => next => action =>
             if (currentTaskStep === TaskStep.IDLE) {
                 /* start current task step to instructions */
                 dispatch(setCurrentTaskStep(TaskStep.TASK_INSTRUCTIONS))
-                /* set task start time */
-                dispatch(setCurrentTaskStartTime(Date.now()))
                 return;
             }
             /* if the current task step is task instructions, head next to performance */
@@ -76,7 +82,7 @@ const stepForwardSplit: Middleware = ({dispatch, getState}) => next => action =>
             /* if the current task step is performance, head next to next snapshot or option selection */
             if (currentTaskStep === TaskStep.PERFORMANCE) {
                 /* grab current snapshot index */
-                const currentSnapshotIndex = state.tasks.tasksStates[getCurrentTaskIndex(state)!].currentSnapshotIndex
+                const currentSnapshotIndex = state.tasks.tasksStates[getCurrentTaskIndex(state)!].currentSnapshotIndex  ?? 0
                 /* grab total number of snapshots */
                 const numberOfSnapshots = state.tasks.tasksStates[getCurrentTaskIndex(state)!].taskMeta.performance.snapshots.length
                 /* check if there are any snapshots left */
@@ -105,6 +111,8 @@ const stepForwardSplit: Middleware = ({dispatch, getState}) => next => action =>
             if (currentTaskStep === TaskStep.GROUP_SCORING) {
                 /* set end time */
                 dispatch(setCurrentTaskEndTime(Date.now()))
+                /* submit task result */
+                dispatch(submitCurrentTaskResults())
                 /* check if there are any tasks left */
                 const numberOfAvailableTasks = state.tasks.tasksStates.length
                 const currentTaskIndex = state.tasks.currentTaskIndex!
@@ -128,14 +136,30 @@ const stepForwardSplit: Middleware = ({dispatch, getState}) => next => action =>
         if the current step is form send the results and finish the experiment
          */
         if (experimentStep === ExperimentStep.FORM) {
-            /* grab all the tasks results */
-            const tasksResultsToSend = state.tasks.tasksStates.map(taskState => {
-                return taskState.taskResult
-            })
-            console.log(tasksResultsToSend)
-            /* send the results */
-            dispatch(submitTasksResult(tasksResultsToSend))
+            dispatch(setExperimentStep(ExperimentStep.LOADING))
+            dispatch(submitPersonalDetails())
         }
     }
 }
-export const experimentMiddleware = [stepForwardSplit]
+
+const initializeExperimentM: Middleware = ({dispatch, getState}) => next => action => {
+    next(action)
+    if (action.type === initializeExperiment.type) {
+        const experiment = action.payload.data.experiment
+        const experimentMeta = action.payload.data.experimentMeta
+        const tasksMeta = action.payload.data.tasksMeta
+        const tasks = action.payload.data.tasks
+        dispatch(setExperimentStartTime(Date.now()))
+        dispatch(setExperimentId(experiment._id))
+        dispatch(setExperimentMeta(experimentMeta))
+        dispatch(setAllTasksState(tasks.map((task: Task, index: number): TaskState => {
+            return {
+                taskMeta: tasksMeta[index],
+                taskStep: TaskStep.IDLE,
+                _id: task._id,
+            }
+        })))
+        dispatch(setExperimentStep(ExperimentStep.IDLE))
+    }
+}
+export const experimentMiddleware = [stepForwardSplit, initializeExperimentM]
