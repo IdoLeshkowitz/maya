@@ -62,19 +62,17 @@ const setCurrentTaskEndTimeM: Middleware = ({dispatch, getState}) => (next) => (
     }
 }
 
-const setCurrentTaskResultOptionSelectionM: Middleware = ({dispatch, getState}) => (next) => (action: PayloadAction<string>) => {
+const setCurrentTaskResultOptionSelectionM: Middleware = ({dispatch, getState}) => (next) => (action: PayloadAction<OptionSelection>) => {
     next(action)
     if (action.type === setCurrentTaskResultOptionSelection.type) {
+        console.log('setCurrentTaskResultOptionSelectionM')
         /* get current task result */
         const state: RootState = getState()
         const currentTaskIndex = state.tasks.currentTaskIndex!
         const currentTaskResult = state.tasks.tasksStates[currentTaskIndex].taskResult!
         const updatedTaskResult: TaskResult = {
             ...currentTaskResult,
-            optionSelection: {
-                ...currentTaskResult.optionSelection!,
-                selectedSide: action.payload as OptionSelection['selectedSide']
-            }
+            optionSelection: action.payload
         }
         /* dispatch set task result */
         dispatch(setTaskResultByIndex({taskIndex: currentTaskIndex, taskResult: updatedTaskResult}))

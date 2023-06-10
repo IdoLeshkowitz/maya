@@ -13,7 +13,7 @@ import {
     setAllTasksState,
     setCurrentTaskEndTime,
     setCurrentTaskIndex,
-    setCurrentTaskSnapshotIndex,
+    setCurrentTaskSnapshotIndex, setCurrentTaskStartTime,
     setCurrentTaskStep,
     setTaskCurrentSnapshotIndexByIndex
 } from "../tasks/tasksActions";
@@ -58,6 +58,7 @@ const stepForwardSplit: Middleware = ({dispatch, getState}) => next => async (ac
             if (currentTaskStep === TaskStep.IDLE) {
                 /* start current task step to instructions */
                 dispatch(setCurrentTaskStep(TaskStep.TASK_INSTRUCTIONS))
+                dispatch(setCurrentTaskStartTime(Date.now()))
                 return;
             }
             /* if the current task step is task instructions, head next to performance */

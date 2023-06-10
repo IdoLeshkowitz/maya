@@ -1,7 +1,12 @@
+import CommonLayout from "@components/commonLayout";
+
 export default function Finish() {
     return (
-        <div className="min-h-screen">
-            <h2 className="text-3xl font-bold text-center text-slate-700">Thank you for participating!</h2>
-        </div>
+        <CommonLayout>
+            <p className="px-20 text-slate-700">
+                Thank you for participating in this experiment.<br/>
+                🙏
+            </p>
+        </CommonLayout>
     )
 }

@@ -37,13 +37,13 @@ const Experiment = (props: { prolificid: string }) => {
             }
         })
     }, [])
-    if (screenSizeError) {
-        return (
-            <div className="flex flex-col justify-center items-center bg-white min-h-screen">
-                <h1 className="text-4xl font-bold text-slate-700">Please adjust your browser to a full screen display.</h1>
-            </div>
-        )
-    }
+    // if (screenSizeError) {
+    //     return (
+    //         <div className="flex flex-col justify-center items-center bg-white min-h-screen">
+    //             <h1 className="text-4xl font-bold text-slate-700">Please adjust your browser to a full screen display.</h1>
+    //         </div>
+    //     )
+    // }
     if (experimentStep === ExperimentStep.LOADING) {
         return <Loader/>
     }
@@ -67,7 +67,7 @@ const Experiment = (props: { prolificid: string }) => {
     }
     if (experimentStep === ExperimentStep.ENDED_ERROR) {
         return (
-            <div className="flex flex-col justify-center items-center bg-white min-h-screen">
+            <div className="flex flex-col justify-center items-center bg-white min-h-screen bg-white">
                 <h1 className="text-4xl font-bold text-slate-700">An error occurred. Please contact the study
                     administrator.</h1>
             </div>
