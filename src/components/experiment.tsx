@@ -9,6 +9,7 @@ import Consent from "@components/experimentSteps/consent";
 import ExperimentInstructions from "@components/experimentSteps/experimentInstructions";
 import Task from "@components/task";
 import Form from "@components/experimentSteps/form";
+import Finish from "@components/experimentSteps/finish";
 
 
 const Experiment = (props: { prolificid: string }) => {
@@ -26,23 +27,23 @@ const Experiment = (props: { prolificid: string }) => {
                 /* set experiment metadata */
                 dispatch(initializeExperiment(res))
             })
+    }, [dispatch, props.prolificid])
+    useEffect(() => {
+        window.addEventListener('resize', () => {
+            if (window.innerWidth < 1024) {
+                setScreenSizeError(true)
+            } else {
+                setScreenSizeError(false)
+            }
+        })
     }, [])
-    // useEffect(() => {
-    //     window.addEventListener('resize', () => {
-    //         if (window.innerWidth < 1024) {
-    //             setScreenSizeError(true)
-    //         } else {
-    //             setScreenSizeError(false)
-    //         }
-    //     })
-    // }, [])
-    // if (screenSizeError) {
-    //     return (
-    //         <div className="flex flex-col justify-center items-center bg-white min-h-screen">
-    //             <h1 className="text-4xl font-bold text-slate-700">Please adjust your browser to a full screen display.</h1>
-    //         </div>
-    //     )
-    // }
+    if (screenSizeError) {
+        return (
+            <div className="flex flex-col justify-center items-center bg-white min-h-screen">
+                <h1 className="text-4xl font-bold text-slate-700">Please adjust your browser to a full screen display.</h1>
+            </div>
+        )
+    }
     if (experimentStep === ExperimentStep.LOADING) {
         return <Loader/>
     }
@@ -60,6 +61,17 @@ const Experiment = (props: { prolificid: string }) => {
     }
     if (experimentStep === ExperimentStep.FORM) {
         return <Form/>
+    }
+    if (experimentStep === ExperimentStep.ENDED_SUCCESS) {
+        return <Finish/>
+    }
+    if (experimentStep === ExperimentStep.ENDED_ERROR) {
+        return (
+            <div className="flex flex-col justify-center items-center bg-white min-h-screen">
+                <h1 className="text-4xl font-bold text-slate-700">An error occurred. Please contact the study
+                    administrator.</h1>
+            </div>
+        )
     }
     return null
 }

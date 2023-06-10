@@ -57,8 +57,8 @@ export default async function AdminTaskPage() {
                                     <td className="border border-slate-500">{taskMeta?.leftOption.optionColor}</td>
                                     <td className="border border-slate-500">{taskMeta?.rightOption.optionColor}</td>
                                     <td className="border border-slate-500">{taskMeta?.orderInExperiment}</td>
-                                    <td className="border border-slate-500">{taskResult?.selectedOption?.selectedSide}</td>
-                                    <td className="border border-slate-500">{taskResult?.selectedOption?.confidence}</td>
+                                    <td className="border border-slate-500">{taskResult?.optionSelection?.selectedSide}</td>
+                                    <td className="border border-slate-500">{taskResult?.optionSelection?.confidence}</td>
                                     <td className="border border-slate-500">{taskResult?.leftScores?.toString()}</td>
                                     <td className="border border-slate-500">{taskResult?.rightScores?.toString()}</td>
                                 </tr>

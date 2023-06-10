@@ -1,11 +1,7 @@
-'use client';
-import {useEffect} from "react";
-
-export default function FinishPage(){
-    useEffect(() => {
-        /* send data from the experiment to the server */
-    }, [])
+export default function Finish() {
     return (
-
+        <div className="min-h-screen">
+            <h2 className="text-3xl font-bold text-center text-slate-700">Thank you for participating!</h2>
+        </div>
     )
 }

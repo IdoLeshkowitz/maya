@@ -5,8 +5,7 @@ export interface TaskResult {
     startTime?: number
     belongsToTask?: ObjectId
     endTime?: number
-    selectedOption?: string
-    optionSelectionConfidence?: number
+    optionSelection?: OptionSelection
     leftScores?: number[] | null
     rightScores?: number[] | null
 }

@@ -9,6 +9,13 @@ import {initializeExperiment} from "../../libs/redux/features/experiment/experim
 
 const inter = Inter({subsets: ['latin']})
 export default function Home(props: { searchParams: { prolificid: string } }) {
+    if (!props.searchParams.prolificid) {
+        return (
+            <div className="flex flex-col justify-center items-center bg-white min-h-screen">
+                <h1 className="text-4xl font-bold text-slate-700">Please use the link provided in the Prolific study.</h1>
+            </div>
+        )
+    }
     return (
         <ReduxProvider>
             <Experiment

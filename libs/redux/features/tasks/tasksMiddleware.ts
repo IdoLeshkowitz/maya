@@ -71,7 +71,10 @@ const setCurrentTaskResultOptionSelectionM: Middleware = ({dispatch, getState}) 
         const currentTaskResult = state.tasks.tasksStates[currentTaskIndex].taskResult!
         const updatedTaskResult: TaskResult = {
             ...currentTaskResult,
-            selectedOption: action.payload
+            optionSelection: {
+                ...currentTaskResult.optionSelection!,
+                selectedSide: action.payload as OptionSelection['selectedSide']
+            }
         }
         /* dispatch set task result */
         dispatch(setTaskResultByIndex({taskIndex: currentTaskIndex, taskResult: updatedTaskResult}))
