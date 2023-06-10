@@ -191,14 +191,14 @@ export default function Form() {
                                     return (
                                         <div key={index} className="flex gap-2 items-center ms-1">
                                             <input
-                                                id={option}
+                                                id={`${question.id}-${option}`}
                                                 type="radio"
                                                 onChange={formik.handleChange}
                                                 value={option}
                                                 name={question.id}
                                                 className="border-black border-opacity-30 border rounded-md w-3 h-3"
                                             />
-                                            <label htmlFor={option} className="mb-0.5 text-gray-700">{option}</label>
+                                            <label htmlFor={`${question.id}-${option}`} className="mb-0.5 text-gray-700">{option}</label>
                                         </div>
                                     )
                                 })
