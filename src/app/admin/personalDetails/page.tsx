@@ -58,3 +58,5 @@ export default async function PersonalDetailsPage() {
         </div>
     )
 }
+
+export const revalidate = 60 ;

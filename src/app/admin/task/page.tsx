@@ -70,3 +70,4 @@ export default async function AdminTaskPage() {
         </div>
     )
 }
+export const revalidate = 60 ;
