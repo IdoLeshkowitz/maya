@@ -2,45 +2,7 @@ import {Config} from "@/types/config";
 import {TaskMeta} from "@/types/taskMeta";
 import {shuffle} from "./shuffle";
 import {splitArray} from "./splitArray";
-import {object, array, number, string} from 'yup'
 
-
-// export const generateExperiment = (config: Config) => {
-//     /* check variant properties */
-//     const numberOfTasks = config.numberOfTasks
-//     const output: TaskMeta[] = []
-//     //shuffle options names
-//     const shuffledOptionsNames = shuffle(config.optionsNames)
-//     //shuffle options colors
-//     const shuffledOptionsColors = shuffle(config.optionsColors)
-//     //shuffle groups names
-//     const shuffledGroupsNames = shuffle(config.groupsNames.map(group => shuffle(group)))
-//     //shuffle performances
-//     const shuffledPerformances = shuffle(config.performances)
-//
-//     //create tasks
-//     for (let i = 0; i < config.numberOfTasks; i++) {
-//         const [leftGroupsNames, rightGroupsNames] = splitArray(shuffledGroupsNames[i])
-//         const [leftOptionName, rightOptionsName] = shuffledOptionsNames[i]
-//         const [leftOptionColor, rightOptionsColor] = shuffledOptionsColors[i]
-//         const taskMeta: TaskMeta = {
-//             variantName: config.variantName,
-//             leftOption : {
-//                 optionName : leftOptionName,
-//                 optionColor: leftOptionColor,
-//                 groupsNames: leftGroupsNames
-//             },
-//             rightOption: {
-//                 optionName : rightOptionsName,
-//                 optionColor: rightOptionsColor,
-//                 groupsNames: rightGroupsNames
-//             },
-//             performance: shuffledPerformances[i]
-//         }
-//         output.push(taskMeta)
-//     }
-//     return output
-// }
 
 export function shuffleConfig(config: Config): Config {
     const shuffledOptionsNames = shuffle(config.optionsNames)

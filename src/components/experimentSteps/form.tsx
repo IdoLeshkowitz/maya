@@ -3,7 +3,7 @@ import {number, object, string} from 'yup';
 import {useFormik} from "formik";
 import CommonLayout from "@components/commonLayout";
 import Slider from "@components/slider";
-import {FC} from "react";
+import {FC, useEffect} from "react";
 import {ArrowLeftIcon, ArrowRightIcon} from "@heroicons/react/24/outline";
 import {CommonButton} from "@components/button";
 import {PersonalDetails} from "@/types/personalDetails";
@@ -160,6 +160,17 @@ export default function Form() {
             dispatch(stepForward())
         }
     })
+    useEffect(() => {
+        /* persist form data */
+        const data = localStorage.getItem('form')
+        if (data) {
+            formik.setValues(JSON.parse(data))
+        }
+    }, [])
+    useEffect(() => {
+        /* persist form data */
+        localStorage.setItem('form', JSON.stringify(formik.values))
+    }, [formik.values])
     return (
         <CommonLayout header={
             <FormGroup className="text-xl text-gray-700">

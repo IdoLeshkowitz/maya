@@ -1,5 +1,8 @@
 import {getAllExperimentMeta} from "@services/experimentMetaService";
 import {getAllExperiments} from "@services/experimentService";
+import {Experiment} from "@/types/experiment";
+import {ExperimentMeta} from "@/types/experimentMeta";
+import {CsvLink} from "@components/CsvLink";
 
 const columns = [
     "experiment_id",
@@ -11,11 +14,37 @@ const columns = [
     "personal_details_id",
 ];
 
+const csvData = [
+    ["firstname", "lastname", "email"],
+    ["Ahmed", "Tomi", "ah@smthing.co.com"],
+    ["Raed", "Labes", "rl@smthing.co.com"],
+    ["Yezzi", "Min l3b", "ymin@cocococo.com"]
+];
+
+function getCsvData(allExperiments: Experiment[], allExperimentMeta: ExperimentMeta[]) {
+    const csvData = allExperiments.map((experiment) => {
+        const experimentMeta = allExperimentMeta.find((meta) => meta._id?.toString() === experiment.experimentMetaId?.toString())
+        return {
+            experiment_id      : experiment._id?.toString(),
+            variant_name       : experimentMeta?.config.variantName,
+            experiment_name    : experimentMeta?.config.experimentName,
+            experiment_version : experimentMeta?.config.experimentVersion,
+            tasks_ids          : experimentMeta?.tasksIds?.toString(),
+            prolific_id        : experimentMeta?.prolificId?.toString(),
+            personal_details_id: experiment.personalDetailsId?.toString(),
+        }
+    })
+    return csvData
+}
+
 export default async function AdminExperimentPage() {
     const allExperiment = await getAllExperiments()
     const allExperimentMeta = await getAllExperimentMeta()
     return (
-        <div className="min-h-screen bg-white min-w-max">
+        <div className="min-h-screen bg-white min-w-max pt-5">
+            <div className="mb-5">
+                <CsvLink data={csvData}>Download Csv</CsvLink>
+            </div>
             <table className="bg-white text-black  table-auto border border-slate-500 border-collapse">
                 <thead>
                     <tr>
@@ -45,4 +74,4 @@ export default async function AdminExperimentPage() {
         </div>
     )
 }
-export const revalidate = 60 ;
+export const revalidate = 60;
