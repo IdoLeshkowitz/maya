@@ -14,13 +14,6 @@ const columns = [
     "personal_details_id",
 ];
 
-const csvData = [
-    ["firstname", "lastname", "email"],
-    ["Ahmed", "Tomi", "ah@smthing.co.com"],
-    ["Raed", "Labes", "rl@smthing.co.com"],
-    ["Yezzi", "Min l3b", "ymin@cocococo.com"]
-];
-
 function getCsvData(allExperiments: Experiment[], allExperimentMeta: ExperimentMeta[]) {
     const csvData = allExperiments.map((experiment) => {
         const experimentMeta = allExperimentMeta.find((meta) => meta._id?.toString() === experiment.experimentMetaId?.toString())
@@ -43,7 +36,7 @@ export default async function AdminExperimentPage() {
     return (
         <div className="min-h-screen bg-white min-w-max pt-5">
             <div className="mb-5">
-                <CsvLink data={csvData}>Download Csv</CsvLink>
+                <CsvLink data={getCsvData(allExperiment, allExperimentMeta)}>Download Csv</CsvLink>
             </div>
             <table className="bg-white text-black  table-auto border border-slate-500 border-collapse">
                 <thead>
