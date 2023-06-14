@@ -1,7 +1,7 @@
 # Research Participation App
 
 ## Description
-This repository contains a research participation app that enables tested participants to engage with the study. The app serves as a platform for participants to actively take part in the research study conducted by the Department of Computer Science.
+This repository contains a research app, allowing tested participants to engage and take part in the study conducted by the Department of Computer Science In the Hebrew University. 
 
 ## Technologies Used
 - **Next.js**: The app is built using Next.js, a popular React framework that ensures efficient rendering and provides a seamless user experience.
