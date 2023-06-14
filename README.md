@@ -1,4 +1,4 @@
-# Research Participation App
+# MAYA'S Experiment Platform
 
 ## Description
 This repository contains a research app, allowing tested participants to engage and take part in the study conducted by the Department of Computer Science In the Hebrew University. 
