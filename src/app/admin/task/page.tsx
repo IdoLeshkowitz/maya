@@ -21,6 +21,7 @@ const columns = [
     "option_selection_confidence",
     "left_scores",
     "right_scores",
+    "belongs_to_experiment",
 ];
 export default async function AdminTaskPage() {
     const [allTasks, allTasksMeta, allTasksResult] = await Promise.all([
@@ -28,6 +29,7 @@ export default async function AdminTaskPage() {
         getAllTasksMeta(),
         getAllTasksResult()
     ])
+    console.log(allTasks)
     return (
         <div className="min-h-screen bg-white min-w-max">
             <table className="bg-white text-black  table-auto border border-slate-500 border-collapse">
@@ -61,6 +63,7 @@ export default async function AdminTaskPage() {
                                     <td className="border border-slate-500">{taskResult?.optionSelection?.confidence}</td>
                                     <td className="border border-slate-500">{taskResult?.leftScores?.toString()}</td>
                                     <td className="border border-slate-500">{taskResult?.rightScores?.toString()}</td>
+                                    <td className="border border-slate-500">{task?.belongsToExperimentId?.toString()}</td>
                                 </tr>
                             )
                         }
