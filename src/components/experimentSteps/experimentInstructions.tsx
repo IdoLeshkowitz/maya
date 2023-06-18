@@ -33,8 +33,9 @@ export default function ExperimentInstructions() {
             }
         >
             <p
-                className="text-start text-base text-black"
-                dangerouslySetInnerHTML={{__html: experimentInstructions[currentInstruction]}}>
+                className="text-start text-black text-base whitespace-break-spaces px-20"
+                dangerouslySetInnerHTML={{__html: experimentInstructions[currentInstruction]}}
+            >
             </p>
         </CommonLayout>
     )
