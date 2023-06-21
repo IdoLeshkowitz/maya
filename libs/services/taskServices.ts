@@ -24,6 +24,17 @@ export async function updateTask(task: Task) {
         await client.close()
     }
 }
+export default async function updateManyTasks(tasks: Task[]) {
+    try {
+        await client.connect()
+        return await client.db("dev").collection("task").updateMany({_id: {$in: tasks.map(task => task._id!)}}, {$set: {...tasks}})
+    } catch (e) {
+        console.error(e)
+        return Promise.reject(e)
+    } finally {
+        await client.close()
+    }
+}
 
 export async function getAllTasks(): Promise<Task[]> {
     try {

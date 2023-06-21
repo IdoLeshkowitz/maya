@@ -8,7 +8,7 @@ import {createTaskMetasFromConfig, shuffleConfig} from "@/utils/shuffleConfig";
 import {insertManyTaskMeta} from "@services/taskMetaService";
 import {insertOneExperiment} from "@services/experimentService";
 import {Task} from "@/types/task";
-import {insertManyTasks, updateTask} from "@services/taskServices";
+import updateManyTasks, {insertManyTasks, updateTask} from "@services/taskServices";
 
 export async function POST(request: Request) {
     const experimentToInsert: Experiment = await request.json()
@@ -97,8 +97,7 @@ export async function GET(request: Request) {
         tasksToUpdate[index].belongsToExperimentId = experiment._id
     })
     try {
-        const promises = tasksToUpdate.map(task => updateTask(task))
-        await Promise.all(promises)
+        await updateManyTasks(tasksToUpdate)
     } catch (e) {
         console.error(e)
         return NextResponse.error()
