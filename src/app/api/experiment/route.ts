@@ -99,7 +99,6 @@ export async function GET(request: Request) {
     try {
         const promises = tasksToUpdate.map(task => updateTask(task))
         await Promise.all(promises)
-
     } catch (e) {
         console.error(e)
         return NextResponse.error()
