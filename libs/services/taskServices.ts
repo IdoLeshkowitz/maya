@@ -5,7 +5,7 @@ import {UpdateOneModel} from "mongodb";
 export async function insertManyTasks(tasks: Task[]) {
     try {
         await client.connect()
-        return await client.db("dev").collection("task").insertMany(tasks)
+        return await client.db(process.env.DB_NAME).collection("task").insertMany(tasks)
     } catch (e) {
         console.error(e)
         return Promise.reject(e)
@@ -17,7 +17,7 @@ export async function insertManyTasks(tasks: Task[]) {
 export async function updateTask(task: Task) {
     try {
         await client.connect()
-        return await client.db("dev").collection("task").updateOne({_id: task._id}, {$set: {...task}})
+        return await client.db(process.env.DB_NAME).collection("task").updateOne({_id: task._id}, {$set: {...task}})
     } catch (e) {
         console.error(e)
         return Promise.reject(e)
@@ -31,7 +31,7 @@ export default async function updateManyTasks(updateManyInput: UpdateOneModel[])
         await client.connect()
         let res = []
         for (const updateOneInput of updateManyInput) {
-            res.push(await client.db("dev").collection("task").updateOne({_id: updateOneInput.filter._id}, {$set: {...updateOneInput.update}}))
+            res.push(await client.db(process.env.DB_NAME).collection("task").updateOne({_id: updateOneInput.filter._id}, {$set: {...updateOneInput.update}}))
         }
         return res
     } catch (e) {
@@ -45,7 +45,7 @@ export default async function updateManyTasks(updateManyInput: UpdateOneModel[])
 export async function getAllTasks(): Promise<Task[]> {
     try {
         await client.connect()
-        return await client.db("dev").collection("task").find().toArray() as Task[]
+        return await client.db(process.env.DB_NAME).collection("task").find().toArray() as Task[]
     } catch (e) {
         console.error(e)
         return Promise.reject(e)
