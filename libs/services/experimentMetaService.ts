@@ -1,8 +1,9 @@
 import {ExperimentMeta} from "@/types/experimentMeta";
 import client from "../client";
 import 'server-only'
+import {cache} from "react";
 
-export async function getAllExperimentMeta(): Promise<ExperimentMeta[]> {
+export const getAllExperimentMeta = cache(async () => {
     try {
         await client.connect()
         return await client.db(process.env.DB_NAME).collection("experimentMeta").find({}).toArray() as ExperimentMeta[]
@@ -10,9 +11,9 @@ export async function getAllExperimentMeta(): Promise<ExperimentMeta[]> {
         console.error(e)
         return Promise.reject(e)
     }
-}
+})
 
-export async function insertOneExperimentMeta(experiment: ExperimentMeta) {
+export const insertOneExperimentMeta = async (experiment: ExperimentMeta)=> {
     try {
         await client.connect()
         return await client.db(process.env.DB_NAME).collection("experimentMeta").insertOne(experiment)

@@ -1,5 +1,6 @@
 import client from "@client";
 import {Experiment} from "@/types/experiment";
+import {cache} from "react";
 
 export async function insertOneExperiment(experiment: Experiment) {
     try {
@@ -14,7 +15,7 @@ export async function insertOneExperiment(experiment: Experiment) {
 
 }
 
-export async function getAllExperiments(){
+export const  getAllExperiments = cache(async()=>{
     try {
         await client.connect()
         return await client.db(process.env.DB_NAME).collection("experiment").find({}).toArray() as Experiment[]
@@ -24,4 +25,4 @@ export async function getAllExperiments(){
     } finally {
         await client.close()
     }
-}
+})

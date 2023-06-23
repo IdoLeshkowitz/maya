@@ -5,7 +5,7 @@ import {ExperimentMeta} from "@/types/experimentMeta";
 import {CsvLink} from "@components/CsvLink";
 
 const columns = [
-    "experiment_id",
+    "session_id",
     "variant_name",
     "experiment_name",
     "experiment_version",
