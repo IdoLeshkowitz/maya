@@ -6,4 +6,5 @@ export interface ExperimentMeta {
     tasksIds?: ObjectId[]
     config : Config
     prolificId?: string
+    belongsToExperimentId?: ObjectId
 }

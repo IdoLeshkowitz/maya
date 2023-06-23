@@ -65,6 +65,7 @@ export async function GET(request: Request) {
         console.error(e)
         return NextResponse.error()
     }
+    /* insert experiment meta */
     const prolificId = request.headers.get("prolificid")!
     const experimentMeta: ExperimentMeta = {
         config,
@@ -81,6 +82,7 @@ export async function GET(request: Request) {
     const experiment: Experiment = {
         experimentMetaId: experimentMeta._id,
     }
+    /* insert experiment */
     try {
         const insertedResult = await insertOneExperiment(experiment)
         experiment._id = insertedResult.insertedId
@@ -97,10 +99,28 @@ export async function GET(request: Request) {
         tasksToUpdate[index].belongsToExperimentId = experiment._id
     })
     try {
-        await updateManyTasks(tasksToUpdate)
+        const res = await updateManyTasks(tasksToUpdate.map(task => ({
+            filter: {_id: task._id!},
+            update: {belongsToExperimentId: task.belongsToExperimentId}
+        })))
     } catch (e) {
         console.error(e)
         return NextResponse.error()
+    }
+    /* update experiment meta with experiment id */
+    const experimentMetaToUpdate = {
+        ...experimentMeta,
+        belongsToExperimentId: experiment._id
+    }
+    experimentMeta.belongsToExperimentId = experiment._id
+    try {
+        await client.connect()
+        const res = await client.db(process.env.DB_NAME).collection("experimentMeta").updateOne({_id: experimentMeta._id}, {$set: {belongsToExperimentId: experiment._id}})
+    }catch (e) {
+        console.error(e)
+        return NextResponse.error()
+    }finally {
+        await client.close()
     }
     const data = {
         tasks,

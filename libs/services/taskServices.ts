@@ -1,5 +1,6 @@
 import {Task} from "@/types/task";
 import client from "@client";
+import {UpdateOneModel} from "mongodb";
 
 export async function insertManyTasks(tasks: Task[]) {
     try {
@@ -24,10 +25,15 @@ export async function updateTask(task: Task) {
         await client.close()
     }
 }
-export default async function updateManyTasks(tasks: Task[]) {
+
+export default async function updateManyTasks(updateManyInput: UpdateOneModel[]) {
     try {
         await client.connect()
-        return await client.db("dev").collection("task").updateMany({_id: {$in: tasks.map(task => task._id!)}}, {$set: {...tasks}})
+        let res = []
+        for (const updateOneInput of updateManyInput) {
+            res.push(await client.db("dev").collection("task").updateOne({_id: updateOneInput.filter._id}, {$set: {...updateOneInput.update}}))
+        }
+        return res
     } catch (e) {
         console.error(e)
         return Promise.reject(e)
