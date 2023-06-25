@@ -123,8 +123,8 @@ export default async function AdminTaskPage(props: { params: { experimentName: s
                 </thead>
                 <tbody>
                     {filteredTasks?.map((task) => {
-                            const taskMeta = filteredTasksMeta?.find((taskMeta) => taskMeta._id?.toString() === task.taskMetaId.toString());
-                            const taskResult = filteredTaskResults?.find((taskResult) => taskResult._id?.toString() === task.taskResultId.toString());
+                            const taskMeta = filteredTasksMeta?.find((taskMeta) => taskMeta._id?.toString() === task.taskMetaId?.toString());
+                            const taskResult = filteredTaskResults?.find((taskResult) => taskResult._id?.toString() === task.taskResultId?.toString());
                             const experimentMeta = filteredExperimentsMeta?.find((experimentMeta) => experimentMeta.belongsToExperimentId?.toString() === task.belongsToExperimentId?.toString());
                             return (
                                 <tr key={task._id?.toString()}>
