@@ -11,4 +11,10 @@ This repository contains a research app, allowing tested participants to engage 
 - **User Interface for Tested Participants**: The app offers an intuitive user interface specifically designed for tested participants, providing them with a seamless and engaging experience while participating in the research study.
 - **Admin Area**: The app includes an admin area that allows researchers to manage and monitor participant activities, access collected data, and analyze the results.
 
+## to start the app you can either 
+- **Visit the production version at** [link](https://maya-three.vercel.app/?external_id=stam).
+- **Clone the repository to your local machine and run the following command:**
+   ```shell
+   npm run dev
+   
 This research participation app serves as a vital tool for enabling tested participants to actively engage with the study conducted by the Department of Computer Science, facilitating data collection and analysis for research purposes.
