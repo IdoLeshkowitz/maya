@@ -42,16 +42,6 @@ const getAllExperimentNames = cache(async () => {
     const experimentNames = allExperimentsMeta.map((experimentMeta) => experimentMeta.config.experimentName)
     return Array.from(new Set(experimentNames))
 })
-const getExperimentsByExperimentName = cache(async (experimentName: string) => {
-    try {
-        await client.connect()
-        const db = client.db(process.env.DB_NAME)
-        const collection = db.collection("experiment")
-        const experiments = await collection.find({config: {experimentName: experimentName}}).toArray()
-    } catch (e) {
-        console.log(e)
-    }
-})
 const findManyExperimentMetaByExperimentName = cache(async (experimentName: string): Promise<ExperimentMeta[]> => {
     try {
         await client.connect()

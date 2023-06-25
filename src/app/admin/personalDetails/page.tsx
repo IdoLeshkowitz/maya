@@ -2,7 +2,7 @@ import {getAllPersonalDetails} from "@services/personalDetailsService";
 
 const columns = [
     "id",
-    "belongs_to_experiment",
+    "belongs_to_session",
     "age",
     "gender",
     "education",
