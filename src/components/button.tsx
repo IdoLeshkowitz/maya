@@ -1,8 +1,9 @@
 import {FC, ReactNode} from "react";
+import Link from "next/link";
 
 interface ButtonProps {
     children: ReactNode
-    onClick: () => void
+    onClick?: () => void
     disabled?: boolean
 }
 
@@ -25,4 +26,22 @@ export const CommonButton: FC<ButtonProps> = (props) => {
         </button>
     )
 
+}
+
+interface LinkProps {
+    children: ReactNode
+    href: string
+}
+
+export const CommonLink: FC<LinkProps> = (props) => {
+    const {children, href} = props
+    return (
+        <Link
+            href={href}
+            data-testid="common-link"
+            className="font-bold py-3 px-5 rounded-full border border-blue transition ease-in-out delay-75 duration-200 hover:bg-opacity-10 hover:text-blue-500 hover:scale-110 focus:bg-opacity-10 focus:text-blue-500 focus:scale-110 bg-blue-500 bg-opacity-90 text-white scale-105"
+        >
+            {children}
+        </Link>
+    )
 }

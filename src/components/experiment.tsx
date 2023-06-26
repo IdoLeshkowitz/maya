@@ -2,7 +2,7 @@
 import {useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../libs/redux/hooks";
 import {initializeExperiment} from "../../libs/redux/features/experiment/experimentActions";
-import Loader from "@components/experimentSteps/loader";
+import Loader from "@components/loader";
 import {ExperimentStep} from "../../libs/redux/features/experiment/experimentSlice";
 import Welcome from "@components/experimentSteps/welcome";
 import Consent from "@components/experimentSteps/consent";

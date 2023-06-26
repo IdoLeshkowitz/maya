@@ -1,8 +1,9 @@
 import CommonLayout from "@components/commonLayout";
 import {cookies} from "next/headers";
 
-export default function Finish() {
-    console.log(cookies().getAll())
+export default async function End() {
+    console.log(cookies().get('profilicId'))
+
     return (
         <CommonLayout>
             <p className="px-20 text-slate-700">

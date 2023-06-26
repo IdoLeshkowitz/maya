@@ -1,11 +1,15 @@
+import { PrismaClient } from "@prisma/client"
 
-import {MongoClient} from 'mongodb'
+// PrismaClient is attached to the `global` object in development to prevent
+// exhausting your database connection limit.
+//
+// Learn more:
+// https://pris.ly/d/help/next-js-best-practices
 
-if (!process.env.DATABASE_URL) {
-    throw new Error('Please define the DATABASE_URL environment variable inside .env.local')
-}
-const client = new MongoClient(process.env.DATABASE_URL)
+const globalForPrisma = global as unknown as { prisma: PrismaClient }
 
-export default client
+export const prisma = globalForPrisma.prisma || new PrismaClient()
 
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma
 
+export default prisma as PrismaClient

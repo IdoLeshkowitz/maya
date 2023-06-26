@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model ExperimentSession {
+  id                String @id @default(auto()) @map("_id") @db.ObjectId
+  prolificId        String @unique
+  createdAt         String
+  experimentName    String
+  experimentVersion String
+  variantName       String
+
+  tasks Task[]
+
+  currentApp      String?
+  personalDetails PersonalDetails?
+  consent         Boolean?
+}
+
+model PersonalDetails {
+  id                 String            @id @default(auto()) @map("_id") @db.ObjectId
+  belongsToSession   ExperimentSession @relation(fields: [belongsToSessionId], references: [id])
+  belongsToSessionId String            @unique @map("belongsToSession") @db.ObjectId
+
+  age                   Int
+  gender                String
+  education             String
+  howDecided            String
+  attention             Int
+  didCount              Boolean
+  didWrite              Boolean
+  familiarityWithStocks Int
+  whatIsStock           String
+  whatIsPortfolio       String
+  didParticipateBefore  Boolean
+  didCheckMarkAppeared  Boolean
+  comments              String?
+}
+
+model Task {
+  id                 String            @id @default(auto()) @map("_id") @db.ObjectId
+  belongsToSession   ExperimentSession @relation(fields: [belongsToSessionId], references: [id])
+  belongsToSessionId String            @map("belongsToSession") @db.ObjectId
+
+  leftOptionLabel        String
+  rightOptionLabel       String
+  leftOptionColor        String
+  rightOptionColor       String
+  leftOptionGroupsNames  String[]
+  rightOptionGroupsNames String[]
+
+  selectedOptionSide       String?
+  selectedOptionConfidence Int?
+  leftOptionGroupsScores   Int[]
+  rightOptionGroupsScores  Int[]
+
+  leftSnapshots  Snapshot[] @relation("LeftSnapshots")
+  rightSnapshots Snapshot[] @relation("RightSnapshots")
+
+  leftPreviewGroupName  String
+  rightPreviewGroupName String
+
+  leftPreviewSimpleName  String
+  rightPreviewSimpleName String
+
+  overallPreviewName String
+}
+
+model Snapshot {
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  label      String
+  groupIndex Int
+  indicator  String
+
+  appearsAsLeftAtTask    Task?   @relation("LeftSnapshots", fields: [appearsAsLeftAtTaskId], references: [id])
+  appearsAsLeftAtTaskId  String? @db.ObjectId
+  appearsAsRightAtTask   Task?   @relation("RightSnapshots", fields: [appearsAsRightAtTaskId], references: [id])
+  appearsAsRightAtTaskId String? @db.ObjectId
+}
