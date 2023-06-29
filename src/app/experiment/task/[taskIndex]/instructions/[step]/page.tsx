@@ -19,6 +19,7 @@ const getCurrentTask = async (prolificId: string, taskIndex: string) => {
     }
 }
 
+
 interface TaskInstructionsPageParams {
     taskIndex: string,
     step: string,

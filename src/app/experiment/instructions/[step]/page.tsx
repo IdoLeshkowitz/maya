@@ -9,6 +9,11 @@ const experimentInstructions: ReactNode[] = [
     <span key="1">Buying a stock is like buying your share of a company. Every stock has a value, which reflects the value of the company, and this value changes over time.</span>,
     <span key="2">To diversify investment you can buy a stock <strong>portfolio</strong>, which is like buying several stocks from different companies.<br/>A portfolio may include stocks of companies from several industries.<br/>The total <strong>profit</strong> from the portfolio will be according to the gains and losses of all of the stocks.</span>,
 ]
+
+export function generateStaticParams() {
+    return experimentInstructions.map((_, i) => ({params: {step: i.toString()}}))
+}
+
 export default function InstructionsPage({params}: { params: { step: string } }) {
     const experimentSessionId = cookies().get("experimentSessionId")?.value!
     prisma.app.update({
