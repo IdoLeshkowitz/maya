@@ -3,10 +3,10 @@ import {cookies} from "next/headers";
 import {prisma} from "@client";
 import {redirect} from "next/navigation";
 
-export default async function Task(request: NextRequest) {
+export default async function Task() {
     const experimentSessionId = cookies().get("experimentSessionId")?.value!
     if (!experimentSessionId) {
-        return NextResponse.redirect(request.nextUrl.origin)
+        return redirect('/')
     }
     let experimentApp;
     try {
@@ -40,7 +40,7 @@ export default async function Task(request: NextRequest) {
         })
     } catch (e) {
         console.log(e)
-        return redirect(request.nextUrl.origin)
+        return redirect('/')
     }
     const activeChild = experimentApp.children.find(child => child.appName === 'task')!.activeChild ?? '0'
     return redirect(`/experiment/task/${activeChild}`)
