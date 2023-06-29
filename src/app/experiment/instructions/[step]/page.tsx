@@ -2,6 +2,7 @@ import CommonLayout from "@components/commonLayout";
 import {ReactNode} from "react";
 import {CommonLink} from "@components/button";
 import {cookies} from "next/headers";
+import {prisma} from "@client";
 
 const experimentInstructions: ReactNode[] = [
     <span key="0">In this experiment, you will be asked to make investment decisions. But first, we will explain some concepts regarding stocks and investments. Please read them and make sure you understand the concepts and their meaning as we use them.</span>,
@@ -10,24 +11,24 @@ const experimentInstructions: ReactNode[] = [
 ]
 export default function InstructionsPage({params}: { params: { step: string } }) {
     const experimentSessionId = cookies().get("experimentSessionId")?.value!
-    // prisma.app.update({
-    //     where: {
-    //         appName_experimentSessionId: {
-    //             experimentSessionId: experimentSessionId,
-    //             appName            : "instructions"
-    //         }
-    //     },
-    //     data : {
-    //         currentStep: parseInt(params.step)
-    //     }
-    // }).catch(e => console.error(e))
+    prisma.app.update({
+        where: {
+            appName_experimentSessionId: {
+                experimentSessionId: experimentSessionId,
+                appName            : "instructions"
+            }
+        },
+        data : {
+            currentStep: parseInt(params.step)
+        }
+    }).catch(e => console.error(e))
 
     function getNextHref() {
-        // const nextSlug = parseInt(params.step) + 1
-        // if (nextSlug < experimentInstructions.length) {
-        //     return `/experiment/instructions/${nextSlug}`
-        // }
-        return "/experiment/task/0/start"
+        const nextSlug = parseInt(params.step) + 1
+        if (nextSlug < experimentInstructions.length) {
+            return `/experiment/instructions/${nextSlug}`
+        }
+        return "/experiment/task"
     }
 
     return (

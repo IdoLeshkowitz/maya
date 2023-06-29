@@ -1,10 +1,12 @@
-import {NextRequest, NextResponse} from "next/server";
+import {NextResponse} from "next/server";
 import {prisma} from "@client";
+import {cookies} from "next/headers";
+import {redirect} from "next/navigation";
 
-export async function GET(request: NextRequest) {
-    const experimentSessionId = request.cookies.get("experimentSessionId")?.value
+export default async function Page() {
+    const experimentSessionId = cookies().get("experimentSessionId")?.value
     if (!experimentSessionId) {
-        return NextResponse.redirect(request.nextUrl.origin)
+        return NextResponse.redirect("/")
     }
     let experimentApp;
     try {
@@ -37,13 +39,13 @@ export async function GET(request: NextRequest) {
             }
         })
     } catch (e) {
-        console.log(e)
-        return NextResponse.redirect(`${request.nextUrl.origin}`)
+        console.error(e)
+        return redirect('/')
     }
     const instructionsApp = experimentApp.children.find(child => child.appName === 'instructions')
     const currentStep = instructionsApp!.currentStep
     if (currentStep === -1) {
-        return NextResponse.redirect(`${request.nextUrl.origin}/${request.nextUrl.pathname}/0`)
+        return redirect('/experiment/instructions/0')
     }
-    return NextResponse.redirect(`${request.nextUrl.origin}/${request.nextUrl.pathname}/${currentStep}`)
+    return redirect(`/experiment/instructions/${currentStep}`)
 }
