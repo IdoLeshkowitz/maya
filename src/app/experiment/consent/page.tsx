@@ -1,12 +1,79 @@
 import CommonLayout from "@components/commonLayout";
 import Header from "@components/header";
-import ConsentForm from "@/app/experimentApps/consent/form";
+import {cookies} from "next/headers";
+import {CommonButton} from "@components/button";
+import {redirect} from "next/navigation";
+import {prisma} from "@client";
 
 export default function Consent() {
+    prisma.app.update({
+        where: {
+            appName_experimentSessionId: {
+                appName            : "experiment",
+                experimentSessionId: cookies().get("experimentSessionId")?.value!
+            }
+        },
+        data : {
+            children   : {
+                connectOrCreate: {
+                    where : {
+                        appName_experimentSessionId: {
+                            appName            : "consent",
+                            experimentSessionId: cookies().get("experimentSessionId")?.value!
+                        }
+                    },
+                    create: {
+                        appName            : "consent",
+                        experimentSessionId: cookies().get("experimentSessionId")?.value!
+                    },
+                }
+            },
+            activeChild: "consent"
+        }
+    }).catch(e => console.error(e))
+
+    async function setConsent(data: FormData) {
+        'use server'
+        const prolificId = cookies().get('prolificId')?.value
+        const didConsent = data.get('consent')
+        prisma.experimentSession.update({
+            where: {
+                prolificId
+            },
+            data : {
+                consent: !!didConsent
+            }
+        }).catch(e => console.error(e))
+        if (!didConsent) {
+            redirect('/experiment/end')
+        }
+        redirect('/experiment/instructions')
+    }
+
     return (
         <CommonLayout
             header={<Header centered={true}>Informed Consent</Header>}
-            footer={<ConsentForm/>}
+            footer={
+                <form action={setConsent as unknown as string} className="flex flex-col justify-center relative">
+                    <div className="absolute -top-3 ps-10">
+                        <input
+                            type="checkbox"
+                            id="consent"
+                            name="consent"
+                            className="mt-1"
+                        />
+                        <label htmlFor="consent" className="text-black text-md ms-3">
+                            I have read and understood the instructions, and would like to participate.
+                        </label>
+                        {/*next button*/}
+                        <div className="flex self-center">
+                            <CommonButton type="submit">
+                                Next
+                            </CommonButton>
+                        </div>
+                    </div>
+                </form>
+            }
         >
             <div className="overflow-scroll border-black border p-5 rounded whitespace-pre-wrap px-10 mx-10">
                 <div className="flex flex-col gap-10">

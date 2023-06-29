@@ -1,23 +1,33 @@
-import {Inter} from 'next/font/google'
-import prisma from "@client";
-import {shuffleConfig} from "@/utils/shuffleConfig";
+import {cookies} from "next/headers";
+import {NextRequest, NextResponse} from "next/server";
 import {Prisma} from "@prisma/client";
+import {splitArray} from "@/utils/splitArray";
+import {shuffleConfig} from "@/utils/shuffleConfig";
+import {prisma} from "@client";
 import experimentConfig from "@public/experimentConfig.json";
-import CommonLayout from "@components/commonLayout";
-import {CommonLink} from "@components/button";
 
-const inter = Inter({subsets: ['latin']})
+export async function GET(request: NextRequest) {
+    const prolificId = request.nextUrl.searchParams.get("external_id") ?? cookies().get("prolificId")?.value
+    if (!prolificId) {
+        return NextResponse.redirect(`${request.nextUrl.origin}/missingProlificId`)
+    }
+    const experimentSession = await createOrUpdateExperimentSession(experimentConfig, prolificId)
+    cookies().set("prolificId", prolificId)
+    cookies().set("experimentSessionId", experimentSession.id)
+    return NextResponse.redirect(`${request.nextUrl.origin}/experiment`)
+}
 
 function createTasksFromConfig(config: any, prolificId: string): Prisma.TaskUncheckedCreateNestedManyWithoutBelongsToSessionInput {
     return {
         create: config.previews.map((preview: any, i: number): Prisma.TaskUncheckedCreateWithoutBelongsToSessionInput => {
             return {
+                orderInExperiment     : i,
                 leftOptionColor       : config.optionsColors[i][0],
                 rightOptionColor      : config.optionsColors[i][1],
                 leftOptionLabel       : config.optionsNames[i][0],
                 rightOptionLabel      : config.optionsNames[i][1],
-                leftOptionGroupsNames : config.groupsNames[i],
-                rightOptionGroupsNames: config.groupsNames[i],
+                leftOptionGroupsNames : splitArray(config.groupsNames[i])[0] as string[],
+                rightOptionGroupsNames: splitArray(config.groupsNames[i])[1] as string[],
                 overallPreviewName    : config.previews[i].overallPreviewName,
                 leftPreviewGroupName  : config.previews[i].options[0].groupName,
                 rightPreviewGroupName : config.previews[i].options[1].groupName,
@@ -54,10 +64,10 @@ async function createOrUpdateExperimentSession(config: any, prolificId: string) 
     const tasksToCreate = createTasksFromConfig(shuffledConfig, prolificId)
     try {
         return await prisma.experimentSession.upsert({
-            where : {
+            where  : {
                 prolificId
             },
-            create: {
+            create : {
                 prolificId,
                 createdAt        : new Date().toUTCString(),
                 experimentName   : config.experimentName,
@@ -65,35 +75,13 @@ async function createOrUpdateExperimentSession(config: any, prolificId: string) 
                 variantName      : config.variantName,
                 tasks            : tasksToCreate,
             },
-            update: {}
+            update : {},
+            include: {
+                apps: true
+            }
         })
     } catch (e) {
         console.error(e)
         return Promise.reject(e)
     }
 }
-
-export default async function Home(props: { searchParams: { external_id: string } }) {
-
-    const experimentSession = await createOrUpdateExperimentSession(experimentConfig, props.searchParams.external_id)
-    if (!experimentSession.currentApp) {
-        return (
-            <CommonLayout
-                footer={
-                    <div className="flex justify-center items-center">
-                        <CommonLink href="experimentApps/consent">Start</CommonLink>
-                    </div>
-                }
-            >
-                <h1 className="flex justify-center items-center text-base font-bold text-center text-black">
-                    Welcome to the experiment!
-                </h1>
-
-            </CommonLayout>
-        )
-    }
-
-    return null
-}
-
-export const dynamic = 'force-dynamic'

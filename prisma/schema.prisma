@@ -17,12 +17,12 @@ model ExperimentSession {
   experimentName    String
   experimentVersion String
   variantName       String
+  apps              App[]  @relation("experimentSession")
 
   tasks Task[]
 
-  currentApp      String?
   personalDetails PersonalDetails?
-  consent         Boolean?
+  consent         Boolean?         @default(false)
 }
 
 model PersonalDetails {
@@ -49,6 +49,10 @@ model Task {
   id                 String            @id @default(auto()) @map("_id") @db.ObjectId
   belongsToSession   ExperimentSession @relation(fields: [belongsToSessionId], references: [id])
   belongsToSessionId String            @map("belongsToSession") @db.ObjectId
+  orderInExperiment  Int
+
+  currentApp  String?
+  currentStep Int     @default(-1)
 
   leftOptionLabel        String
   rightOptionLabel       String
@@ -84,4 +88,20 @@ model Snapshot {
   appearsAsLeftAtTaskId  String? @db.ObjectId
   appearsAsRightAtTask   Task?   @relation("RightSnapshots", fields: [appearsAsRightAtTaskId], references: [id])
   appearsAsRightAtTaskId String? @db.ObjectId
+}
+
+model App {
+  id                  String             @id @default(auto()) @map("_id") @db.ObjectId
+  experimentSession   ExperimentSession? @relation("experimentSession", fields: [experimentSessionId], references: [id])
+  experimentSessionId String?            @db.ObjectId
+  appName             String
+
+  currentStep Int     @default(-1)
+  activeChild String?
+
+  children App[]   @relation("childrenApps")
+  parent   App?    @relation("childrenApps", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  parentId String? @db.ObjectId
+
+  @@unique([appName, experimentSessionId])
 }
