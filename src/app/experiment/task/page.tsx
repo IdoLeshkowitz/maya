@@ -1,10 +1,10 @@
 import {NextRequest, NextResponse} from "next/server";
 import {cookies} from "next/headers";
-import {findUniqueExperimentSession} from "@services/experimentSession";
 import {prisma} from "@client";
+import {redirect} from "next/navigation";
 
-export async function GET(request: NextRequest) {
-    const experimentSessionId = request.cookies.get("experimentSessionId")?.value!
+export default async function Task(request: NextRequest) {
+    const experimentSessionId = cookies().get("experimentSessionId")?.value!
     if (!experimentSessionId) {
         return NextResponse.redirect(request.nextUrl.origin)
     }
@@ -40,12 +40,8 @@ export async function GET(request: NextRequest) {
         })
     } catch (e) {
         console.log(e)
-        return NextResponse.redirect(request.nextUrl.origin)
+        return redirect(request.nextUrl.origin)
     }
-    const tasksApp = experimentApp.children.find(child => child.appName === 'task')
-    const currentStep = tasksApp!.currentStep
-    if (currentStep === -1) {
-        return NextResponse.redirect(`${request.nextUrl.href}/0`)
-    }
-    return NextResponse.redirect(`${request.nextUrl.href}/${currentStep}`)
+    const activeChild = experimentApp.children.find(child => child.appName === 'task')!.activeChild ?? '0'
+    return redirect(`/experiment/task/${activeChild}`)
 }

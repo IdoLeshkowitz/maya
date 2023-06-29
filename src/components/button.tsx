@@ -3,7 +3,7 @@ import Link from "next/link";
 
 interface ButtonProps {
     children: ReactNode
-    onClick?: () => void
+    onClick?: () => any
     disabled?: boolean
     type?: 'button' | 'submit' | 'reset'
 }

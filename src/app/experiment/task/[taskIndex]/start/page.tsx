@@ -8,27 +8,25 @@ export default function StartTaskPage({params}: { params: { taskIndex: string } 
         where: {
             appName_experimentSessionId: {
                 appName            : "task",
-                experimentSessionId: cookies().get("prolificId")?.value!
+                experimentSessionId: cookies().get("experimentSessionId")?.value!
             }
         },
         data : {
-            children   : {
-                connectOrCreate: {
-                    where : {
+            children: {
+                update: {
+                    where: {
                         appName_experimentSessionId: {
-                            appName            : "start",
-                            experimentSessionId: cookies().get("prolificId")?.value!
+                            appName            : params.taskIndex,
+                            experimentSessionId: cookies().get("experimentSessionId")?.value!
                         }
                     },
-                    create: {
-                        appName            : "start",
-                        experimentSessionId: cookies().get("prolificId")?.value!
+                    data : {
+                        activeChild: "start"
                     }
                 }
             },
-            activeChild: "start"
         }
-    })
+    }).catch(e => console.error(e))
     return (
         <CommonLayout
             footer={
