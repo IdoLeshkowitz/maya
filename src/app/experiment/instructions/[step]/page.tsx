@@ -11,7 +11,9 @@ const experimentInstructions: ReactNode[] = [
 ]
 
 export function generateStaticParams() {
-    return experimentInstructions.map((_, i) => ({params: {step: i.toString()}}))
+    return experimentInstructions.map((_, i) => {
+        return {step: i.toString()}
+    })
 }
 
 export default function InstructionsPage({params}: { params: { step: string } }) {
