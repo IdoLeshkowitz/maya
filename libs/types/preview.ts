@@ -11,7 +11,12 @@ export interface Snapshot {
     indicator: string
     groupIndex: number
     label?: string
-    optionSide: string
+}
+
+export interface option {
+    groupName: string
+    simpleName: string
+    snapshots: Snapshot[]
 }
 
 export const snapshotSchema = object().shape({
@@ -22,21 +27,17 @@ export const snapshotSchema = object().shape({
 })
 
 export interface Preview {
-    previewName: string
-    leftPreviewGroupName: string
-    rightPreviewGroupName: string
-    leftPreviewSimpleName: string
-    rightPreviewSimpleName: string
-    snapshots: Snapshot[]
+    overallPreviewName: string
+    options: option[]
 }
 
 export const previewSchema = object().shape({
-    previewName          : string().required(),
-    leftPreviewGroupName : string().required(),
-    rightPreviewGroupName: string().required(),
-    leftPreviewSimpleName: string().required(),
+    previewName           : string().required(),
+    leftPreviewGroupName  : string().required(),
+    rightPreviewGroupName : string().required(),
+    leftPreviewSimpleName : string().required(),
     rightPreviewSimpleName: string().required(),
-    snapshots              : array().of(snapshotSchema).required()
+    snapshots             : array().of(snapshotSchema).required()
 })
 
 

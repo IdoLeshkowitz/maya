@@ -14,7 +14,7 @@ import {
     setCurrentTaskEndTime,
     setCurrentTaskIndex,
     setCurrentTaskSnapshotIndex, setCurrentTaskStartTime,
-    setCurrentTaskStep,
+    setCurrentTaskStep, setPreviewSideByIndex,
     setTaskCurrentSnapshotIndexByIndex
 } from "../tasks/tasksActions";
 import {TaskState, TaskStep} from "../tasks/tasksSlice";
@@ -66,7 +66,7 @@ const stepForwardSplit: Middleware = ({dispatch, getState}) => next => async (ac
                 /* set current task step to performance */
                 dispatch(setCurrentTaskStep(TaskStep.PERFORMANCE))
                 /* check if there are any snapshots in current task */
-                const numberOfSnapshots = state.tasks.tasksStates[getCurrentTaskIndex(state)!].taskMeta.performance.snapshots.length
+                const numberOfSnapshots = state.tasks.tasksStates[getCurrentTaskIndex(state)!].taskMeta.performance.options.reduce((acc, option) => acc + option.snapshots.length, 0)
                 /* if there are no snapshots, head next to option selection */
                 if (numberOfSnapshots === 0) {
                     /* set current task step to option selection */
@@ -76,28 +76,37 @@ const stepForwardSplit: Middleware = ({dispatch, getState}) => next => async (ac
                 /* if there are snapshots, set current snapshot index to 0 */
                 /* set current snapshot index to 0 */
                 dispatch(setCurrentTaskSnapshotIndex(0))
+                /* set current preview side to left */
+                dispatch(setPreviewSideByIndex({taskIndex: getCurrentTaskIndex(state)!, previewSide: 'LEFT'}))
                 /* set current task step to performance */
                 dispatch(setCurrentTaskStep(TaskStep.PERFORMANCE))
                 return;
             }
             /* if the current task step is performance, head next to next snapshot or option selection */
             if (currentTaskStep === TaskStep.PERFORMANCE) {
+                const currentPreviewSide = state.tasks.tasksStates[getCurrentTaskIndex(state)!].currentPreviewSide
                 /* grab current snapshot index */
-                const currentSnapshotIndex = state.tasks.tasksStates[getCurrentTaskIndex(state)!].currentSnapshotIndex  ?? 0
+                const currentSnapshotIndex = state.tasks.tasksStates[getCurrentTaskIndex(state)!].currentSnapshotIndex ?? -1
                 /* grab total number of snapshots */
-                const numberOfSnapshots = state.tasks.tasksStates[getCurrentTaskIndex(state)!].taskMeta.performance.snapshots.length
+                const numberOfSnapshotsInCurrentSide = state.tasks.tasksStates[getCurrentTaskIndex(state)!].taskMeta.performance.options[currentPreviewSide === 'LEFT' ? 0 : 1].snapshots.length
                 /* check if there are any snapshots left */
-                if (currentSnapshotIndex! < numberOfSnapshots - 1) {
+                if (currentSnapshotIndex! < numberOfSnapshotsInCurrentSide - 1) {
                     /* if there are snapshots left, head next to next snapshot */
                     /* increment current snapshot index */
                     dispatch(setTaskCurrentSnapshotIndexByIndex({taskIndex: getCurrentTaskIndex(state)!, snapshotIndex: currentSnapshotIndex! + 1}))
                     return;
+                } else {
+                    if (currentPreviewSide === 'LEFT') {
+                        dispatch(setPreviewSideByIndex({taskIndex: getCurrentTaskIndex(state)!, previewSide: 'RIGHT'}))
+                        /* set current snapshot index to 0 */
+                        dispatch(setCurrentTaskSnapshotIndex(0))
+                        return;
+                    }
+                    /* if there are no snapshots left, head next to option selection */
+                    /* set current task step to option selection */
+                    dispatch(setCurrentTaskStep(TaskStep.OPTION_SELECTION))
+                    return;
                 }
-                /* if there are no snapshots left, head next to option selection */
-                /* reset current snapshot index */
-                dispatch(setCurrentTaskSnapshotIndex(null))
-                /* set current task step to option selection */
-                dispatch(setCurrentTaskStep(TaskStep.OPTION_SELECTION))
             }
             /* if the current step is option selection, head next to group scoring */
             if (currentTaskStep === TaskStep.OPTION_SELECTION) {
@@ -155,9 +164,10 @@ const initializeExperimentM: Middleware = ({dispatch, getState}) => next => acti
         dispatch(setExperimentMeta(experimentMeta))
         dispatch(setAllTasksState(tasks.map((task: Task, index: number): TaskState => {
             return {
-                taskMeta: tasksMeta[index],
-                taskStep: TaskStep.IDLE,
-                _id: task._id,
+                currentPreviewSide: null,
+                taskMeta          : tasksMeta[index],
+                taskStep          : TaskStep.IDLE,
+                _id               : task._id,
             }
         })))
         dispatch(setExperimentStep(ExperimentStep.IDLE))

@@ -1,5 +1,5 @@
 {
-  "colors"        : {
+  "colors"           : {
     "blue"  : "#1fb6ff",
     "red"   : "#E0245E",
     "yellow": "#FFD700",
@@ -7,51 +7,67 @@
     "white" : "#FFFFFF",
     "black" : "#000000"
   },
-  "experimentName": "alpha experiment",
+  "experimentName"   : "alpha experiment",
   "experimentVersion": "1.0.0",
-  "variantName"   : "alpha variant",
-  "numberOfTasks" : 2,
-  "optionsColors" : [
+  "variantName"      : "alpha variant",
+  "numberOfTasks"    : 2,
+  "optionsColors"    : [
     ["red", "green"],
     ["blue", "yellow"]
   ],
-  "optionsNames"  : [
+  "optionsNames"     : [
     ["Portfolio ABG", "Portfolio QYN"],
     ["Portfolio BGH", "Portfolio ZQN"]
   ],
-  "groupsNames"   : [
+  "groupsNames"      : [
     ["Banking", "Food", "Products", "Insurance", "Materials", "Utilities"],
     ["Real Estate", "Fashion", "Automobiles", "Tourism", "Transportation", "Entertainment"]
   ],
-  "previews"      : [
+  "previews"         : [
     {
-      "previewName"           : "preview1",
-      "leftPreviewGroupName"  : "left preview group name",
-      "rightPreviewGroupName" : "right preview group name",
-      "leftPreviewSimpleName" : "left preview simple name",
-      "rightPreviewSimpleName": "right preview simple name",
-      "snapshots"             : [
-        {"groupIndex": 0, "label": "Company 1", "indicator": "check", "optionSide": "left"},
-        {"groupIndex": 1, "label": "Company 2", "indicator": "check", "optionSide": "left"},
-        {"groupIndex": 2, "label": "Company 3", "indicator": "check", "optionSide": "left"},
-        {"groupIndex": 1, "label": "Company 4", "indicator": "cross", "optionSide": "right"},
-        {"groupIndex": 2, "label": "Company 5", "indicator": "cross", "optionSide": "right"},
-        {"groupIndex": 0, "label": "Company 6", "indicator": "cross", "optionSide": "right"}
+      "overallPreviewName": "preview 1",
+      "options"           : [
+        {
+          "groupName" : "p1",
+          "simpleName": "s1",
+          "snapshots" : [
+            {"groupIndex": 0, "indicator": "check", "label": "stock 1"},
+            {"groupIndex": 1, "indicator": "check", "label": "stock 2"},
+            {"groupIndex": 2, "indicator": "check", "label": "stock 3"}
+          ]
+        },
+        {
+          "groupName" : "p2",
+          "simpleName": "s2",
+          "snapshots" : [
+            {"groupIndex": 0, "indicator": "check", "label": "stock 1"},
+            {"groupIndex": 1, "indicator": "check", "label": "stock 2"},
+            {"groupIndex": 2, "indicator": "check", "label": "stock 3"}
+          ]
+        }
       ]
     },
     {
-      "previewName"           : "preview2",
-      "leftPreviewGroupName"  : "left preview group name",
-      "rightPreviewGroupName" : "right preview group name",
-      "leftPreviewSimpleName" : "left preview simple name",
-      "rightPreviewSimpleName": "right preview simple name",
-      "snapshots"             : [
-        {"groupIndex": 0, "label": "Company 1", "indicator": "check", "optionSide": "right"},
-        {"groupIndex": 1, "label": "Company 2", "indicator": "check", "optionSide": "right"},
-        {"groupIndex": 2, "label": "Company 3", "indicator": "check", "optionSide": "right"},
-        {"groupIndex": 1, "label": "Company 4", "indicator": "cross", "optionSide": "left"},
-        {"groupIndex": 0, "label": "Company 5", "indicator": "cross", "optionSide": "left"},
-        {"groupIndex": 2, "label": "Company 6", "indicator": "cross", "optionSide": "left"}
+      "overallPreviewName": "preview 2",
+      "options"           : [
+        {
+          "groupName" : "p2",
+          "simpleName": "s2",
+          "snapshots" : [
+            {"groupIndex": 0, "indicator": "check", "label": "stock 1"},
+            {"groupIndex": 1, "indicator": "check", "label": "stock 2"},
+            {"groupIndex": 2, "indicator": "check", "label": "stock 3"}
+          ]
+        },
+        {
+          "groupName" : "p2",
+          "simpleName": "s2",
+          "snapshots" : [
+            {"groupIndex": 0, "indicator": "check", "label": "stock 1"},
+            {"groupIndex": 1, "indicator": "check", "label": "stock 2"},
+            {"groupIndex": 2, "indicator": "check", "label": "stock 3"}
+          ]
+        }
       ]
     }
   ]

@@ -7,7 +7,7 @@ import '../app/globals.css'
 
 interface BoardProps {
     taskMeta: TaskMeta,
-    snapshot?: Snapshot
+    snapshot?: Snapshot & { optionSide: 'LEFT' | 'RIGHT' }
     children?: ReactNode
     header?: ReactNode
     onOptionSelected?: (side: 'left' | 'right') => void
@@ -46,8 +46,8 @@ export default function Board(props: BoardProps) {
                                 <Group
                                     key={index}
                                     groupName={groupName}
-                                    snapshot={(snapshot && snapshot.optionSide === "left" && snapshot.groupIndex === index) ? snapshot : undefined}
-                                    hidden={snapshot && (snapshot?.optionSide === "right" || snapshot?.groupIndex !== index)}
+                                    snapshot={(snapshot && snapshot.optionSide === "LEFT" && snapshot.groupIndex === index) ? snapshot : undefined}
+                                    hidden={snapshot && (snapshot?.optionSide === "RIGHT" || snapshot?.groupIndex !== index)}
                                 />
                             )
                         })
@@ -66,8 +66,8 @@ export default function Board(props: BoardProps) {
                                 <Group
                                     key={index}
                                     groupName={groupName}
-                                    snapshot={(snapshot && snapshot.optionSide === "right" && snapshot.groupIndex === index) ? snapshot : undefined}
-                                    hidden={snapshot && (snapshot?.optionSide === "left" || snapshot?.groupIndex !== index)}
+                                    snapshot={(snapshot && snapshot.optionSide === "RIGHT" && snapshot.groupIndex === index) ? snapshot : undefined}
+                                    hidden={snapshot && (snapshot?.optionSide === "LEFT" || snapshot?.groupIndex !== index)}
                                 />
                             )
                         })

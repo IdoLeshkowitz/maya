@@ -96,7 +96,7 @@ export default function GroupScoring() {
                 </Header>
             }
             snapshot={{
-                optionSide: step === GroupScoringSteps.LEFT_OPTION_SCORING ? "left" : "right",
+                optionSide: step === GroupScoringSteps.LEFT_OPTION_SCORING ? "LEFT" : "RIGHT",
                 groupIndex: currentGroupIndex,
                 indicator : SnapshotIndicator.NONE
             }}

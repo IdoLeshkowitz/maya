@@ -20,22 +20,33 @@ function getCurrentTaskMeta(state: RootState) {
 
 function getCurrentSnapshot(state: RootState) {
     const currentSnapshotIndex = state.tasks.tasksStates.at(state.tasks.currentTaskIndex!)!.currentSnapshotIndex!
-    const allSnapshots = getCurrentTaskMeta(state).performance.snapshots
-    return allSnapshots.at(currentSnapshotIndex)!
+    const currentPreviewSide = state.tasks.tasksStates.at(state.tasks.currentTaskIndex!)!.currentPreviewSide!
+    const previewSideIndex = currentPreviewSide === "LEFT" ? 0 : 1
+    const previewOption = state.tasks.tasksStates.at(state.tasks.currentTaskIndex!)!.taskMeta.performance.options[previewSideIndex]
+    return previewOption.snapshots[currentSnapshotIndex]
+}
+
+function getCurrentPreviewSide(state: RootState) {
+    return state.tasks.tasksStates.at(state.tasks.currentTaskIndex!)!.currentPreviewSide!
 }
 
 const Performance: FC = () => {
     const dispatch = useAppDispatch()
     const [currentSnapshotStep, setCurrentSnapshotStep] = useState(SnapshotStep.IDLE)
     let currentSnapshot: Snapshot | undefined = useAppSelector(getCurrentSnapshot)
+    const optionSide = useAppSelector(getCurrentPreviewSide)
     return (
         <>
             {/*board*/}
             <Board
                 header={<Header centered={true}>{currentSnapshot.label}</Header>}
                 snapshot={
-                    currentSnapshotStep === SnapshotStep.SNAPSHOT ? currentSnapshot : currentSnapshotStep === SnapshotStep.LOADER ?
-                        {...currentSnapshot, indicator: SnapshotIndicator.LOADING} : undefined}
+                    currentSnapshotStep === SnapshotStep.SNAPSHOT
+                        ?
+                        {...currentSnapshot, optionSide} :
+                        currentSnapshotStep === SnapshotStep.LOADER
+                            ?
+                            {...currentSnapshot, indicator: SnapshotIndicator.LOADING,optionSide} : undefined}
                 taskMeta={useAppSelector(getCurrentTaskMeta)}
             >
                 {

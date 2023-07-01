@@ -5,6 +5,7 @@ import {cache} from "react";
 import {ObjectId} from "bson";
 import {ExperimentMeta} from "@/types/experimentMeta";
 import {Experiment} from "@/types/experiment";
+import {TaskMeta} from "@/types/taskMeta";
 
 const columns = [
     "task_id",
@@ -12,8 +13,8 @@ const columns = [
     "end_time",
     "preview_name",
     "l_preview_group_name",
-    "r_preview_group_name",
     "l_preview_simple_name",
+    "r_preview_group_name",
     "r_preview_simple_name",
     "l_option_name",
     "r_option_name",
@@ -131,11 +132,11 @@ export default async function AdminTaskPage(props: { params: { experimentName: s
                                     <td className="border border-slate-500">{task._id?.toString()}</td>
                                     <td className="border border-slate-500">{taskResult?.startTime}</td>
                                     <td className="border border-slate-500">{taskResult?.endTime}</td>
-                                    <td className="border border-slate-500">{taskMeta?.performance.previewName}</td>
-                                    <td className="border border-slate-500">{taskMeta?.performance.leftPreviewGroupName}</td>
-                                    <td className="border border-slate-500">{taskMeta?.performance.rightPreviewGroupName}</td>
-                                    <td className="border border-slate-500">{taskMeta?.performance.leftPreviewSimpleName}</td>
-                                    <td className="border border-slate-500">{taskMeta?.performance.rightPreviewSimpleName}</td>
+                                    <td className="border border-slate-500">{taskMeta?.performance.overallPreviewName}</td>
+                                    <td className="border border-slate-500">{taskMeta?.performance.options[0].groupName}</td>
+                                    <td className="border border-slate-500">{taskMeta?.performance.options[0].simpleName}</td>
+                                    <td className="border border-slate-500">{taskMeta?.performance.options[1].groupName}</td>
+                                    <td className="border border-slate-500">{taskMeta?.performance.options[1].simpleName}</td>
                                     <td className="border border-slate-500">{taskMeta?.leftOption.optionName}</td>
                                     <td className="border border-slate-500">{taskMeta?.rightOption.optionName}</td>
                                     <td className="border border-slate-500">{taskMeta?.leftOption.optionColor}</td>

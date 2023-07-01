@@ -22,13 +22,13 @@ export default function TaskInstructions() {
         <Board
             key={4}
             taskMeta={currentTaskMeta}
-            snapshot={{indicator: 'check', groupIndex: 0, optionSide: 'right', label: 'company 1'}}
+            snapshot={{indicator: 'check', groupIndex: 0, optionSide: 'RIGHT', label: 'company 1'}}
         />,
         "And this is how it would look if the value of the company's stock from a certain portfolio and industry fell.",
         <Board
             key={6}
             taskMeta={currentTaskMeta}
-            snapshot={{indicator: 'cross', groupIndex: 0, optionSide: 'right', label: 'company 2'}}
+            snapshot={{indicator: 'cross', groupIndex: 0, optionSide: 'RIGHT', label: 'company 2'}}
         />,
         `The performance of all the stocks in the portfolios will be presented one after the other. Please pay close attention. After the presentation, you will be asked questions about the portfolios. \n When you are ready please start the task.`,
     ]

@@ -8,7 +8,12 @@ export function shuffleConfig(config: Config): Config {
     const shuffledOptionsNames = shuffle(config.optionsNames)
     const shuffledOptionsColors = shuffle(config.optionsColors)
     const shuffledGroupsNames = shuffle(config.groupsNames.map(group => shuffle(group)))
-    const shuffledPreviews = shuffle(config.previews)
+    const shuffledPreviews = shuffle(config.previews.map(preview => {
+        return {
+            ...preview,
+            options: shuffle(preview.options),
+        }
+    }))
     return {
         ...config,
         optionsNames : shuffledOptionsNames,

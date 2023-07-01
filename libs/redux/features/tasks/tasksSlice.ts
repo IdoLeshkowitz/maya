@@ -18,6 +18,7 @@ export interface TaskState {
     taskResult?: TaskResult
     taskStep: TaskStep
     currentSnapshotIndex?: number
+    currentPreviewSide: "LEFT" | "RIGHT" | null
 }
 
 interface TasksState {
@@ -58,6 +59,13 @@ export const tasksSlice = createSlice({
         setTaskResultIdByIndex(state, action: PayloadAction<{ taskIndex: number, taskResultId: ObjectId }>) {
             const taskState = state.tasksStates[action.payload.taskIndex]
             taskState.taskResult!._id = action.payload.taskResultId
+        },
+        setPreviewSideByIndex(state, action: PayloadAction<{
+            taskIndex: number,
+            previewSide: "LEFT" | "RIGHT" | null
+        }>) {
+            console.log('setPreviewSideByIndex', action.payload)
+            state.tasksStates[action.payload.taskIndex].currentPreviewSide = action.payload.previewSide
         }
     }
 })
