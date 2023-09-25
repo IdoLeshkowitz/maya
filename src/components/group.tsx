@@ -1,4 +1,4 @@
-import {Snapshot as SnapshotType, SnapshotIndicator} from "@/types/preview";
+import {Snapshot as SnapshotType, SnapshotIndicator} from "@/types/performance";
 import {FC} from "react";
 
 interface GroupProps {

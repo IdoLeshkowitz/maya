@@ -1,6 +1,6 @@
 import {FC, ReactNode} from "react";
 
-interface HeaderProps {
+interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
     centered?: boolean
     children?: ReactNode
 }
@@ -8,7 +8,7 @@ interface HeaderProps {
 const Header: FC<HeaderProps> = (props) => {
     const {centered, children} = props
     return (
-        <p className={`text-black text-base ${centered ? 'text-center' : 'text-start'}`}>
+        <p className={`text-black text-base ${centered ? 'text-center' : 'text-instructions'}`} {...props}>
             {children}
         </p>
     )

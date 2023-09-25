@@ -3,7 +3,7 @@ import experimentConfig from "@public/experimentConfig.json"
 
 interface OptionProps {
     optionName: string
-    optionColor: string
+    color: string
     children: ReactNode
     onClick?: () => void
     hidden?: boolean
@@ -12,9 +12,9 @@ interface OptionProps {
 
 
 const Option: FC<OptionProps> = (props) => {
-    const {optionName, optionColor, children, onClick, hidden, tabIndex} = props
+    const {optionName, color, children, onClick, hidden, tabIndex} = props
     let bgColor;
-    switch (optionColor) {
+    switch (color) {
         case 'red':
             bgColor = experimentConfig.colors.red
             break;

@@ -50,6 +50,7 @@ export const experimentSlice = createSlice({
             state.endTime = action.payload
         },
         setPersonalDetails(state, action: PayloadAction<PersonalDetails>) {
+            console.log(action.payload)
             state.personalDetails = action.payload
         },
         setExperimentId(state, action: PayloadAction<ObjectId>) {

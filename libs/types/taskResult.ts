@@ -11,6 +11,6 @@ export interface TaskResult {
 }
 
 export interface OptionSelection {
-    selectedSide: 'left' | 'right'
+    selectedSide: 'LEFT' | 'RIGHT'
     confidence: number
 }

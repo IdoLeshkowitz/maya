@@ -13,7 +13,7 @@ export interface Snapshot {
     label?: string
 }
 
-export interface option {
+export interface OptionPerformance {
     groupName: string
     simpleName: string
     snapshots: Snapshot[]
@@ -26,9 +26,9 @@ export const snapshotSchema = object().shape({
     optionSide: string().required()
 })
 
-export interface Preview {
+export interface Performance {
     overallPreviewName: string
-    options: option[]
+    options: OptionPerformance[]
 }
 
 export const previewSchema = object().shape({

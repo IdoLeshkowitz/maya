@@ -1,16 +1,15 @@
 import {ObjectId} from "bson";
 import {Option, optionSchema} from "@/types/option";
-import {Preview, previewSchema} from "@/types/preview";
+import {Performance, previewSchema} from "@/types/performance";
 import {number, object, string} from "yup";
 
 
 export interface TaskMeta {
-    _id?: ObjectId
+    id?: ObjectId
     leftOption: Option
     rightOption: Option
-    performance: Preview
+    performance: Performance
     orderInExperiment: number
-    belongsToTask ?: ObjectId
 }
 
 export const taskMetaSchema = object().shape({

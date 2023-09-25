@@ -1,17 +1,33 @@
-import client from "@client";
-import {PersonalDetails} from "@/types/personalDetails";
-import {NextResponse} from "next/server";
+import prisma from "../../../../prisma/client";
+import {Prisma} from ".prisma/client";
+import {cookies} from "next/headers";
+import {NextRequest, NextResponse} from "next/server";
 
-export async function POST(request: Request) {
-    const personalDetailsToInsert: PersonalDetails = await request.json()
+async function createPersonalDetails(prolificId: string, input: Prisma.UserDetailsCreateWithoutSessionInput) {
+    return prisma.userDetails.create({
+        data: {
+            ...input,
+            Session: {
+                connect: {
+                    prolificId
+                }
+            }
+        }
+    })
+}
+
+export async function POST(request: NextRequest) {
+    const prolificId = cookies().get("prolificId")?.value
+    if (!prolificId) {
+        console.error(`no prolificId cookie found in request ${request}`)
+        return NextResponse.redirect(request.nextUrl.origin)
+    }
+    const personalDetails = await request.json()
     try {
-        await client.connect()
-        const insertedPersonalDetails = await client.db(process.env.DB_NAME).collection("personalDetails").insertOne(personalDetailsToInsert)
-        return NextResponse.json(insertedPersonalDetails)
+        await createPersonalDetails(prolificId, personalDetails)
+        return NextResponse.json(personalDetails)
     } catch (e) {
         console.error(e)
         return NextResponse.error()
-    } finally {
-        await client.close()
     }
 }

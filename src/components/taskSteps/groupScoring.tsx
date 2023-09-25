@@ -6,7 +6,7 @@ import {TaskMeta} from "@/types/taskMeta";
 import {stepForward} from "../../../libs/redux/features/experiment/experimentActions";
 import Board from "@components/board";
 import {CommonButton} from "@components/button";
-import {SnapshotIndicator} from "@/types/preview";
+import {SnapshotIndicator} from "@/types/performance";
 import Slider from "@components/slider";
 import {
     setCurrentTaskResultLeftScores,

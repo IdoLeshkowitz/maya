@@ -32,7 +32,7 @@ function getExperimentStep(state: RootState) {
 const stepForwardSplit: Middleware = ({dispatch, getState}) => next => async (action) => {
     next(action)
     if (action.type === stepForward.type) {
-        /* check the current experiment step */
+        /* check the current session step */
         const state: RootState = getState()
         const experimentStep = getExperimentStep(state)
         if (experimentStep === ExperimentStep.IDLE) {
@@ -44,8 +44,8 @@ const stepForwardSplit: Middleware = ({dispatch, getState}) => next => async (ac
             return;
         }
         if (experimentStep === ExperimentStep.INTRO) {
-            /* start the first task */
-            /* set experiment step to tasks */
+            /* instructions the first task */
+            /* set session step to tasks */
             dispatch(setExperimentStep(ExperimentStep.TASKS))
             /* set current task index to 0 */
             dispatch(setCurrentTaskIndex(0))
@@ -56,7 +56,7 @@ const stepForwardSplit: Middleware = ({dispatch, getState}) => next => async (ac
             const currentTaskStep = state.tasks.tasksStates[getCurrentTaskIndex(state)!].taskStep
             /* if the current task step is idle, head next to instructions */
             if (currentTaskStep === TaskStep.IDLE) {
-                /* start current task step to instructions */
+                /* instructions current task step to instructions */
                 dispatch(setCurrentTaskStep(TaskStep.TASK_INSTRUCTIONS))
                 dispatch(setCurrentTaskStartTime(Date.now()))
                 return;
@@ -131,7 +131,7 @@ const stepForwardSplit: Middleware = ({dispatch, getState}) => next => async (ac
                     /* if there are no tasks left head to form  */
                     /* set current task index to null */
                     dispatch(setCurrentTaskIndex(null))
-                    /* set experiment step to form */
+                    /* set session step to form */
                     dispatch(setExperimentStep(ExperimentStep.FORM))
                     return;
                 }
@@ -142,8 +142,8 @@ const stepForwardSplit: Middleware = ({dispatch, getState}) => next => async (ac
             }
         }
         /*
-        this is the last step of the experiment,
-        if the current step is form send the results and finish the experiment
+        this is the last step of the session,
+        if the current step is form send the results and finish the session
          */
         if (experimentStep === ExperimentStep.FORM) {
             dispatch(setExperimentStep(ExperimentStep.LOADING))

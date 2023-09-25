@@ -5,11 +5,11 @@ import {initializeExperiment} from "../../libs/redux/features/experiment/experim
 import Loader from "@components/experimentSteps/loader";
 import {ExperimentStep} from "../../libs/redux/features/experiment/experimentSlice";
 import Welcome from "@components/experimentSteps/welcome";
-import Consent from "@components/experimentSteps/consent";
-import ExperimentInstructions from "@components/experimentSteps/experimentInstructions";
+import Consent from "@/app/consent/consent";
+import ExperimentInstructions from "@/app/instructions/Instructions";
 import Task from "@components/task";
-import Form from "@components/experimentSteps/form";
-import Finish from "@components/experimentSteps/finish";
+import PersonalDetails from "@/app/personalDetails/personalDetails";
+import Finish from "@/app/finish/finish";
 
 
 const Experiment = (props: { prolificid: string }) => {
@@ -24,7 +24,7 @@ const Experiment = (props: { prolificid: string }) => {
         })
             .then(res => res.json())
             .then(res => {
-                /* set experiment metadata */
+                /* set session metadata */
                 dispatch(initializeExperiment(res))
             })
     }, [dispatch, props.prolificid])
@@ -60,7 +60,7 @@ const Experiment = (props: { prolificid: string }) => {
         return <Task/>
     }
     if (experimentStep === ExperimentStep.FORM) {
-        return <Form/>
+        return <PersonalDetails/>
     }
     if (experimentStep === ExperimentStep.ENDED_SUCCESS) {
         return <Finish/>

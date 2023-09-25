@@ -16,4 +16,5 @@ export interface PersonalDetails {
     didParticipateBefore:boolean// Radio button
     didCheckMarkAppeared:boolean// Radio button
     comments?:string// open question
+    comprehension : string
 }

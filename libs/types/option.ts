@@ -1,9 +1,11 @@
 import {array, object, string} from "yup";
+import {OptionPerformance} from "@/types/performance";
 
 export interface Option {
-    optionName: string
-    optionColor: string
+    name: string
+    color: string
     groupsNames: string[]
+    performance: OptionPerformance
 }
 
 export const optionSchema = object().shape({

@@ -32,13 +32,13 @@ export function createTaskMetasFromConfig(config: Config): TaskMeta[] {
         const taskMeta: TaskMeta = {
             orderInExperiment: i + 1,
             leftOption       : {
-                optionName : leftOptionName,
-                optionColor: leftOptionColor,
+                name : leftOptionName,
+                color: leftOptionColor,
                 groupsNames: leftGroupsNames
             },
             rightOption      : {
-                optionName : rightOptionsName,
-                optionColor: rightOptionsColor,
+                name : rightOptionsName,
+                color: rightOptionsColor,
                 groupsNames: rightGroupsNames
             },
             performance      : config.previews[i]

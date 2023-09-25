@@ -1,18 +1,11 @@
-'use client'
-import {useState} from "react";
-import {useAppDispatch} from "../../../libs/redux/hooks";
-import {stepForward} from "../../../libs/redux/features/experiment/experimentActions";
 import CommonLayout from "@components/commonLayout";
-import {CommonButton} from "@components/button";
 import Header from "@components/header";
+import {Form} from "@/app/consent/form";
 
 export default function Consent() {
-    const [consent, setConsent] = useState(false)
-    const dispatch = useAppDispatch()
-    return (
-        <CommonLayout
+    return (<CommonLayout
             header={<Header centered={true}>Informed Consent</Header>}
-            footer={<ConsentFooter consent={consent} setConsent={setConsent} dispatch={dispatch}/>}
+            footer={<Form/>}
         >
             <div className="overflow-scroll border-black border p-5 rounded whitespace-pre-wrap px-10 mx-10">
                 <div className="flex flex-col gap-10">
@@ -67,44 +60,7 @@ export default function Consent() {
                     </p>
                 </div>
             </div>
-        </CommonLayout>
-    )
+        </CommonLayout>)
 }
 
 
-function ConsentFooter({setConsent, consent, dispatch}: {
-    setConsent: Function,
-    consent: boolean,
-    dispatch: Function
-}) {
-    return (
-        <div className="flex flex-col justify-center relative">
-            <div className="absolute -top-3 ps-10">
-                <input
-                    type="checkbox"
-                    id="consent"
-                    name="consent"
-                    checked={consent}
-                    onChange={() => setConsent(!consent)}
-                    className="mt-1"
-                />
-                <label htmlFor="consent" className="text-black text-md ms-3">
-                    I have read and understood the instructions, and would like to participate.
-                </label>
-            </div>
-            {/*next button*/}
-            <div className="flex self-center">
-                <CommonButton
-                    onClick={() => {
-                        if (consent) {
-                            dispatch(stepForward())
-                        }
-                    }}
-                    disabled={!consent}
-                >
-                    Next
-                </CommonButton>
-            </div>
-        </div>
-    )
-}

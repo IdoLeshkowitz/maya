@@ -1,4 +1,4 @@
-import {Preview, previewSchema} from "@/types/preview";
+import {Performance, previewSchema} from "@/types/performance";
 import {array, number, object, string} from "yup";
 
 export const configSchema = object().shape({
@@ -20,6 +20,6 @@ export interface Config {
     optionsNames: string[][]
     groupsNames: string[][]
 
-    previews: Preview[]
+    previews: Performance[]
 }
 
