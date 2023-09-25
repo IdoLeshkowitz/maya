@@ -20,7 +20,7 @@ export async function validateVariant(variant: unknown) {
         return Promise.reject(`Invalid variant: ${JSON.stringify((variant))} \n The number of groups names is not equal to the number of tasks`)
     }
     /* check that the number of performances is equal to the number of tasks */
-    if (validVariant.previews.length !== numberOfTasks) {
+    if (validVariant.performance.length !== numberOfTasks) {
         return Promise.reject(`Invalid variant: ${JSON.stringify((variant))} \n The number of performances is not equal to the number of tasks`)
     }
     return true

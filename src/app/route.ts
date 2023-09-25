@@ -17,15 +17,15 @@ const tasksCreateManyInput = (config: Config): TaskCreateManySessionInput[] => {
                 name: config.optionsNames[i][0],
                 color: config.optionsColors[i][0],
                 groupsNames: splitArray(config.groupsNames[i])[0],
-                performance: JSON.stringify(config.previews[i]["options"][0]),
+                performance: JSON.stringify(config.performance[i]["options"][0]),
             },
             rightOption: {
                 name: config.optionsNames[i][1],
                 color: config.optionsColors[i][1],
                 groupsNames: splitArray(config.groupsNames[i])[1],
-                performance: JSON.stringify(config.previews[i]["options"][1]),
+                performance: JSON.stringify(config.performance[i]["options"][1]),
             },
-            overallPreviewName: JSON.stringify(config.previews[i]["overallPreviewName"]),
+            overallPreviewName: JSON.stringify(config.performance[i]["overallPreviewName"]),
         })
     }
     return tasksCreateManyInput

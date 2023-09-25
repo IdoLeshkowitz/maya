@@ -1,5 +1,6 @@
-import {Performance, previewSchema} from "@/types/performance";
+import {OptionPerformance, Performance, previewSchema} from "@/types/performance";
 import {array, number, object, string} from "yup";
+import {Option} from "@/types/option";
 
 export const configSchema = object().shape({
     colors       : object().required(),
@@ -20,6 +21,6 @@ export interface Config {
     optionsNames: string[][]
     groupsNames: string[][]
 
-    previews: Performance[]
+    performance: Performance[]
 }
 

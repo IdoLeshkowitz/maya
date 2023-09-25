@@ -135,7 +135,7 @@ export default function OptionSelection() {
                     </p>
                     {/*{/!*confidence slider*!/}*/}
                     <Slider
-                        value={state.confidence ?? undefined}
+                        value={state.confidence ?? null}
                         onChange={(value) => {
                             dispatch({action: ActionType.SET_CONFIDENCE, payload: value})
                         }}

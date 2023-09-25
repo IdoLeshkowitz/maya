@@ -1,16 +1,9 @@
 "use client"
-import {RootState} from "../../../libs/redux/store";
 import Board from "@components/board";
 import React, {cloneElement, DetailedReactHTMLElement, useState} from "react";
 import {CommonButton} from "@components/button";
-import {stepForward} from "../../../libs/redux/features/experiment/experimentActions";
 import CommonLayout from "@components/commonLayout";
 import {useRouter} from "next/navigation";
-
-function getCurrentTaskMetaFromState(state: RootState) {
-    return state.tasks.tasksStates.at(state.tasks.currentTaskIndex!)!.taskMeta
-}
-
 interface TaskInstructionsProps {
     taskId: string
 }
@@ -46,7 +39,7 @@ export default function TaskInstructions(props: TaskInstructionsProps) {
             return
         }
         /* if there are no instructions steps left, step forward */
-        router.replace( `/task/${props.taskId}/performance`)
+        router.replace(`/task/${props.taskId}/performance`)
     }
 
     if (typeof instructionsSteps.at(currentStep) === "string") {
