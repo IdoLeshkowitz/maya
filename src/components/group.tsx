@@ -38,7 +38,7 @@ function Snapshot({snapshot}: { snapshot: SnapshotType }) {
                  viewBox="0 0 24 24"
                  strokeWidth="3"
                  stroke="currentColor"
-                 className="w-20 h-20 text-red-500 ms-2 lg:scale-125 xl:scale-150"
+                 className="w-20 h-20 text-red-500 lg:scale-125 xl:scale-150"
             >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/>
             </svg>
