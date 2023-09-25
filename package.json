@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run prisma && next build",
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
+    "prisma": "npx prisma generate && npx prisma db push",
     "reset-db": "ts-node libs/scripts/resetDb.ts"
   },
   "dependencies": {
