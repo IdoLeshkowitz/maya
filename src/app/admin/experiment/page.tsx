@@ -17,4 +17,4 @@ export default async function AdminExperimentPage() {
         </div>
     )
 }
-export const revalidate = 60;
+export const revalidate = 0

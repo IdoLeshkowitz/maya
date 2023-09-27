@@ -41,7 +41,6 @@ export default async function AdminTaskPage(props: { params: { experimentName: s
             }
         }
     })
-    console.log(parsedTasks)
     return (
         <div className="min-h-screen bg-white min-w-max pt-5">
             <div className="mb-5">
@@ -56,4 +55,4 @@ export default async function AdminTaskPage(props: { params: { experimentName: s
         </div>
     )
 }
-export const revalidate = 180;
+export const revalidate = 0

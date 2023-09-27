@@ -1,5 +1,5 @@
 'use client';
-import {number, object, string} from 'yup';
+import {array, number, object, string} from 'yup';
 import {useFormik} from "formik";
 import Slider from "@components/slider";
 import {FC, useRef, useState} from "react";
@@ -9,7 +9,6 @@ import Image from "next/image";
 import Header from "@components/header";
 import {Prisma} from ".prisma/client";
 import {useRouter} from "next/navigation";
-
 /*
 the form includes the inputs :
 age : text
@@ -52,67 +51,137 @@ type Question =
         id: string
         label: string
         type: "textArea",
+    } |
+    {
+        id: string
+        label: string
+        type: "checkbox",
+        options: string[]
     }
 
 interface Page {
-    title: string
+    title?: string
     footer?: string
-    questions: Question[]
+    questions?: Question[]
 }
 
 const pages: Page[] = [
     {
-        title: "Dear participant, we want to ask you a few more questions to understand how you performed the task. There are no right or wrong answers, and we appreciate your honesty. ",
+        title: "Dear participant, we want to ask you a few more questions to understand how you performed the task. We appreciate your honesty. ",
+    },
+    {
         questions: [
             {
-                id: "didKeepTrack",
-                label: "When viewing the stock performance, did you mainly keep track of each industry's performance or the overall portfolio performance? If you mainly kept track of one of them, choose a value close to that side. You can also select a value in between.",
+                label: "In the experiment, the money invested in each portfolio was:",
+                options: [
+                    "Split equally between several industries.",
+                    "Split equally between several company stocks.",
+                    "Neither of the above.",
+                    "I don't know. "
+                ],
+                type: "radio",
+                id: "didSplitEqually"
+            },
+        ]
+    },
+    {
+        questions: [
+            {
+                label: "Question: What were you asked to choose in the task?",
+                options: [
+                    "The portfolio that performed better over the last week.",
+                    "The portfolio that you predict will perform better in the future.",
+                    "I don't know."
+                ],
+                type: "radio",
+                id: "whatAskedToChoose"
+            }
+        ]
+    },
+    {
+        questions: [
+            {
+                label: "Question: What does the information in the image below mean?",
+                options: [
+                    "The value of Portfolio QYN went up over the last week.",
+                    "The value of the Materials stocks in Portfolio QYN went up over the last week.",
+                    "The value of Company 1 stock from the Materials industry in Portfolio QYN went up over the last week.",
+                    "I don't know."
+                ],
+                type: "radio",
+                id: "whatInfoInImage",
+                img: {
+                    src: "/form-img.png",
+                    alt: "form-img"
+                }
+            }
+        ]
+    },
+    {
+        questions: [
+            {
+                label: "When viewing the stock performance, did you mainly keep track of each industry's performance or the overall portfolio performance? If you mostly kept track of one of them, choose a value close to that side. You can also select a value in between. ",
                 type: "slider",
-                labels: ["Kept track of industries", "Kept track of portfolio"]
+                id: "didKeepTrack",
+                labels: ["Kept track of industries", "Kept track of portfolios"]
             },
             {
                 label: "How did you decide which portfolio was better? Please choose all the options that apply to you.",
-                type: "radio",
                 options: [
-                    "I tried to choose the portfolio that has more rising stocks.",
-                    "I tried to choose the portfolio that has better-performing industries.",
+                    "I tried to select the portfolio that had more rising stocks.",
+                    "I tried to select the portfolio that had better-performing industries.",
                     "I went with my intuition. ",
                     "I took notes.",
-                    "other"
+                    "Other: "
                 ],
+                type: "checkbox",
                 id: "howDecided"
             },
             {
+                label: "If you choose other, please explain:",
+                type: "textArea",
+                id: "howDecidedOther"
+            },
+            {
                 label: "Did you count the stocks?",
+                options: [
+                    "Yes",
+                    "No"
+                ],
                 type: "radio",
-                options: ["Yes", "No"],
                 id: "didCount"
             },
             {
-                label: "If so, how accurately do you think you were in keeping track of counting?",
-                type: "text",
-                id: "howAccurateCounting"
-            },
-            {
-                label: "While performing the stock task, did you write down information?",
+                label: "While performing the task, did you write down information?",
+                options: [
+                    "Yes",
+                    "No"
+                ],
                 type: "radio",
-                options: ["Yes", "No"],
                 id: "didWrite"
             },
             {
-                label: "How knowledgeable are you regarding stocks and investment?",
-                type: "slider",
-                labels: ["Not at all", "To a great extent"],
+                label: "How much knowledge do you have regarding stock portfolios and investments?",
+                options: [
+                    "No knowledge.",
+                    "Some knowledge.",
+                    "A lot of knowledge."
+                ],
+                type: "radio",
                 id: "familiarityWithStocks"
             },
             {
-                label: "How much experience do you have with stock investment?",
-                type: "slider",
-                labels: ["I have never invested in stocks", "I invest in stocks regularly"],
+                label: "How much experience do you have with stock investment? ",
+                options: [
+                    "I never invested in stocks.",
+                    "I have some experience with stock investment.",
+                    "I invest in stocks regularly."
+                ],
+                type: "radio",
                 id: "experienceWithStocks"
             },
             {
-                label: "Were there unclear parts or issues in the experiment? We would be happy to hear your feedback.",
+                label: "Were there unclear parts or issues in the experiment? We would be happy to hear your feedback. \nAddition comprehension test that did not appear in previous experiments: ",
                 type: "textArea",
                 id: "comments"
             }
@@ -120,46 +189,63 @@ const pages: Page[] = [
     },
     {
         title: "Before completing this study, we would like to ask you a few more questions. Please remember that your answers will remain anonymous. ",
-        footer: "Thank you for taking part in our study.",
         questions: [
             {
                 label: "In what Management program do you study?",
-                type: "text",
+                options: [
+                    "Option1",
+                    "Option2",
+                    "Option3",
+                ],
+                type: "radio",
                 id: "managementProgram"
             },
             {
-                label: "What is your age?",
+                label: "Please enter your age: ",
                 type: "text",
                 id: "age"
             },
             {
-                label: "What is your English level? ",
+                label: "What is your English level?",
+                options: [
+                    "Low",
+                    "Intermediate",
+                    "Advanced",
+                    "Superior"
+                ],
                 type: "radio",
-                options: ["Low", "Intermediate", "Advanced", "Superior"],
                 id: "englishLevel"
             },
             {
                 label: "To which gender identity do you most identify?",
+                options: [
+                    "woman",
+                    "man",
+                    "non-binary",
+                    "prefer not to say"
+                ],
                 type: "radio",
-                options: ["woman", "man", "non-binary", "prefer not to say"],
                 id: "gender"
             }
         ]
     }
 ]
 const schema = object().shape({
-    age: string().required("Required"),
-    didKeepTrack: number().required("Required"),
-    howDecided: string().required("Required"),
-    didCount: string().required("Required"),
-    howAccurateCounting: string(),
-    didWrite: string().required("Required"),
-    familiarityWithStocks: number().required("Required"),
-    experienceWithStocks: number().required("Required"),
+    didSplitEqually: string().required("Please select an option."),
+    whatAskedToChoose: string().required("Please select an option."),
+    whatInfoInImage: string().required("Please select an option."),
+    didKeepTrack: number().required("Please select an option."),
+    howDecided: array().of(string()).required("Please select an option."),
+    howDecidedOther: string(),
+    didCount: string().required("Please select an option."),
+    didWrite: string().required("Please select an option."),
+    familiarityWithStocks: string().required("Please select an option."),
+    experienceWithStocks: string().required("Please select an option."),
     comments: string(),
-    managementProgram: string().required("Required"),
-    englishLevel: string().required("Required"),
-    gender: string().required("Required"),
+    managementProgram: string().required("Please select an option."),
+    age: string(),
+    englishLevel: string().required("Please select an option."),
+    gender: string(),
 })
 
 async function submitForm(body: Prisma.UserDetailsCreateWithoutSessionInput) {
@@ -175,39 +261,47 @@ async function submitForm(body: Prisma.UserDetailsCreateWithoutSessionInput) {
 
 export default function PersonalDetails() {
     const [page, setPage] = useState(0)
-    const onceRef = useRef(true)
     const router = useRouter()
     const formik = useFormik({
         validationSchema: schema,
         initialValues: {
-            age: "",
-            didKeepTrack: null,
-            howDecided: "",
-            didCount: "",
-            howAccurateCounting: "",
-            didWrite: "",
+            didSplitEqually: null,
+            whatAskedToChoose: null,
+            whatInfoInImage: null,
+            howDecided: null,
+            howDecidedOther: null,
+            didCount: null,
+            didWrite: null,
             familiarityWithStocks: null,
             experienceWithStocks: null,
-            comments: "",
-            managementProgram: "",
-            englishLevel: "",
-            gender: "",
+            comments: null,
+            managementProgram: null,
+            age: null,
+            englishLevel: null,
+            gender: null,
         },
         onSubmit: async (values) => {
             if (page === pages.length - 1) {
+                values = {
+                    ...values,
+                    howDecided: JSON.stringify(values.howDecided) as any,
+                }
                 await submitForm(values as any)
                 router.replace("/finish")
             }
         },
     })
+    console.log(formik)
 
     function onBack() {
-        setPage(0)
+        setPage(prev => prev - 1)
+        window.scrollTo(0, 0)
     }
 
     function onNext() {
         if (page < pages.length - 1) {
             setPage(page + 1)
+            window.scrollTo(0, 0)
             return
         }
         formik.handleSubmit()
@@ -231,17 +325,41 @@ export default function PersonalDetails() {
     // }, [formik.values]);
     return (
         <div
-            className="flex flex-col bg-white gap-4"
+            className="flex flex-col bg-white gap-4 min-h-screen justify-stretch py-20 px-10"
         >
             <Header className="text-xl text-gray-700 h-min px-5 py-6">
-                {pages[page].title}
+                {pages[page].title && pages[page].title}
             </Header>
             <form className="text-black flex flex-col gap-4 mx-6">
-                {pages[page].questions.map((question, index) => {
+                {pages[page].questions?.map((question, index) => {
                     return (
                         <FormGroup key={index}>
                             <label htmlFor={question.id}
                                    className="mb-2 text-lg text-gray-900 whitespace-pre-wrap border border-transparent border-b-black w-full pb-2">{question.label}</label>
+                            {
+                                question.type === 'checkbox' &&
+                                <div className="ps-8">
+                                    {question.options!.map((option, index) => {
+                                        return (
+                                            <div key={`${question.id}-${option}-${index}`}
+                                                 className="flex gap-2 items-center ms-1">
+                                                <input
+                                                    id={`${question.id}-${option}`}
+                                                    type="checkbox"
+                                                    onChange={formik.handleChange}
+                                                    value={option}
+                                                    checked={(formik.values[question.id as keyof typeof formik.values] ?? [] as any[]).includes(option)}
+                                                    name={question.id}
+                                                    className="border-black border-opacity-30 border rounded-md w-3 h-3"
+                                                />
+                                                <label htmlFor={`${question.id}-${option}`}
+                                                       className="mb-0.5 text-gray-700">{option}</label>
+                                            </div>
+                                        )
+                                    })
+                                    }
+                                </div>
+                            }
                             {
                                 question.type === 'text' &&
                                 <input
@@ -256,17 +374,20 @@ export default function PersonalDetails() {
                                 question.type === 'radio' &&
                                 <>
                                     {question.img &&
-                                        <Image src={question.img.src} alt="picture" width={400} height={100}/>}
+                                        <Image src={question.img.src} alt="picture" width={800} height={400}
+                                               className="self-center"/>}
                                     <div className="ps-8">
                                         {question.options!.map((option, index) => {
                                             return (
-                                                <div key={index} className="flex gap-2 items-center ms-1">
+                                                <div key={`${question.id}-${option}-${index}`}
+                                                     className="flex gap-2 items-center ms-1">
                                                     <input
                                                         id={`${question.id}-${option}`}
                                                         type="radio"
                                                         onChange={formik.handleChange}
                                                         value={option}
                                                         name={question.id}
+                                                        checked={formik.values[question.id as keyof typeof formik.values] === option}
                                                         className="border-black border-opacity-30 border rounded-md w-3 h-3"
                                                     />
                                                     <label htmlFor={`${question.id}-${option}`}
@@ -294,7 +415,7 @@ export default function PersonalDetails() {
                                     </div>
                                     <Slider
                                         onChange={value => formik.setFieldValue(question.id, value)}
-                                        value={formik.values[question.id as keyof typeof formik.values] ? parseInt(formik.values[question.id as keyof typeof formik.values] as string) : null}
+                                        value={formik.values[question.id as keyof typeof formik.values] ? parseInt(formik.values[question.id as keyof typeof formik.values]!) : null}
                                         min={0}
                                         max={100}
                                     />
@@ -309,10 +430,12 @@ export default function PersonalDetails() {
                                     className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500 max-w-xl basis-20 ms-8"
                                 />
                             }
-                            {formik.errors[question.id as keyof typeof formik.errors] && formik.touched[question.id as keyof typeof formik.touched] ? (
-                                <span
-                                    className="text-red-500 text-md">{formik.errors[question.id as keyof typeof formik.errors]}</span>
-                            ) : null}
+                            {
+                                formik.errors[question.id as keyof typeof formik.errors] && formik.touched[question.id as keyof typeof formik.touched] ? (
+                                    <span
+                                        className="text-red-500 text-md">{formik.errors[question.id as keyof typeof formik.errors]}</span>
+                                ) : null
+                            }
                         </FormGroup>
                     )
                 })}

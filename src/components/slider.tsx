@@ -31,7 +31,7 @@ const Slider: FC<SliderProps> = (props) => {
                 />
             </div>
             <p className={`text-2xl font-bold text-black ${value === undefined && 'opacity-0'}`}>
-                {value ?? ''}
+                {value ?? <span>&nbsp;</span>}
             </p>
         </div>
     )

@@ -76,18 +76,21 @@ model UserDetails {
   SessionId String            @unique
   Session   ExperimentSession @relation(fields: [SessionId], references: [prolificId])
 
-  age                   String
-  didKeepTrack          Int
-  howDecided            String
-  didCount              String
-  howAccurateCounting   String?
-  didWrite              String
-  familiarityWithStocks Int
-  experienceWithStocks  Int
-  comments              String?
-  managementProgram     String
-  englishLevel          String
-  gender                String
+  didSplitEqually String
+  whatAskedToChoose String
+  whatInfoInImage String
+  howDecided Json
+  didKeepTrack Int
+  howDecidedOther String
+  didCount String
+  didWrite String
+  familiarityWithStocks String
+  experienceWithStocks String
+  comments String
+  managementProgram String
+  age String
+  englishLevel String
+  gender String
 
   @@index([SessionId])
 }

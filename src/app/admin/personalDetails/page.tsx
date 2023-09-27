@@ -18,4 +18,4 @@ export default async function PersonalDetailsPage() {
     )
 }
 
-export const revalidate = 60;
+export const revalidate = 0;
