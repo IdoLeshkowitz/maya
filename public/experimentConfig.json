@@ -1,9 +1,11 @@
 {
   "colors"           : {
-    "blue"  : "#1fb6ff",
+    "blue"  : "#000080",
+    "orange": "#FF7F2A",
+    "brown": "#43141A",
     "red"   : "#E0245E",
     "yellow": "#FFD700",
-    "green" : "#17BF63",
+    "green" : "#005F2C",
     "white" : "#FFFFFF",
     "black" : "#000000"
   },
@@ -12,8 +14,8 @@
   "variantName"      : "alpha variant",
   "numberOfTasks"    : 2,
   "optionsColors"    : [
-    ["red", "green"],
-    ["blue", "yellow"]
+    ["blue", "orange"],
+    ["brown", "green"]
   ],
   "optionsNames"     : [
     ["Portfolio ABG", "Portfolio QYN"],
@@ -25,47 +27,112 @@
   ],
   "performance"         : [
     {
-      "overallPreviewName": "preview 1",
+      "overallPreviewName": "Incongruent",
       "options"           : [
         {
-          "groupName" : "p1",
-          "simpleName": "s1",
+          "groupName" : "Group_Low",
+          "simpleName": "Simple_High",
           "snapshots" : [
-            {"groupIndex": 0, "indicator": "check", "label": "stock 1"},
-            {"groupIndex": 1, "indicator": "check", "label": "stock 2"},
-            {"groupIndex": 2, "indicator": "check", "label": "stock 3"}
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 1 Stock"},
+            {"groupIndex": 1, "indicator": "cross", "label": "Company 2 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 3 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 4 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 5 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 6 Stock"},
+            {"groupIndex": 1, "indicator": "cross", "label": "Company 7 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 8 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 9 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 10 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 11 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 12 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 13 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 14 Stock"},
+            {"groupIndex": 1, "indicator": "cross", "label": "Company 15 Stock"},
+            {"groupIndex": 1, "indicator": "cross", "label": "Company 16 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 17 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 18 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 19 Stock"}
           ]
         },
         {
-          "groupName" : "p2",
-          "simpleName": "s2",
+          "groupName" : "Group_High",
+          "simpleName": "Simple_Low",
           "snapshots" : [
-            {"groupIndex": 0, "indicator": "check", "label": "stock 1"},
-            {"groupIndex": 1, "indicator": "check", "label": "stock 2"},
-            {"groupIndex": 2, "indicator": "check", "label": "stock 3"}
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 1 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 2 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 3 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 4 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 5 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 6 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 7 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 8 Stock"},
+            {"groupIndex": 1, "indicator": "check", "label": "Company 9 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 10 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 11 Stock"},
+            {"groupIndex": 1, "indicator": "check", "label": "Company 12 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 13 Stock"},
+            {"groupIndex": 1, "indicator": "check", "label": "Company 14 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 15 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 16 Stock"},
+            {"groupIndex": 1, "indicator": "check", "label": "Company 17 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 18 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 19 Stock"}
           ]
         }
       ]
     },
     {
-      "overallPreviewName": "preview 2",
+      "overallPreviewName": "Congruent",
       "options"           : [
         {
-          "groupName" : "p2",
-          "simpleName": "s2",
+          "groupName" : "Group_High",
+          "simpleName": "Simple_High",
           "snapshots" : [
-            {"groupIndex": 0, "indicator": "check", "label": "stock 1"},
-            {"groupIndex": 1, "indicator": "check", "label": "stock 2"},
-            {"groupIndex": 2, "indicator": "check", "label": "stock 3"}
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 1 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 2 Stock"},
+            {"groupIndex": 1, "indicator": "check", "label": "Company 3 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 4 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 5 Stock"},
+            {"groupIndex": 1, "indicator": "check", "label": "Company 6 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 7 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 8 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 9 Stock"},
+            {"groupIndex": 1, "indicator": "check", "label": "Company 10 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 11 Stock"},
+            {"groupIndex": 1, "indicator": "check", "label": "Company 12 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 13 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 14 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 15 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 16 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 17 Stock"},
+            {"groupIndex": 1, "indicator": "check", "label": "Company 18 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 19 Stock"}
+
           ]
         },
         {
-          "groupName" : "p2",
-          "simpleName": "s2",
+          "groupName" : "Group_Low",
+          "simpleName": "Simple_Low",
           "snapshots" : [
-            {"groupIndex": 0, "indicator": "check", "label": "stock 1"},
-            {"groupIndex": 1, "indicator": "check", "label": "stock 2"},
-            {"groupIndex": 2, "indicator": "check", "label": "stock 3"}
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 1 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 2 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 3 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 4 Stock"},
+            {"groupIndex": 1, "indicator": "cross", "label": "Company 5 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 6 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 7 Stock"},
+            {"groupIndex": 1, "indicator": "cross", "label": "Company 8 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 9 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 10 Stock"},
+            {"groupIndex": 1, "indicator": "cross", "label": "Company 11 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 12 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 13 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 14 Stock"},
+            {"groupIndex": 1, "indicator": "cross", "label": "Company 15 Stock"},
+            {"groupIndex": 1, "indicator": "cross", "label": "Company 16 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 17 Stock"},
+            {"groupIndex": 2, "indicator": "check", "label": "Company 18 Stock"},
+            {"groupIndex": 0, "indicator": "cross", "label": "Company 19 Stock"}
           ]
         }
       ]

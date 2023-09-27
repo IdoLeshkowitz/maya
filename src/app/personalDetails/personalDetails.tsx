@@ -191,11 +191,12 @@ const pages: Page[] = [
         title: "Before completing this study, we would like to ask you a few more questions. Please remember that your answers will remain anonymous. ",
         questions: [
             {
-                label: "In what Management program do you study?",
+                label: "In what Business program and year do you study?",
                 options: [
-                    "Option1",
-                    "Option2",
-                    "Option3",
+                    "Bachelor in Business – first year",
+                    "Bachelor in Business - second year or above",
+                    "MBA",
+                    "Other"
                 ],
                 type: "radio",
                 id: "managementProgram"
@@ -236,16 +237,16 @@ const schema = object().shape({
     whatInfoInImage: string().required("Please select an option."),
     didKeepTrack: number().required("Please select an option."),
     howDecided: array().of(string()).required("Please select an option."),
-    howDecidedOther: string(),
+    howDecidedOther: string().notRequired(),
     didCount: string().required("Please select an option."),
     didWrite: string().required("Please select an option."),
     familiarityWithStocks: string().required("Please select an option."),
     experienceWithStocks: string().required("Please select an option."),
-    comments: string(),
-    managementProgram: string(),
-    age: string(),
+    comments: string().notRequired(),
+    managementProgram: string().notRequired(),
+    age: string().notRequired(),
     englishLevel: string().required("Please select an option."),
-    gender: string(),
+    gender: string().notRequired(),
 })
 
 async function submitForm(body: Prisma.UserDetailsCreateWithoutSessionInput) {
@@ -265,20 +266,20 @@ export default function PersonalDetails() {
     const formik = useFormik({
         validationSchema: schema,
         initialValues: {
-            didSplitEqually: null,
-            whatAskedToChoose: null,
-            whatInfoInImage: null,
-            howDecided: null,
-            howDecidedOther: null,
-            didCount: null,
-            didWrite: null,
-            familiarityWithStocks: null,
-            experienceWithStocks: null,
-            comments: null,
-            managementProgram: null,
-            age: null,
-            englishLevel: null,
-            gender: null,
+            didSplitEqually: undefined,
+            whatAskedToChoose: undefined,
+            whatInfoInImage: undefined,
+            howDecided: undefined,
+            howDecidedOther: undefined,
+            didCount: undefined,
+            didWrite: undefined,
+            familiarityWithStocks: undefined,
+            experienceWithStocks: undefined,
+            comments: undefined,
+            managementProgram: undefined,
+            age: undefined,
+            englishLevel: undefined,
+            gender: undefined,
         },
         onSubmit: async (values) => {
             if (page === pages.length - 1) {
@@ -291,7 +292,6 @@ export default function PersonalDetails() {
             }
         },
     })
-    console.log(formik)
 
     function onBack() {
         setPage(prev => prev - 1)

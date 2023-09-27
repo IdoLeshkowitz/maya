@@ -27,6 +27,12 @@ const Option: FC<OptionProps> = (props) => {
         case 'yellow':
             bgColor = experimentConfig.colors.yellow
             break;
+        case 'brown':
+            bgColor = experimentConfig.colors.brown
+            break;
+        case 'orange':
+            bgColor = experimentConfig.colors.orange
+            break;
         default:
             bgColor = experimentConfig.colors.white
     }
@@ -60,7 +66,7 @@ const Option: FC<OptionProps> = (props) => {
 
 const GroupsContainer = ({children}: { children: ReactNode }) => {
     const gridContainerStyle = {
-        display            : "grid",
+        display: "grid",
         gridTemplateColumns: "repeat(3,1fr)",
     }
     return (
