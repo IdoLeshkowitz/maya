@@ -242,7 +242,7 @@ const schema = object().shape({
     familiarityWithStocks: string().required("Please select an option."),
     experienceWithStocks: string().required("Please select an option."),
     comments: string(),
-    managementProgram: string().required("Please select an option."),
+    managementProgram: string(),
     age: string(),
     englishLevel: string().required("Please select an option."),
     gender: string(),

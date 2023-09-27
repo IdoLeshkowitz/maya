@@ -81,16 +81,16 @@ model UserDetails {
   whatInfoInImage String
   howDecided Json
   didKeepTrack Int
-  howDecidedOther String
+  howDecidedOther String?
   didCount String
   didWrite String
   familiarityWithStocks String
   experienceWithStocks String
-  comments String
-  managementProgram String
-  age String
+  comments String?
+  managementProgram String?
+  age String?
   englishLevel String
-  gender String
+  gender String?
 
   @@index([SessionId])
 }
