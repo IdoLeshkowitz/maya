@@ -1,6 +1,6 @@
 "use client"
 import {useState} from "react";
-import {CommonButton} from "@components/button";
+import {CommonButton, CommonButtonLink} from "@components/button";
 import CommonLayout from "@components/commonLayout";
 import {useRouter} from "next/navigation";
 
@@ -16,13 +16,13 @@ export default function ExperimentInstructions() {
             setCurrentInstruction(currentInstruction + 1)
             return
         }
-        /* if there are no more instructions, move to the next step */
-        router.replace("/task")
     }
 
     return (<CommonLayout
         footer={<div className="flex justify-center items-center">
-            <CommonButton onClick={next}>Next</CommonButton>
+            {/*<CommonButton onClick={next}>Next</CommonButton>*/}
+            { currentInstruction + 1 < instructions.length && <CommonButton onClick={next}>Next</CommonButton>}
+            { currentInstruction + 1 === instructions.length && <CommonButtonLink replace={true} href="/task">Start</CommonButtonLink>}
         </div>}
     >
         <p

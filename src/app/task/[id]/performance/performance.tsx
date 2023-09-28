@@ -160,11 +160,11 @@ const Performance: FC<PerformanceProps> = (props) => {
                                                 type: ActionType.SET_SNAPSHOT_STATE,
                                                 payload: SnapshotState.SNAPSHOT
                                             })
-                                        }, 500)
+                                        }, 50)
                                         /* then go to next step */
                                         setTimeout(() => {
                                             dispatch({type: ActionType.FINISH_SNAPSHOT})
-                                        }, 1000)
+                                        }, 100)
                                     }}
                                 >
                                     Next

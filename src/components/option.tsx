@@ -54,7 +54,7 @@ const Option: FC<OptionProps> = (props) => {
                     }
                 })}
             >
-                <h2 className="text-base font-bold text-black text-center py-2 justify-self-center mt-8">{optionName}</h2>
+                <h2 className="text-base font-bold text-black text-center py-2 justify-self-center mt-8 bg-white">{optionName}</h2>
                 <GroupsContainer>
                     {children}
                 </GroupsContainer>
