@@ -42,7 +42,8 @@ model ExperimentSession {
   experimentVersion String
 
   step         ExperimentStep?
-  activeTaskId String?
+  activeTaskId             String?
+  activePersonalDetailsPage String?
 
   tasks       Task[]
   userDetails UserDetails?
@@ -76,20 +77,20 @@ model UserDetails {
   SessionId String            @unique
   Session   ExperimentSession @relation(fields: [SessionId], references: [prolificId])
 
-  didSplitEqually String
-  whatAskedToChoose String
-  whatInfoInImage String
-  howDecided Json
-  didKeepTrack Int
+  didSplitEqually String?
+  whatAskedToChoose String?
+  whatInfoInImage String?
+  howDecided Json?
+  didKeepTrack Int?
   howDecidedOther String?
-  didCount String
-  didWrite String
-  familiarityWithStocks String
-  experienceWithStocks String
+  didCount String?
+  didWrite String?
+  familiarityWithStocks String?
+  experienceWithStocks String?
   comments String?
   managementProgram String?
   age String?
-  englishLevel String
+  englishLevel String?
   gender String?
 
   @@index([SessionId])

@@ -12,7 +12,8 @@ export default function TaskInstructions(props: TaskInstructionsProps) {
     const [currentStep, setCurrentStep] = useState(0)
     const router = useRouter()
     const instructionsSteps = [
-        "There are two stock portfolios. Each portfolio initially consisted of an equal proportion of stocks of several companies.", "Each company belongs to an industry (such as technology or real estate). On the next screen, you will see information about the two stock portfolios, and the industries each portfolio invested in.",
+        "There are two stock portfolios. The money invested in each portfolio was divided equally between several company stocks.",
+        "Each company belongs to an industry (such as technology or real estate). On the next screen, you will see information about the two stock portfolios, and the industries each portfolio invested in.",
         <Board
             taskId={props.taskId}
             key={2}

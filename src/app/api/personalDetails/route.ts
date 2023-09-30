@@ -4,14 +4,25 @@ import {cookies} from "next/headers";
 import {NextRequest, NextResponse} from "next/server";
 
 async function createPersonalDetails(prolificId: string, input: Prisma.UserDetailsCreateWithoutSessionInput) {
-    return prisma.userDetails.create({
-        data: {
+    return prisma.userDetails.upsert({
+        create: {
             ...input,
             Session: {
                 connect: {
                     prolificId
                 }
             }
+        },
+        update: {
+            ...input,
+            Session: {
+                connect: {
+                    prolificId
+                }
+            }
+        },
+        where: {
+            SessionId: prolificId
         }
     })
 }
