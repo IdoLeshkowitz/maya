@@ -110,30 +110,26 @@ const Performance: FC<PerformanceProps> = (props) => {
 
 
     const currentSnapshot = useMemo(() => {
+        let output;
         if (state.optionSide === "LEFT") {
-            return leftOption?.performance?.snapshots[state.snapshotIndex]!
+            output = {...leftOption?.performance?.snapshots[state.snapshotIndex]!, optionSide: "LEFT" as PerformanceSide}
         } else {
-            return rightOption?.performance?.snapshots[state.snapshotIndex]!
+            output = {...rightOption?.performance?.snapshots[state.snapshotIndex]!, optionSide: "RIGHT" as PerformanceSide}
         }
-    }, [leftOption, rightOption, state.optionSide, state.snapshotIndex])
+        if (state.finished) {
+            return undefined
+        }
+        if (state.currentSnapshotState === SnapshotState.LOADER) {
+            output = {...output, indicator: SnapshotIndicator.LOADING}
+        }
+        return output
+    }, [leftOption?.performance?.snapshots, rightOption?.performance?.snapshots, state.currentSnapshotState, state.finished, state.optionSide, state.snapshotIndex])
 
     return (
         <>
-            {/*board*/}
             <Board
                 header={<Header centered={true}>{currentSnapshot?.label}</Header>}
-                snapshot={
-                    state.currentSnapshotState === SnapshotState.SNAPSHOT
-                        ?
-                        {...currentSnapshot, optionSide: state.optionSide} :
-                        state.currentSnapshotState === SnapshotState.LOADER
-                            ?
-                            {
-                                ...currentSnapshot,
-                                indicator: SnapshotIndicator.LOADING,
-                                optionSide: state.optionSide
-                            } : undefined
-                }
+                snapshot={currentSnapshot}
                 taskId={props.taskId}
             >
                 {
