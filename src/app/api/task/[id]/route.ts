@@ -18,11 +18,11 @@ export async function GET(request: NextRequest, context: { params: { id: string 
     let task: TaskReturnType;
     try {
         task = await getTask(params.id)
+        return NextResponse.json(task)
     } catch (e) {
         console.error(e)
         return NextResponse.error()
     }
-    return NextResponse.json(task)
 }
 
 export async function PUT(request: NextRequest, context: { params: { id: string } }) {

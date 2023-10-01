@@ -70,7 +70,7 @@ export default function GroupScoring() {
     const [state, dispatch] = useReducer(reducer, initialState)
     const router = useRouter()
     const queryClient = useQueryClient()
-    const {data: taskData} = useQuery<TaskReturnType>(['task', taskId], () => fetch(`/api/task/${taskId}`).then(res => res.json()), {
+    const {data: taskData} = useQuery<TaskReturnType>(['task', taskId], () => fetch(`${process.env["NEXT_PUBLIC_BASE_URL"]}/api/task/${taskId}`).then(res => res.json()), {
         suspense: true,
     })
     const leftOption = useMemo(() => {
@@ -174,7 +174,7 @@ export default function GroupScoring() {
                 {/*next button*/}
                 <CommonButton
                     onClick={onNext}
-                    disabled={currentScore === null}
+                    disabled={(currentScore ?? false) === false ? true : undefined}
                 >
                     Next
                 </CommonButton>

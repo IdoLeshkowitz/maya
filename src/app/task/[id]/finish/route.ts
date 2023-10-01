@@ -3,7 +3,7 @@ import {cookies} from "next/headers";
 import {SessionReturnType} from "@/app/api/session/[prolificId]/route";
 
 async function getSession(prolificId: string) {
-    const res = await fetch(`${process.env["BASE_URL"]}/api/session/${prolificId}`)
+    const res = await fetch(`${process.env["NEXT_PUBLIC_BASE_URL"]}/api/session/${prolificId}`)
     return await res.json()
 }
 

@@ -12,7 +12,7 @@ interface TaskStartProps {
 async function getSession(prolificId: string): Promise<SessionReturnType> {
     let session: SessionReturnType
     try {
-        const res = await fetch(`${process.env["BASE_URL"]}/api/session/${prolificId}`)
+        const res = await fetch(`${process.env["NEXT_PUBLIC_BASE_URL"]}/api/session/${prolificId}`)
         const data = await res.json()
         session = data
         return session

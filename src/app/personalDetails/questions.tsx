@@ -12,7 +12,7 @@ import {personalDetailsPages, Question} from "@/app/personalDetails/personalDeta
 import Loader from "@components/experimentSteps/loader";
 
 async function setPerosnalDetails(body: Prisma.UserDetailsCreateWithoutSessionInput) {
-    const res = await fetch("/api/personalDetails", {
+    const res = await fetch(`${process.env["NEXT_PUBLIC_BASE_URL"]}/api/personalDetails`, {
         method: "POST",
         body: JSON.stringify(body),
         headers: {

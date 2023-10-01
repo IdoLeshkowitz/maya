@@ -5,8 +5,7 @@ interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
     children?: ReactNode
 }
 
-const Header: FC<HeaderProps> = (props) => {
-    const {centered, children} = props
+const Header: FC<HeaderProps> = ({centered,children,...props}) => {
     return (
         <p className={`text-black text-base ${centered ? 'text-center' : 'text-instructions'}`} {...props}>
             {children}
