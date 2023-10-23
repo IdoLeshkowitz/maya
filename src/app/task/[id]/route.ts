@@ -1,8 +1,7 @@
 import {NextRequest, NextResponse} from "next/server";
-import {ExperimentStep, Prisma, TaskStep} from "@prisma/client";
+import { Prisma, TaskStep} from "@prisma/client";
 import prisma from "../../../../prisma/client";
 import {cookies} from "next/headers";
-import {set} from "zod";
 
 async function updateSession(prolificId: string,taskId:string) {
     const session = await prisma.experimentSession.update({
