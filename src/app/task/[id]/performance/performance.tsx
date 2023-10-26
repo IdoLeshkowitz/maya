@@ -108,9 +108,11 @@ const Performance: FC<PerformanceProps> = (props) => {
     }, [leftOption?.performance.snapshots, rightOption?.performance.snapshots])
     const [state, dispatch] = useReducer(reducer, initialState)
 
-
     const currentSnapshot = useMemo(() => {
         let output;
+        if (state.currentSnapshotState === SnapshotState.IDLE) {
+            return undefined
+        }
         if (state.optionSide === "LEFT") {
             output = {...leftOption?.performance?.snapshots[state.snapshotIndex]!, optionSide: "LEFT" as PerformanceSide}
         } else {
@@ -123,7 +125,8 @@ const Performance: FC<PerformanceProps> = (props) => {
             output = {...output, indicator: SnapshotIndicator.LOADING}
         }
         return output
-    }, [leftOption?.performance?.snapshots, rightOption?.performance?.snapshots, state.currentSnapshotState, state.finished, state.optionSide, state.snapshotIndex])
+    }, [leftOption?.performance?.snapshots, rightOption?.performance?.snapshots, state])
+
 
     return (
         <>

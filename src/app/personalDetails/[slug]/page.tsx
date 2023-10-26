@@ -3,6 +3,7 @@ import Header from "@components/header";
 import Questions from "@/app/personalDetails/questions";
 import prisma from "../../../../prisma/client";
 import {personalDetailsPages} from "@/app/personalDetails/personalDetails.data";
+import {CommonButtonLink} from "@components/button";
 
 interface PersonalDetailsPageProps {
     params: {
@@ -22,6 +23,7 @@ interface PersonalDetailsPageProps {
 // }
 
 export default async function PersonalDetails(props: PersonalDetailsPageProps) {
+    const slug = props.params.slug
     const data = personalDetailsPages[parseInt(props.params.slug ?? "0")]
     const isLast = parseInt(props.params.slug ?? "0") === personalDetailsPages.length - 1
     return (
@@ -31,7 +33,12 @@ export default async function PersonalDetails(props: PersonalDetailsPageProps) {
             <Header className="text-xl text-gray-700 h-min px-5 py-6">
                 {data.title && data.title}
             </Header>
-            {data.questions && <Questions questions={data.questions} isLast={isLast}/>}
+            {data.questions ? <Questions questions={data.questions} isLast={isLast}/> :
+                <div className="flex justify-center items-center">
+                    <CommonButtonLink href={`/personalDetails/${parseInt(slug)+1}`}>Next</CommonButtonLink>
+                </div>
+            }
+
         </div>
     )
 }

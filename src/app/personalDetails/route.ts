@@ -24,5 +24,5 @@ export async function GET(request: NextRequest) {
     if (activePersonalDetailsPage) {
         return NextResponse.redirect(`${request.nextUrl.origin}/personalDetails/${activePersonalDetailsPage}`)
     }
-    return NextResponse.redirect(`${request.nextUrl.origin}/personalDetails/1`)
+    return NextResponse.redirect(`${request.nextUrl.origin}/personalDetails/0`)
 }
