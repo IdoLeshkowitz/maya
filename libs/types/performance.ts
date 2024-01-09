@@ -8,7 +8,7 @@ export enum SnapshotIndicator {
 }
 
 export interface Snapshot {
-    indicator: string
+    indicator: number | "loading"
     groupIndex: number
     label?: string
 }
