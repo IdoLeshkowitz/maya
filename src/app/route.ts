@@ -64,15 +64,6 @@ export async function GET(request: NextRequest) {
     cookies().set("prolificId", prolificID)
     const experimentSession = await upsertSession(prolificID)
     const step = experimentSession?.step ?? ExperimentStep.WELCOME
-    // if (step === ExperimentStep.WELCOME) {
-    //     return redirect("welcome")
-    // } else if (step === ExperimentStep.CONSENT) {
-    //     return redirect("consent")
-    // } else if (step === ExperimentStep.INSTRUCTIONS) {
-    //     return redirect("instructions")
-    // } else if (step === ExperimentStep.TASKS) {
-    //     return redirect("task")
-    // }
     if (step === ExperimentStep.WELCOME) {
         return NextResponse.redirect(`${request.nextUrl.origin}/welcome`)
     }

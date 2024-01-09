@@ -2,13 +2,14 @@ import {Snapshot as SnapshotType, SnapshotIndicator} from "@/types/performance";
 import {FC} from "react";
 
 interface GroupProps {
-    snapshot?: SnapshotType
+    snapshot?: number
     groupName: string
     focused?: boolean
     hidden?: boolean
 }
 
-const Group: FC<GroupProps> = ({groupName, focused, snapshot, hidden}) => {
+const Group: FC<GroupProps> = ({groupName, focused, hidden}) => {
+    const snapshot = 7
     const focusedClassName = focused ? 'border-4 border-black bg-white' : 'border'
     if (hidden) return (
         <div className="flex text-black items-center relative justify-center aspect-square">
@@ -22,7 +23,7 @@ const Group: FC<GroupProps> = ({groupName, focused, snapshot, hidden}) => {
                 {
                     snapshot &&
                     <div className="absolute -bottom-32">
-                        <Snapshot snapshot={snapshot}/>
+                        <span className="font-bold text-[30px] lg:text-[35px] xl:text-[40px]">{snapshot.toString()}</span>
                     </div>
                 }
             </div>
