@@ -183,7 +183,7 @@ export default function Questions(props: QuestionsProps) {
             })}
             <div className="flex justify-center py-10 gap-6">
                 <CommonButton onClick={formik.handleSubmit}>
-                    Submit
+                    Next
                 </CommonButton>
             </div>
         </form>
