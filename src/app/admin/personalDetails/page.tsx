@@ -17,7 +17,7 @@ export default async function PersonalDetailsPage() {
         acc[version] = sessions.filter(session => session.experimentVersion === version).map(session => session.prolificId)
         return acc
     }, {} as Record<string, string[]>)
-    const userDetailsByProlificId = experimentVersions.reduce((acc, version) => {
+    const userDetailsByVersion = experimentVersions.reduce((acc, version) => {
         acc[version] = userDetails.filter(userDetail => prolificIdByExperimentVersion[version].includes(userDetail.ProlificId)).map(userDetail => {
             const parsedAnswers = JSON.parse(userDetail.answers ?? {} as any)
             return {
@@ -27,14 +27,13 @@ export default async function PersonalDetailsPage() {
         })
         return acc
     }, {} as Record<string, any[]>)
-
     return (
         <div className="min-h-screen bg-white min-w-max pt-5">
             <div className="mb-5">
                 {
                     experimentVersions.map((version, index) => {
                         return (
-                            <CsvLink key={index} data={JSON.stringify(sessions.filter(session => session.experimentVersion === version))} fileName={`sessions-${version}.csv`}>
+                            <CsvLink key={index} data={JSON.stringify(userDetailsByVersion[version])} fileName={`sessions-${version}.csv`}>
                                 Download CSV for {version}
                             </CsvLink>
                         )
