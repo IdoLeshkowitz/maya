@@ -7,7 +7,7 @@ async function getAllUserDetails() {
 
 export default async function PersonalDetailsPage() {
     const userDetails = await getAllUserDetails()
-    const
+
     return (
         <div className="min-h-screen bg-white min-w-max pt-5">
             <div className="mb-5">
