@@ -1,10 +1,17 @@
 import {NextRequest, NextResponse} from "next/server";
 import {cookies} from "next/headers";
 import {SessionReturnType} from "@/app/api/session/[prolificId]/route";
+import prisma from "../../../../../prisma/client";
 
 async function getSession(prolificId: string) {
-    const res = await fetch(`/api/session/${prolificId}`)
-    return await res.json()
+    return prisma.experimentSession.findFirst({
+        where: {
+            prolificId
+        },
+        include: {
+            tasks: true
+        }
+    })
 }
 
 export async function GET(request: NextRequest) {
