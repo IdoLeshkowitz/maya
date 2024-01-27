@@ -13,7 +13,6 @@ export default async function PersonalDetailsPage() {
     const userDetails = await getAllUserDetails() ?? []
     const sessions = await getAllSessions() ?? []
     const experimentVersions = Array.from(new Set(sessions.map(session => session.experimentVersion)))
-    console.log(JSON.stringify(sessions.filter(session => session.experimentVersion === "1.0.0")))
     return (
         <div className="min-h-screen bg-white min-w-max pt-5">
             <div className="mb-5">
@@ -27,9 +26,6 @@ export default async function PersonalDetailsPage() {
                     }
                     )
                 }
-                {/*<CsvLink data={JSON.stringify(userDetails)} fileName="user-details.csv">*/}
-                {/*    Download CSV*/}
-                {/*</CsvLink>*/}
             </div>
         </div>
     )

@@ -7,5 +7,6 @@ export function middleware(request: NextRequest,context:any) {
         const urlToGo = `${request.nextUrl.origin}/mobileBlock`
         return NextResponse.redirect(urlToGo)
     }
+    return NextResponse.next()
 }
 
