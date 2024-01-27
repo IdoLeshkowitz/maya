@@ -1,64 +1,49 @@
 'use client';
-import {object, ObjectSchema} from 'yup';
+import {object, ObjectSchema, Schema, string} from 'yup';
 import {useFormik} from "formik";
 import Slider from "@components/slider";
 import {FC, useMemo, useState} from "react";
 import {ArrowLeftIcon, ArrowRightIcon} from "@heroicons/react/24/outline";
 import {CommonButton} from "@components/button";
 import Image from "next/image";
-import {Prisma} from ".prisma/client";
 import {useParams, useRouter} from "next/navigation";
 import {personalDetailsPages, Question} from "@/app/personalDetails/personalDetails.data";
 import Loader from "@components/experimentSteps/loader";
-
-async function setPerosnalDetails(body: Prisma.UserDetailsCreateWithoutSessionInput) {
-    const res = await fetch(`${process.env["NEXT_PUBLIC_BASE_URL"]}/api/personalDetails`, {
-        method: "POST",
-        body: JSON.stringify(body),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-    return res.json()
-}
+import {patchPersonalDetailsAnswers} from "@/app/actions";
 
 interface QuestionsProps {
-    questions: Question[]
+    pageNumber : number
     isLast: boolean
 }
 
 export default function Questions(props: QuestionsProps) {
     const router = useRouter()
     const [submitting, setSubmitting] = useState(false)
-    const validationSchema: ObjectSchema<any> = useMemo(() =>
-            object().shape(
-                props.questions!.reduce((acc, question) => {
-                    console.log(question.validation)
-                    acc[question.id] = question.validation
-                    return acc
-                }, {} as any)
-            )
-        , [props.questions])
-    const initialValues = useMemo(() =>
-            personalDetailsPages.reduce((acc, page) => {
-                if (page.questions) {
-                    page.questions.forEach(question => {
-                        acc[question.id] = undefined
-                    })
-                }
-                return acc
-            }, {} as any)
-        , [])
+    const parsedQuestions = personalDetailsPages[props.pageNumber].questions
+    if (!parsedQuestions) throw new Error("No questions found")
 
+    const initialValues = useMemo(() =>
+            parsedQuestions.reduce((acc, question) => {
+                acc[question.id] = ""
+                return acc
+            }, {} as Record<string, string>)
+        , [parsedQuestions])
     const {slug}: { slug: string } = useParams()
 
     const formik = useFormik({
-        validationSchema,
+        validationSchema: object().shape({
+            ...parsedQuestions.reduce((acc, question) => {
+                acc[question.id] = question.validation
+                return acc
+            }, {} as  Record<string, Schema>),
+        }),
         initialValues,
         onSubmit: async (values) => {
             setSubmitting(true)
             try {
-                const res = await setPerosnalDetails(values)
+                const res = await patchPersonalDetailsAnswers(values)
+                const success = JSON.parse(res).success
+                if (!success) throw new Error("Failed to submit")
                 if (props.isLast) {
                     router.push("/finish")
                 } else {
@@ -70,10 +55,11 @@ export default function Questions(props: QuestionsProps) {
             }
         },
     })
+
     if (submitting) return <Loader/>
     return (
         <form className="text-black flex flex-col gap-4 mx-6">
-            {props.questions?.map((question, index) => {
+            {parsedQuestions.map((question, index) => {
                 return (
                     <FormGroup key={index}>
                         <label htmlFor={question.id}
