@@ -11,17 +11,6 @@ interface PersonalDetailsPageProps {
     }
 }
 
-// async function updatePersonalDetailsPage(page: string, prolificId: string) {
-//     return prisma.experimentSession.update({
-//         where: {
-//             prolificId: prolificId
-//         },
-//         data: {
-//             activePersonalDetailsPage: page
-//         }
-//     })
-// }
-
 export default async function PersonalDetails(props: PersonalDetailsPageProps) {
     const slug = props.params.slug
     const data = personalDetailsPages[parseInt(props.params.slug ?? "0")]
@@ -33,12 +22,11 @@ export default async function PersonalDetails(props: PersonalDetailsPageProps) {
             <Header className="text-xl text-gray-700 h-min px-5 py-6">
                 {data.title && data.title}
             </Header>
-            {data.questions ? <Questions questions={data.questions} isLast={isLast}/> :
+            {data.questions ? <Questions pageNumber={parseInt(slug)} isLast={isLast}/> :
                 <div className="flex justify-center items-center">
                     <CommonButtonLink href={`/personalDetails/${parseInt(slug)+1}`}>Next</CommonButtonLink>
                 </div>
             }
-
         </div>
     )
 }

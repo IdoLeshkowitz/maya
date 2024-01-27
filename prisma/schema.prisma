@@ -74,12 +74,12 @@ model Task {
 model UserDetails {
   id        String            @id @default(uuid())
   createdAt DateTime          @default(now())
-  SessionId String            @unique
-  Session   ExperimentSession @relation(fields: [SessionId], references: [prolificId])
+  ProlificId String            @unique
+  Session   ExperimentSession @relation(fields: [ProlificId], references: [prolificId])
 
   answers Json?
 
-  @@index([SessionId])
+  @@index([ProlificId])
 }
 
 model Account {
