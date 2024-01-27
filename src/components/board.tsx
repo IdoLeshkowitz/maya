@@ -19,7 +19,7 @@ interface BoardProps {
 export default function Board(props: BoardProps) {
     const {children, snapshot, header, onOptionSelected} = props
     const queryClient = useQueryClient()
-    const {data} = useQuery<TaskReturnType>(['task', props.taskId], () => fetch(`${process.env["NEXT_PUBLIC_BASE_URL"]}/api/task/${props.taskId}`).then(res => res.json()), {
+    const {data} = useQuery<TaskReturnType>(['task', props.taskId], () => fetch(`/api/task/${props.taskId}`).then(res => res.json()), {
         suspense: true,
     })
 
@@ -51,7 +51,7 @@ export default function Board(props: BoardProps) {
     return (
         <main className="py-8 px-10 bg-white h-screen" style={boardContainerStyle}>
             {/* header */}
-            <div className="px-20">
+            <div className="px-20 flex justify-center items-center">
                 {header ?? <div/>}
             </div>
             {/*options*/}

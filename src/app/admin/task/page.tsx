@@ -47,7 +47,7 @@ export default async function AdminTaskPage(props: { params: { experimentName: s
                 <CsvLink
                     fileName="tasks.csv"
                     headers={headers}
-                    data={parsedTasks}
+                    data={JSON.stringify(parsedTasks)}
                 >
                     Download CSV
                 </CsvLink>
