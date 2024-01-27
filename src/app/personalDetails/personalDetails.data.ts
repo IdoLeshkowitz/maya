@@ -8,15 +8,18 @@ export interface Page {
 
 export const personalDetailsPages: Page[] = [
     {
-        title: "Dear participant, we want to ask you a few more questions to understand how you performed the task. We appreciate your honesty. ",
+        //screen 1
+        title: "Dear participant, we want to ask you a few questions to understand how you performed the task.",
     },
     {
+        //screen 2
         questions: [
             {
                 label: "In the experiment, the money invested in each portfolio was:",
                 options: [
-                    "Split equally between several industries.",
                     "Split equally between several company stocks.",
+                    "Split equally between several industries.",
+                    "Both of the above.",
                     "Neither of the above.",
                     "I don't know. "
                 ],
@@ -27,12 +30,13 @@ export const personalDetailsPages: Page[] = [
         ]
     },
     {
+        //screen 3
         questions: [
             {
-                label: "Question: What were you asked to choose in the task?",
+                label: "What portfolio were you asked to select in the experiment?",
                 options: [
-                    "The portfolio that performed better over the last week.",
-                    "The portfolio that you predict will perform better in the future.",
+                    "The portfolio that performed better.",
+                    "The portfolio that will perform better in the future.",
                     "I don't know."
                 ],
                 type: "radio",
@@ -42,13 +46,14 @@ export const personalDetailsPages: Page[] = [
         ]
     },
     {
+        //screen 4
         questions: [
             {
-                label: "Question: What does the information in the image below mean?",
+                label: "What does the information in the image below mean?",
                 options: [
-                    "The value of Portfolio QYN went up over the last week.",
-                    "The value of the Materials stocks in Portfolio QYN went up over the last week.",
-                    "The value of Company 1 stock from the Materials industry in Portfolio QYN went up over the last week.",
+                    "The value of Portfolio QYN went up.",
+                    "The value of the Materials stocks in Portfolio QYN went up.",
+                    "The value of Company 1 stock from the Materials industry in Portfolio QYN went up.",
                     "I don't know."
                 ],
                 type: "radio",
@@ -61,20 +66,28 @@ export const personalDetailsPages: Page[] = [
             }
         ]
     },
-    {
+    { //screen 5questions: 
         questions: [
             {
-                label: "When viewing the stock performance, did you mainly keep track of each industry's performance or the overall portfolio performance? If you mostly kept track of one of them, choose a value close to that side. You can also select a value in between. ",
+        
+                label: "To what extent did you keep track of each industry's performance throughout the task?",
                 type: "slider",
-                id: "didKeepTrack",
-                labels: ["Kept track of industries", "Kept track of portfolios"],
+                id: "trackIndustry",
+                labels: ["Not at all", "To a great extent"],
+                validation: number().required("Please select an option.")
+            },
+            {
+                label: "To what extent did you keep track of the overall portfolio performance throughout the task?",
+                type: "slider",
+                id: "trackPortfolio",
+                labels: ["Not at all", "To a great extent"],
                 validation: number().required("Please select an option.")
             },
             {
                 label: "How did you decide which portfolio was better? Please choose all the options that apply to you.",
                 options: [
-                    "I tried to select the portfolio that had more rising stocks.",
-                    "I tried to select the portfolio that had better-performing industries.",
+                    "I selected the portfolio with more rising stocks.",
+                    "I selected the portfolio with better-perfoming industries.",
                     "I went with my intuition. ",
                     "I took notes.",
                     "Other: "
@@ -108,34 +121,51 @@ export const personalDetailsPages: Page[] = [
                 type: "radio",
                 id: "didWrite",
                 validation: string().required("Please select an option.")
-            },
+            }
+        ]
+    },
+    {//screen 6
+        questions: [
             {
-                label: "How much knowledge do you have regarding stock portfolios and investments?",
+                label: "How have you acquired knowledge about stock investment? Please choose all the options that apply to you.",
                 options: [
-                    "No knowledge.",
-                    "Some knowledge.",
-                    "A lot of knowledge."
+                    "Academic courses",
+                    "Online forums or tutorials",
+                    "Non-academic lectures and courses",
+                    "Other",
+                    "I haven't acquired knowledge"
                 ],
-                type: "radio",
-                id: "familiarityWithStocks",
-                validation: string().required("Please select an option.")
+                type: "checkbox",
+                id: "howAcquired",
+                validation: array().of(string()).required("Please select an option.")
             },
             {
-                label: "How much experience do you have with stock investment? ",
-                options: [
-                    "I never invested in stocks.",
-                    "I have some experience with stock investment.",
-                    "I invest in stocks regularly."
-                ],
-                type: "radio",
-                id: "experienceWithStocks",
-                validation: string().required("Please select an option.")
+                label: "How knowledgeable are you regarding stock portfolios and investments?",
+                type: "slider",
+                id: "knowledgeable",
+                labels: ["Not at all", "To a great extent"],
+                validation: number().required("Please select an option.")
             },
             {
-                label: "Were there unclear parts or issues in the experiment? We would be happy to hear your feedback. \nAddition comprehension test that did not appear in previous experiments: ",
-                type: "textArea",
-                id: "comments",
-                validation: string().notRequired()
+                label: "How experienced are you with stock investments? ",
+                type: "slider",
+                id: "experienced",
+                labels: ["Not at all", "To a great extent"],
+                validation: number().required("Please select an option.")
+            },
+            {
+                label: "Relative to the population, how well do you understand stock investments on a scale of 0 to 100, where 50 is the population average?",
+                type: "slider",
+                id: "populationKnowledgeable",
+                labels: ["0", "100"],
+                validation: number().required("Please select an option.")
+            },
+            {
+                label: "Relative to the population, how good do you think you are in stock investments on a scale of 0 to 100, where 50 is the population average?",
+                type: "slider",
+                id: "populationGood",
+                labels: ["0", "100"],
+                validation: number().required("Please select an option.")
             }
         ]
     },
@@ -143,15 +173,53 @@ export const personalDetailsPages: Page[] = [
         title: "Before completing this study, we would like to ask you a few more questions. Please remember that your answers will remain anonymous. ",
         questions: [
             {
-                label: "In what Business program and year do you study?",
+                label: "From the following list, please mark all the subjects you have studied in the past or are currently studying.",
                 options: [
-                    "Bachelor in Business – first year",
-                    "Bachelor in Business - second year or above",
-                    "MBA",
-                    "Other"
+                    "Business",
+                    "Finance",
+                    "Accounting",
+                    "Management",
+                    "Economics",
+                    "None of the above"
+                ],
+                type: "checkbox",
+                id: "subjects",
+                validation: array().of(string()).required("Please select an option.")
+            },
+            {
+                label: "What is the highest level of education you have obtained in the fields of Business, Finance, Accounting, Management, and Economics?",
+                options: [
+                    "None",
+                    "Some college (no degree)",
+                    "College degree (BA/BSc/AA/AS)",
+                    "Graduate degree/Doctorate (MA/MD/MBA/MSc/PhD)"
                 ],
                 type: "radio",
-                id: "managementProgram",
+                id: "educationBFAMEObtained",
+                validation: string().notRequired()
+            },
+            {
+                label: "What is the highest level of education you are currently pursuing in the fields of Business, Finance, Accounting, Management, and Economics?",
+                options: [
+                    "Currently, I do not study these subjects",
+                    "Some college (no degree)",
+                    "College degree (BA/BSc/AA/AS)",
+                    "Graduate degree/Doctorate (MA/MD/MBA/MSc/PhD)"
+                ],
+                type: "radio",
+                id: "educationBFAMEPursue",
+                validation: string().notRequired()
+            },
+            {
+                label: "If you are currently studying one of the subjects: Business, Finance, Accounting, Management, and Economics, what year of your program are you in?",
+                options: [
+                    "Currently, I do not study these subjects",
+                    "First year",
+                    "Second year or above",
+                    "Third year and above"
+                ],
+                type: "radio",
+                id: "programYear",
                 validation: string().notRequired()
             },
             {
@@ -173,15 +241,9 @@ export const personalDetailsPages: Page[] = [
                 validation: string().required("Please select an option.")
             },
             {
-                label: "To which gender identity do you most identify?",
-                options: [
-                    "woman",
-                    "man",
-                    "non-binary",
-                    "prefer not to say"
-                ],
-                type: "radio",
-                id: "gender",
+                label: "Were there unclear parts or issues in the experiment? We would be happy to hear your feedback.",
+                type: "textArea",
+                id: "comments",
                 validation: string().notRequired()
             }
         ]
