@@ -17,8 +17,8 @@ export const personalDetailsPages: Page[] = [
             {
                 label: "In the experiment, the money invested in each portfolio was:",
                 options: [
-                    "Split equally between several company stocks.",
-                    "Split equally between several industries.",
+                    "Split equally between the company stocks.",
+                    "Split equally between the industries.",
                     "Both of the above.",
                     "Neither of the above.",
                     "I don't know. "
@@ -33,7 +33,7 @@ export const personalDetailsPages: Page[] = [
         //screen 3
         questions: [
             {
-                label: "What portfolio were you asked to select in the experiment?",
+                label: "What portfolio were you asked to choose in the experiment?",
                 options: [
                     "The portfolio that performed better.",
                     "The portfolio that will perform better in the future.",
@@ -157,14 +157,14 @@ export const personalDetailsPages: Page[] = [
                 label: "Relative to the population, how well do you understand stock investments on a scale of 0 to 100, where 50 is the population average?",
                 type: "slider",
                 id: "populationKnowledgeable",
-                labels: ["0", "100"],
+                labels: ["Below average", "Above average"],
                 validation: number().required("Please select an option.")
             },
             {
                 label: "Relative to the population, how good do you think you are in stock investments on a scale of 0 to 100, where 50 is the population average?",
                 type: "slider",
                 id: "populationGood",
-                labels: ["0", "100"],
+                labels: ["Below average", "Above average"],
                 validation: number().required("Please select an option.")
             }
         ]

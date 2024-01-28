@@ -24,16 +24,16 @@ export default function TaskInstructions(props: TaskInstructionsProps) {
             key={4}
             taskId={props.taskId}
             snapshot={{indicator: 'check', groupIndex: 0, optionSide: 'RIGHT', label: 'company 1'}}
-            header={<Header centered={true}>company 1</Header>}
+            header={<Header centered={true}>Stock 1</Header>}
         />,
         "And this is how it would look if the value of the company's stock from a certain portfolio and industry fell.",
         <Board
             key={6}
             taskId={props.taskId}
             snapshot={{indicator: 'cross', groupIndex: 0, optionSide: 'RIGHT', label: 'company 2'}}
-            header={<Header centered={true}>company 2</Header>}
+            header={<Header centered={true}>Stock 2</Header>}
         />,
-        `The performance of all the stocks in the portfolios will be presented one after the other. Please pay close attention. After the presentation, you will be asked questions about the portfolios. \n When you are ready please start the task.`
+        `The performance of all the stocks in the portfolios will be presented one after the other. Please pay close attention. After the presentation, you will be asked questions about the portfolios. \n When you are ready, please start the task.`
     ]
 
     function next() {
