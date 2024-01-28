@@ -131,7 +131,7 @@ export default function OptionSelection() {
                 <div className="flex flex-col justify-evenly items-center px-20">
                     <p className="text-black text-base">
                         How confident are you in your selection, on a scale of 0-100, where 0 is not confident at all
-                        and 100 is extremely confident?
+                        and 100 is highly confident?
                     </p>
                     {/*{/!*confidence slider*!/}*/}
                     <Slider
