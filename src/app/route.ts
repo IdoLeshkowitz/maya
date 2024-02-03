@@ -1,6 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
 import experimentConfig from "@public/experimentConfig.json"
-import {pickRandomConfigAndShuffle, shuffleConfig} from "@/utils/shuffleConfig";
+import {pickRandomConfigAndShuffle} from "@/utils/shuffleConfig";
 import prisma from "../../prisma/client";
 import {ExperimentStep, Prisma, TaskStep} from "@prisma/client";
 import {Config} from "@/types/config";
@@ -25,7 +25,7 @@ const tasksCreateManyInput = (config: Config): TaskCreateManySessionInput[] => {
                 groupsNames: splitArray(config.groupsNames[i])[1],
                 performance: JSON.stringify(config.performance[i]["options"][1]),
             },
-            overallPreviewName: JSON.stringify(config.performance[i]["overallPreviewName"]),
+            overallPreviewName: config.performance[i]["overallPreviewName"],
         })
     }
     return tasksCreateManyInput
@@ -68,16 +68,16 @@ export async function GET(request: NextRequest) {
     if (step === ExperimentStep.WELCOME) {
         return NextResponse.redirect(`${request.nextUrl.origin}/welcome`)
     }
-    if (step === ExperimentStep.CONSENT){
+    if (step === ExperimentStep.CONSENT) {
         return NextResponse.redirect(`${request.nextUrl.origin}/consent`)
     }
-    if (step === ExperimentStep.TASKS){
+    if (step === ExperimentStep.TASKS) {
         return NextResponse.redirect(`${request.nextUrl.origin}/task`)
     }
-    if (step === ExperimentStep.FINISH){
+    if (step === ExperimentStep.FINISH) {
         return NextResponse.redirect(`${request.nextUrl.origin}/finish`)
     }
-    if (step === ExperimentStep.PERSONAL_DETAILS){
+    if (step === ExperimentStep.PERSONAL_DETAILS) {
         return NextResponse.redirect(`${request.nextUrl.origin}/personalDetails`)
     }
     return NextResponse.json("error directing")
