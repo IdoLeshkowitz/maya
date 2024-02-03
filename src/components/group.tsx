@@ -59,13 +59,16 @@ const Group: FC<GroupProps> = ({groupName, focused, hidden, snapshot}) => {
                 </svg>
             )
         }
+        if (snapshot.indicator === "none") {
+            return null
+        }
         return (
             <span
                 className="font-bold text-[30px] lg:text-[35px] xl:text-[40px]">
                 {snapshot.indicator.toString()}
             </span>
         )
-    } , [snapshot])
+    }, [snapshot])
 
     if (hidden) return (
         <div className="flex text-black items-center relative justify-center aspect-square">
@@ -73,16 +76,16 @@ const Group: FC<GroupProps> = ({groupName, focused, hidden, snapshot}) => {
     )
 
     return (
-            <div
-                className={`flex text-black items-center relative justify-center aspect-square bg-white ${focusedClassName}`}>
-                <span className="text-md lg:text-xl xl:text-2xl" style={{whiteSpace: "nowrap"}}>{groupName}</span>
-                {
-                    snapshot &&
-                    <div className="absolute -bottom-32">
-                        {indicator}
-                    </div>
-                }
-            </div>
+        <div
+            className={`flex text-black items-center relative justify-center aspect-square bg-white ${focusedClassName}`}>
+            <span className="text-md lg:text-xl xl:text-2xl" style={{whiteSpace: "nowrap"}}>{groupName}</span>
+            {
+                snapshot &&
+                <div className="absolute -bottom-32">
+                    {indicator}
+                </div>
+            }
+        </div>
     )
 }
 
