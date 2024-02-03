@@ -1,5 +1,5 @@
 'use client';
-import {object, ObjectSchema, Schema, string} from 'yup';
+import {object, Schema} from 'yup';
 import {useFormik} from "formik";
 import Slider from "@components/slider";
 import {FC, useMemo, useState} from "react";
@@ -7,12 +7,12 @@ import {ArrowLeftIcon, ArrowRightIcon} from "@heroicons/react/24/outline";
 import {CommonButton} from "@components/button";
 import Image from "next/image";
 import {useParams, useRouter} from "next/navigation";
-import {personalDetailsPages, Question} from "@/app/personalDetails/personalDetails.data";
+import {personalDetailsPages} from "@/app/personalDetails/personalDetails.data";
 import Loader from "@components/experimentSteps/loader";
-import {patchPersonalDetailsAnswers} from "@/app/actions";
+import {patchPersonalDetailsAnswers, setPersonalDetailsEndTime} from "@/app/actions";
 
 interface QuestionsProps {
-    pageNumber : number
+    pageNumber: number
     isLast: boolean
 }
 
@@ -35,7 +35,7 @@ export default function Questions(props: QuestionsProps) {
             ...parsedQuestions.reduce((acc, question) => {
                 acc[question.id] = question.validation
                 return acc
-            }, {} as  Record<string, Schema>),
+            }, {} as Record<string, Schema>),
         }),
         initialValues,
         onSubmit: async (values) => {
@@ -45,6 +45,7 @@ export default function Questions(props: QuestionsProps) {
                 const success = JSON.parse(res).success
                 if (!success) throw new Error("Failed to submit")
                 if (props.isLast) {
+                    await setPersonalDetailsEndTime();
                     router.push("/finish")
                 } else {
                     router.push(`/personalDetails/${parseInt(slug) + 1}`)

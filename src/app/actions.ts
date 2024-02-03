@@ -38,3 +38,28 @@ export async function patchPersonalDetailsAnswers(answers: Record<string, string
         return JSON.stringify({error: e})
     }
 }
+
+export async function setPersonalDetailsEndTime() {
+    const prolificId = cookies().get("prolificId")?.value;
+    if (!prolificId) {
+        return JSON.stringify({error: "No Prolific ID found"})
+    }
+    try {
+        await prisma.userDetails.upsert({
+            create: {
+                ProlificId: prolificId,
+                endTime: new Date(),
+            },
+            update: {
+                endTime: new Date(),
+            },
+            where: {
+                ProlificId: prolificId
+            }
+        })
+        return JSON.stringify({success: true})
+    } catch (e) {
+        console.error(e)
+        return JSON.stringify({error: e})
+    }
+}

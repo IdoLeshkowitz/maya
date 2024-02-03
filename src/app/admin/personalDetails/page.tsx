@@ -21,7 +21,10 @@ export default async function PersonalDetailsPage() {
         acc[version] = userDetails.filter(userDetail => prolificIdByExperimentVersion[version].includes(userDetail.ProlificId)).map(userDetail => {
             const parsedAnswers = JSON.parse(userDetail.answers ?? {} as any)
             return {
-                ...userDetail,
+                id: userDetail.ProlificId,
+                startTime: userDetail.createdAt,
+                prolificId: userDetail.ProlificId,
+                endTime: userDetail.endTime,
                 ...parsedAnswers
             }
         })
@@ -32,12 +35,13 @@ export default async function PersonalDetailsPage() {
             <div className="mb-5">
                 {
                     experimentVersions.map((version, index) => {
-                        return (
-                            <CsvLink key={index} data={JSON.stringify(userDetailsByVersion[version])} fileName={`sessions-${version}.csv`}>
-                                Download CSV for {version}
-                            </CsvLink>
-                        )
-                    }
+                            return (
+                                <CsvLink key={index} data={JSON.stringify(userDetailsByVersion[version])}
+                                         fileName={`sessions-${version}.csv`}>
+                                    Download CSV for {version}
+                                </CsvLink>
+                            )
+                        }
                     )
                 }
             </div>

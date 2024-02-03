@@ -36,6 +36,7 @@ generator client {
 model ExperimentSession {
   prolificId String   @id @unique
   createdAt  DateTime @default(now())
+  endTime    DateTime?
 
   variantName       String
   experimentName    String
@@ -76,6 +77,7 @@ model UserDetails {
   createdAt DateTime          @default(now())
   ProlificId String            @unique
   Session   ExperimentSession @relation(fields: [ProlificId], references: [prolificId])
+  endTime   DateTime?
 
   answers Json?
 
