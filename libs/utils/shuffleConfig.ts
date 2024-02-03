@@ -3,8 +3,8 @@ import {shuffle} from "./shuffle";
 
 
 export function shuffleConfig(config: Config): Config {
-    const shuffledOptionsNames = shuffle(config.optionsNames)
-    const shuffledOptionsColors = shuffle(config.optionsColors)
+    const shuffledOptionsNames = shuffle(config.optionsNames.map(name => shuffle(name)))
+    const shuffledOptionsColors = shuffle(config.optionsColors.map(color => shuffle(color)))
     const shuffledGroupsNames = shuffle(config.groupsNames.map(group => shuffle(group)))
     const shuffledPreviews = shuffle(config.performance.map(preview => {
         return {
@@ -19,4 +19,12 @@ export function shuffleConfig(config: Config): Config {
         groupsNames: shuffledGroupsNames,
         performance: shuffledPreviews
     }
+}
+
+export function getRandomConfigFromConfigsList(configs: Config[]): Config {
+    return configs[Math.floor(Math.random() * configs.length)]
+}
+
+export function pickRandomConfigAndShuffle(configs: Config[]): Config {
+    return shuffleConfig(getRandomConfigFromConfigsList(configs))
 }

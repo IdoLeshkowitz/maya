@@ -13,6 +13,7 @@ export const configSchema = object().shape({
 })
 
 export interface Config {
+    colors : Record<string, string>
     variantName: string
     experimentName: string
     experimentVersion : string
