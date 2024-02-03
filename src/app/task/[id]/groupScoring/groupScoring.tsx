@@ -137,7 +137,7 @@ export default function GroupScoring() {
         <Board
             snapshot={{
                 groupIndex: state.groupIndex,
-                indicator: SnapshotIndicator.NONE,
+                indicator: "none",
                 optionSide: state.step === GroupScoringSteps.LEFT_OPTION_SCORING ? 'LEFT' : 'RIGHT',
             }}
             taskId={taskId}

@@ -32,7 +32,7 @@ const tasksCreateManyInput = (config: Config): TaskCreateManySessionInput[] => {
 }
 
 async function upsertSession(prolificId: string) {
-    const shuffledConfig = pickRandomConfigAndShuffle(experimentConfig)
+    const shuffledConfig = pickRandomConfigAndShuffle(experimentConfig as Config[])
     try {
         return await prisma.experimentSession.upsert({
             where: {prolificId: prolificId}, create: {
