@@ -6,17 +6,18 @@ async function getAllTasks() {
 }
 
 const headers = [
-    {label: "sessionId", key: "SessionId"},
-    {label: "step", key: "step"},
+    {label: "prolificId", key: "SessionId"},
     {label: "overall_preview_name", key: "overallPreviewName"},
     {label: "selected_side", key: "optionSelection.selectedSide"},
+    {label: "startTime", key: "startTime"},
+    {label: "endTime", key: "endTime"},
     {label: "confidence", key: "optionSelection.confidence"},
     {label: "left_option_name", key: "leftOption.name"},
     {label: "left_option_color", key: "leftOption.color"},
     {label: "left_option_groupsNames", key: "leftOption.groupsNames"},
     {label: "left_group_scoring", key: "leftScores"},
-    {label: "right_option_performance_group_name", key: "rightOption.performance.groupName"},
-    {label: "right_option_performance_simple_name", key: "rightOption.performance.simpleName"},
+    {label: "left_option_performance_group_name", key: "leftOption.performance.groupName"},
+    {label: "left_option_performance_simple_name", key: "leftOption.performance.simpleName"},
     {label: "right_option_name", key: "rightOption.name"},
     {label: "right_option_color", key: "rightOption.color"},
     {label: "right_option_groupsNames", key: "rightOption.groupsNames"},

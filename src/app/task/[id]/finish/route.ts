@@ -14,6 +14,28 @@ async function getSession(prolificId: string) {
     })
 }
 
+async function setTaskEndTime(prolificId: string, taskId: string) {
+    return prisma.experimentSession.update({
+        where: {
+            prolificId
+        },
+        data: {
+            activeTaskId: null,
+            tasks: {
+                update: {
+                    where: {
+                        id: taskId
+                    },
+                    data: {
+                        endTime: new Date()
+                    }
+                }
+            }
+        }
+    })
+}
+
+
 export async function GET(request: NextRequest) {
     const prolificId = cookies().get("prolificId")?.value
     if (!prolificId) {
@@ -26,6 +48,9 @@ export async function GET(request: NextRequest) {
         return NextResponse.redirect(request.nextUrl.origin)
     }
     const {tasks, activeTaskId} = session
+    if (activeTaskId) {
+        await setTaskEndTime(prolificId, activeTaskId)
+    }
     const taskIndex = tasks.findIndex(task => task.id === activeTaskId)
     const nextTask = tasks[taskIndex + 1]
     if (!nextTask) {
