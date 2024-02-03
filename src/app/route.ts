@@ -1,6 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
 import experimentConfig from "@public/experimentConfig.json"
-import {shuffleConfig} from "@/utils/shuffleConfig";
+import {pickRandomConfigAndShuffle, shuffleConfig} from "@/utils/shuffleConfig";
 import prisma from "../../prisma/client";
 import {ExperimentStep, Prisma, TaskStep} from "@prisma/client";
 import {Config} from "@/types/config";
@@ -32,7 +32,7 @@ const tasksCreateManyInput = (config: Config): TaskCreateManySessionInput[] => {
 }
 
 async function upsertSession(prolificId: string) {
-    const shuffledConfig = shuffleConfig(experimentConfig)
+    const shuffledConfig = pickRandomConfigAndShuffle(experimentConfig)
     try {
         return await prisma.experimentSession.upsert({
             where: {prolificId: prolificId}, create: {
