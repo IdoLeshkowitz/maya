@@ -16,7 +16,8 @@ async function updateExperimentStep(prolificId: string) {
             where: {
                 prolificId: prolificId
             }, data: {
-                step: ExperimentStep.FINISH
+                step: ExperimentStep.FINISH,
+                endTime: new Date()
             }
         })
     } catch (e) {
