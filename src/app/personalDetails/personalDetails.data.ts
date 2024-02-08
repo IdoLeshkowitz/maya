@@ -11,24 +11,24 @@ export const personalDetailsPages: Page[] = [
         //screen 1
         title: "Dear participant, we want to ask you a few questions to understand how you performed the task.",
     },
-    {
-        //screen 2
-        questions: [
-            {
-                label: "In the experiment, the money invested in each portfolio was:",
-                options: [
-                    "Split equally between the company stocks.",
-                    "Split equally between the industries.",
-                    "Both of the above.",
-                    "Neither of the above.",
-                    "I don't know. "
-                ],
-                type: "radio",
-                id: "didSplitEqually",
-                validation: string().required("Please select an option.")
-            },
-        ]
-    },
+    // {
+    //     //screen 2
+    //     questions: [
+    //         {
+    //             label: "In the experiment, the money invested in each portfolio was:",
+    //             options: [
+    //                 "Split equally between the company stocks.",
+    //                 "Split equally between the industries.",
+    //                 "Both of the above.",
+    //                 "Neither of the above.",
+    //                 "I don't know. "
+    //             ],
+    //             type: "radio",
+    //             id: "didSplitEqually",
+    //             validation: string().required("Please select an option.")
+    //         },
+    //     ]
+    // },
     {
         //screen 3
         questions: [
@@ -45,27 +45,27 @@ export const personalDetailsPages: Page[] = [
             }
         ]
     },
-    {
-        //screen 4
-        questions: [
-            {
-                label: "What does the information in the image below mean?",
-                options: [
-                    "The value of Portfolio QYN went up.",
-                    "The value of the Materials stocks in Portfolio QYN went up.",
-                    "The value of Company 1 stock from the Materials industry in Portfolio QYN went up.",
-                    "I don't know."
-                ],
-                type: "radio",
-                id: "whatInfoInImage",
-                img: {
-                    src: "/form-img.png",
-                    alt: "form-img"
-                },
-                validation: string().required("Please select an option.")
-            }
-        ]
-    },
+    // {
+    //     //screen 4
+    //     questions: [
+    //         {
+    //             label: "What does the information in the image below mean?",
+    //             options: [
+    //                 "The value of Portfolio QYN went up.",
+    //                 "The value of the Materials stocks in Portfolio QYN went up.",
+    //                 "The value of Company 1 stock from the Materials industry in Portfolio QYN went up.",
+    //                 "I don't know."
+    //             ],
+    //             type: "radio",
+    //             id: "whatInfoInImage",
+    //             img: {
+    //                 src: "/form-img.png",
+    //                 alt: "form-img"
+    //             },
+    //             validation: string().required("Please select an option.")
+    //         }
+    //     ]
+    // },
     { //screen 5questions: 
         questions: [
             {
@@ -86,9 +86,9 @@ export const personalDetailsPages: Page[] = [
             {
                 label: "How did you decide which portfolio was better? Please choose all the options that apply to you.",
                 options: [
-                    "I selected the portfolio with more rising stocks.",
-                    "I selected the portfolio with better-perfoming industries.",
-                    "I went with my intuition. ",
+                    "I selected the portfolio that many of its industries had at least one stock that performed very well.",
+                    "I selected the portfolio that had an industry with many well-performing stocks.",
+                    "I followed my intuition.",
                     "I took notes.",
                     "Other: "
                 ],
@@ -122,23 +122,11 @@ export const personalDetailsPages: Page[] = [
                 id: "didWrite",
                 validation: string().required("Please select an option.")
             }
+
         ]
     },
     {//screen 6
         questions: [
-            {
-                label: "How have you acquired knowledge about stock investment? Please choose all the options that apply to you.",
-                options: [
-                    "Academic courses",
-                    "Online forums or tutorials",
-                    "Non-academic lectures and courses",
-                    "Other",
-                    "I haven't acquired knowledge"
-                ],
-                type: "checkbox",
-                id: "howAcquired",
-                validation: array().of(string()).required("Please select an option.")
-            },
             {
                 label: "How knowledgeable are you regarding stock portfolios and investments?",
                 type: "slider",
@@ -151,13 +139,6 @@ export const personalDetailsPages: Page[] = [
                 type: "slider",
                 id: "experienced",
                 labels: ["Not at all", "To a great extent"],
-                validation: number().required("Please select an option.")
-            },
-            {
-                label: "Relative to the population, how well do you understand stock investments on a scale of 0 to 100, where 50 is the population average?",
-                type: "slider",
-                id: "populationKnowledgeable",
-                labels: ["Below average", "Above average"],
                 validation: number().required("Please select an option.")
             },
             {
@@ -180,6 +161,12 @@ export const personalDetailsPages: Page[] = [
                     "Accounting",
                     "Management",
                     "Economics",
+                    "Engineering",
+                    "Mathematics",
+                    "Biology",
+                    "Chemistry",
+                    "Physics",
+                    "Engineering",
                     "None of the above"
                 ],
                 type: "checkbox",
@@ -196,30 +183,6 @@ export const personalDetailsPages: Page[] = [
                 ],
                 type: "radio",
                 id: "educationBFAMEObtained",
-                validation: string().notRequired()
-            },
-            {
-                label: "What is the highest level of education you are currently pursuing in the fields of Business, Finance, Accounting, Management, and Economics?",
-                options: [
-                    "Currently, I do not study these subjects",
-                    "Some college (no degree)",
-                    "College degree (BA/BSc/AA/AS)",
-                    "Graduate degree/Doctorate (MA/MD/MBA/MSc/PhD)"
-                ],
-                type: "radio",
-                id: "educationBFAMEPursue",
-                validation: string().notRequired()
-            },
-            {
-                label: "If you are currently studying one of the subjects: Business, Finance, Accounting, Management, and Economics, what year of your program are you in?",
-                options: [
-                    "Currently, I do not study these subjects",
-                    "First year",
-                    "Second year or above",
-                    "Third year and above"
-                ],
-                type: "radio",
-                id: "programYear",
                 validation: string().notRequired()
             },
             {
