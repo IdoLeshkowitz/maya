@@ -12,6 +12,7 @@ const tasksCreateManyInput = (config: Config): TaskCreateManySessionInput[] => {
     const tasksCreateManyInput: TaskCreateManySessionInput[] = []
     for (let i = 0; i < config.numberOfTasks; i++) {
         tasksCreateManyInput.push({
+            orderInExperiment: i,
             step: TaskStep.START,
             leftOption: {
                 name: config.optionsNames[i][0],
