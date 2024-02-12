@@ -8,6 +8,7 @@ async function getAllTasks() {
 const headers = [
     {label: "prolificId", key: "SessionId"},
     {label: "overall_preview_name", key: "overallPreviewName"},
+    {label:"order_in_experiment", key: "orderInExperiment"},
     {label: "selected_side", key: "optionSelection.selectedSide"},
     {label: "startTime", key: "startTime"},
     {label: "endTime", key: "endTime"},
