@@ -25,6 +25,7 @@ const Option: FC<OptionProps> = (props) => {
         "brown": "bg-[#43141A]",
         "red": "bg-[#E0245E]",
         "yellow": "bg-[#FFD700]",
+        "black": "bg-[#000000]"
     }
 
     return (
