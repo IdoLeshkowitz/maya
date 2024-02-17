@@ -65,53 +65,6 @@
 					"groupName": "NOextremesector",
 					"simpleName": "NOextremesector",
 					"snapshots" : [
-						   {"groupIndex": 0, "indicator": 1200, "label": "Company 1 Stock"},
-						   {"groupIndex": 1, "indicator": 400, "label": "Company 2 Stock"},
-						   {"groupIndex": 1, "indicator": 450, "label": "Company 3 Stock"},
-						   {"groupIndex": 0, "indicator": 350, "label": "Company 4 Stock"},
-						   {"groupIndex": 2, "indicator": 450, "label": "Company 5 Stock"},
-						   {"groupIndex": 0, "indicator": 300, "label": "Company 6 Stock"},
-						   {"groupIndex": 1, "indicator": 1500, "label": "Company 7 Stock"},
-						   {"groupIndex": 2, "indicator": 500, "label": "Company 8 Stock"},
-						   {"groupIndex": 2, "indicator": 1200, "label": "Company 9 Stock"},
-						   {"groupIndex": 2, "indicator": 500, "label": "Company 10 Stock"},
-						   {"groupIndex": 1, "indicator": 400, "label": "Company 11 Stock"},
-						   {"groupIndex": 0, "indicator": 350, "label": "Company 12 Stock"},
-						   {"groupIndex": 0, "indicator": 350, "label": "Company 13 Stock"},
-						   {"groupIndex": 2, "indicator": 450, "label": "Company 14 Stock"},
-						   {"groupIndex": 1, "indicator": 450, "label": "Company 15 Stock"}
-					]
-				},
-				{
-					"groupName": "Group_Low",
-					"simpleName": "Simple_High",
-					"snapshots": [
-					   {"groupIndex": 0, "indicator": 300, "label": "Company 1 Stock"},
-					   {"groupIndex": 0, "indicator": 350, "label": "Company 2 Stock"},
-					   {"groupIndex": 2, "indicator": 450, "label": "Company 3 Stock"},
-					   {"groupIndex": 0, "indicator": 300, "label": "Company 4 Stock"},
-					   {"groupIndex": 0, "indicator": 350, "label": "Company 5 Stock"},
-					   {"groupIndex": 2, "indicator": 500, "label": "Company 6 Stock"},
-					   {"groupIndex": 0, "indicator": 350, "label": "Company 7 Stock"},
-					   {"groupIndex": 2, "indicator": 500, "label": "Company 8 Stock"},
-					   {"groupIndex": 1, "indicator": 1500, "label": "Company 9 Stock"},
-					   {"groupIndex": 2, "indicator": 500, "label": "Company 10 Stock"},
-					   {"groupIndex": 2, "indicator": 500, "label": "Company 11 Stock"},
-					   {"groupIndex": 1, "indicator": 450, "label": "Company 12 Stock"},
-					   {"groupIndex": 1, "indicator": 1200, "label": "Company 13 Stock"},
-					   {"groupIndex": 1, "indicator": 1200, "label": "Company 14 Stock"},
-					   {"groupIndex": 1, "indicator": 400, "label": "Company 15 Stock"}     
-					]
-				}
-			]
-		},
-		{   
-			"overallPreviewName": "1",
-			"options": [
-				{
-					"groupName": "NOextremesector",
-					"simpleName": "NOextremesector",
-					"snapshots" : [
 					   {"groupIndex": 0, "indicator": 1200, "label": "Company 1 Stock"},
 					   {"groupIndex": 1, "indicator": 400, "label": "Company 2 Stock"},
 					   {"groupIndex": 1, "indicator": 450, "label": "Company 3 Stock"},
@@ -180,21 +133,21 @@
 					"groupName": "Extremesector",
 					"simpleName": "Extremesector",
 					"snapshots": [
-						{"groupIndex": 0, "indicator": 200, "label": "Company 1 Stock"},
-						{"groupIndex": 0, "indicator": 250, "label": "Company 2 Stock"},
+						{"groupIndex": 1, "indicator": 200, "label": "Company 1 Stock"},
+						{"groupIndex": 1, "indicator": 250, "label": "Company 2 Stock"},
 						{"groupIndex": 2, "indicator": 150, "label": "Company 3 Stock"},
-						{"groupIndex": 0, "indicator": 200, "label": "Company 4 Stock"},
-						{"groupIndex": 0, "indicator": 200, "label": "Company 5 Stock"},
-						{"groupIndex": 2, "indicator": 100, "label": "Company 6 Stock"},
-						{"groupIndex": 0, "indicator": 250, "label": "Company 7 Stock"},
-						{"groupIndex": 2, "indicator": 150, "label": "Company 8 Stock"},
-						{"groupIndex": 1, "indicator": 1200, "label": "Company 9 Stock"},
+						{"groupIndex": 0, "indicator": 1300, "label": "Company 4 Stock"},
+						{"groupIndex": 0, "indicator": 1250, "label": "Company 5 Stock"},           
+						{"groupIndex": 1, "indicator": 200, "label": "Company 6 Stock"},
+						{"groupIndex": 1, "indicator": 200, "label": "Company 7 Stock"},
+						{"groupIndex": 2, "indicator": 100, "label": "Company 8 Stock"},
+						{"groupIndex": 1, "indicator": 250, "label": "Company 9 Stock"},
 						{"groupIndex": 2, "indicator": 150, "label": "Company 10 Stock"},
-						{"groupIndex": 2, "indicator": 100, "label": "Company 11 Stock"},
-						{"groupIndex": 1, "indicator": 150, "label": "Company 12 Stock"},
-						{"groupIndex": 1, "indicator": 1300, "label": "Company 13 Stock"},
-						{"groupIndex": 1, "indicator": 1250, "label": "Company 14 Stock"},
-						{"groupIndex": 1, "indicator": 200, "label": "Company 15 Stock"}    
+						{"groupIndex": 0, "indicator": 1200, "label": "Company 11 Stock"},
+						{"groupIndex": 2, "indicator": 150, "label": "Company 12 Stock"},
+						{"groupIndex": 2, "indicator": 100, "label": "Company 13 Stock"},
+						{"groupIndex": 0, "indicator": 150, "label": "Company 14 Stock"},
+						{"groupIndex": 0, "indicator": 200, "label": "Company 15 Stock"}    
 					]
 				}
 			]
@@ -229,19 +182,19 @@
 					"snapshots": [
 						{"groupIndex": 0, "indicator": 400, "label": "Company 1 Stock"},
 						{"groupIndex": 0, "indicator": 350, "label": "Company 2 Stock"},
-						{"groupIndex": 2, "indicator": 300, "label": "Company 3 Stock"},
+						{"groupIndex": 1, "indicator": 300, "label": "Company 3 Stock"},
 						{"groupIndex": 0, "indicator": 350, "label": "Company 4 Stock"},
-						{"groupIndex": 1, "indicator": 1200, "label": "Company 5 Stock"},
-						{"groupIndex": 2, "indicator": 300, "label": "Company 6 Stock"},
+						{"groupIndex": 2, "indicator": 1200, "label": "Company 5 Stock"},
+						{"groupIndex": 1, "indicator": 300, "label": "Company 6 Stock"},
 						{"groupIndex": 0, "indicator": 400, "label": "Company 7 Stock"},
-						{"groupIndex": 1, "indicator": 1500, "label": "Company 8 Stock"},
-						{"groupIndex": 1, "indicator": 450, "label": "Company 9 Stock"},
-						{"groupIndex": 2, "indicator": 250, "label": "Company 10 Stock"},
-						{"groupIndex": 1, "indicator": 1500, "label": "Company 11 Stock"},
-						{"groupIndex": 2, "indicator": 300, "label": "Company 12 Stock"},
+						{"groupIndex": 2, "indicator": 1500, "label": "Company 8 Stock"},
+						{"groupIndex": 2, "indicator": 450, "label": "Company 9 Stock"},
+						{"groupIndex": 1, "indicator": 250, "label": "Company 10 Stock"},
+						{"groupIndex": 2, "indicator": 1500, "label": "Company 11 Stock"},
+						{"groupIndex": 1, "indicator": 300, "label": "Company 12 Stock"},
 						{"groupIndex": 0, "indicator": 350, "label": "Company 13 Stock"},
-						{"groupIndex": 2, "indicator": 300, "label": "Company 14 Stock"},
-						{"groupIndex": 1, "indicator": 400, "label": "Company 15 Stock"} 
+						{"groupIndex": 1, "indicator": 300, "label": "Company 14 Stock"},
+						{"groupIndex": 2, "indicator": 400, "label": "Company 15 Stock"} 
 					]
 				}
 			]
