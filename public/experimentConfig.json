@@ -1,14 +1,4 @@
 [{		
-	 "colors":  {
-		"blue"  : "#000080",
-		"orange": "#FF7F2A",
-		"brown": "#43141A",
-		"red"   : "#E0245E",
-		"yellow": "#FFD700",
-		"green" : "#005F2C",
-		"white" : "#FFFFFF",
-		"black" : "#000000"
-		},
     "experimentName": "seminar experiment",
     "experimentVersion": "1",
     "variantName": "stocks",
