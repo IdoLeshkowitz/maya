@@ -1,6 +1,6 @@
 [{		
     "experimentName": "seminar experiment",
-    "experimentVersion": "1",
+    "experimentVersion": "run_1",
     "variantName": "stocks",
     "numberOfTasks": 3,
     "optionsColors": [
