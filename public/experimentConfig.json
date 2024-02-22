@@ -6,12 +6,12 @@
     "numberOfTasks": 2,
     "optionsColors": [
       [
-        "blue",
+        "purple",
         "orange"
       ],
       [
-        "brown",
-        "green"
+        "lightblue",
+        "gray"
       ]
     ],
     "optionsNames": [

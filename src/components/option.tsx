@@ -21,10 +21,13 @@ const Option: FC<OptionProps> = (props) => {
     const colors: Record<string, string> = {
         "green": "bg-[#005F2C]",
         "blue": "bg-[#000080]",
-        "orange": "bg-[#FF7F2A]",
+        "orange": "bg-[#FF6600]",
         "brown": "bg-[#43141A]",
         "red": "bg-[#E0245E]",
         "yellow": "bg-[#FFD700]",
+        "lightblue": "bg-[#99d9ea]",
+        "gray": "bg-[#c3c3c3]",
+        "purple": "bg-[#440055]"
     }
 
     return (
