@@ -14,6 +14,7 @@ export default async function AdminPage() {
             <Link href="/admin/personalDetails" className="rounded-md border border-slate-500 px-10 py-3">personal
                 details table</Link>
             <Link href="/admin/task" className="rounded-md border border-slate-500 px-10 py-3">tasks table</Link>
+            <Link href="/admin/signout" className="rounded-md border border-slate-500 px-10 py-3">signout</Link>
         </div>
     )
 }

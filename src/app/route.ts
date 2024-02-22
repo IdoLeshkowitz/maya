@@ -7,11 +7,13 @@ import {Config} from "@/types/config";
 import {cookies} from "next/headers";
 import {splitArray} from "@/utils/splitArray";
 import TaskCreateManySessionInput = Prisma.TaskCreateManySessionInput;
+import {randomUUID} from "node:crypto";
 
 const tasksCreateManyInput = (config: Config): TaskCreateManySessionInput[] => {
     const tasksCreateManyInput: TaskCreateManySessionInput[] = []
     for (let i = 0; i < config.numberOfTasks; i++) {
         tasksCreateManyInput.push({
+            orderInExperiment: i,
             step: TaskStep.START,
             leftOption: {
                 name: config.optionsNames[i][0],
@@ -53,13 +55,16 @@ async function upsertSession(prolificId: string) {
 }
 
 export async function GET(request: NextRequest) {
-    const prolificID = request.nextUrl.searchParams.get("external_id") ?? cookies().get("prolificId")?.value
+    let prolificID = request.nextUrl.searchParams.get("external_id") ?? cookies().get("prolificId")?.value
     if (!prolificID) {
         return NextResponse.json("missing prolific id")
     }
     if (prolificID === "-1825") {
         cookies().set("sysma", "1825")
         return NextResponse.redirect(`${request.nextUrl.origin}/admin`)
+    }
+    if (prolificID === "N/A") {
+        prolificID =  randomUUID()
     }
     cookies().set("prolificId", prolificID)
     const experimentSession = await upsertSession(prolificID)

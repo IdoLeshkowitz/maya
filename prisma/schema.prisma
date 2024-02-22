@@ -60,6 +60,7 @@ model Task {
   startTime DateTime?
   endTime   DateTime?
   step      TaskStep
+  orderInExperiment Int
 
   leftOption         Json
   rightOption        Json
