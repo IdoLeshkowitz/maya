@@ -8,6 +8,7 @@ import {useRouter} from "next/navigation";
 import Board from "@components/board";
 import Header from "@components/header";
 import {CommonButton, CommonButtonLink} from "@components/button";
+import {shuffle} from "@/utils/shuffle";
 
 enum SnapshotState {
     IDLE,
@@ -55,14 +56,14 @@ const Performance: FC<PerformanceProps> = (props) => {
             return null
         }
         const leftOption = data.leftOption as any
-        return {...leftOption, performance: JSON.parse(leftOption["performance"])} as OptionType
+        return {...leftOption, performance: shuffle(JSON.parse(leftOption["performance"]))} as OptionType
     }, [data])
     const rightOption = useMemo(() => {
         if (!data) {
             return null
         }
         const rightOption = data.rightOption as any
-        return {...rightOption, performance: JSON.parse(rightOption["performance"])} as OptionType
+        return {...rightOption, performance: shuffle(JSON.parse(rightOption["performance"]))} as OptionType
     }, [data])
 
     const reducer = useCallback((state: State, action: Action): State => {
@@ -114,9 +115,15 @@ const Performance: FC<PerformanceProps> = (props) => {
             return undefined
         }
         if (state.optionSide === "LEFT") {
-            output = {...leftOption?.performance?.snapshots[state.snapshotIndex]!, optionSide: "LEFT" as PerformanceSide}
+            output = {
+                ...leftOption?.performance?.snapshots[state.snapshotIndex]!,
+                optionSide: "LEFT" as PerformanceSide
+            }
         } else {
-            output = {...rightOption?.performance?.snapshots[state.snapshotIndex]!, optionSide: "RIGHT" as PerformanceSide}
+            output = {
+                ...rightOption?.performance?.snapshots[state.snapshotIndex]!,
+                optionSide: "RIGHT" as PerformanceSide
+            }
         }
         if (state.finished) {
             return undefined
