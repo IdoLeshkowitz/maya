@@ -46,7 +46,7 @@ type Action =
 const Performance: FC<PerformanceProps> = (props) => {
     const router = useRouter()
     const queryClient = useQueryClient()
-    const {data} = useQuery<TaskReturnType>(['task', props.taskId], () => fetch("/api/task/${props.taskId}").then(res => res.json()), {
+    const {data} = useQuery<TaskReturnType>(['task', props.taskId], () => fetch(`/api/task/${props.taskId}`).then(res => res.json()), {
         suspense: true,
     })
 
