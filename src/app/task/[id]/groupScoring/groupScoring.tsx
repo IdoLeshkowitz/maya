@@ -89,7 +89,7 @@ export default function GroupScoring() {
     }, [taskData])
     const taskMutation = useMutation({
         mutationFn: (input: TaskUpdateInput) => {
-            return fetch(`/api/task/${input.id}`, {
+            return fetch(`${process.env["NEXT_PUBLIC_BASE_URL"]}/api/task/${input.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
