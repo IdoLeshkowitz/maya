@@ -31,7 +31,7 @@ export default function Start(props: TaskStartProps) {
                     props.isFirst ?
                         `The experiment is divided to several tasks. Click to start the first task.`
                         :
-                        `You will now start the next part of the task, which is unrelated to the previous part.`
+                        `You will now start the next part of the task, which contains different stock portfolios.`
                 }
             </p>
         </CommonLayout>
