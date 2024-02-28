@@ -3,12 +3,12 @@ import {FC, useCallback, useMemo, useReducer} from "react";
 import {useQuery, useQueryClient} from "@tanstack/react-query";
 import {TaskReturnType} from "@/app/api/task/[id]/route";
 import {Option as OptionType} from "@/types/option";
-import {SnapshotIndicator} from "@/types/performance";
 import {useRouter} from "next/navigation";
+import {shuffle} from "@/utils/shuffle";
+import {SnapshotIndicator} from "@/types/performance";
 import Board from "@components/board";
 import Header from "@components/header";
 import {CommonButton, CommonButtonLink} from "@components/button";
-import {shuffle} from "@/utils/shuffle";
 
 enum SnapshotState {
     IDLE,
@@ -47,25 +47,47 @@ type Action =
 const Performance: FC<PerformanceProps> = (props) => {
     const router = useRouter()
     const queryClient = useQueryClient()
-    const {data} = useQuery<TaskReturnType>(['task', props.taskId], () => fetch(`/api/task/${props.taskId}`).then(res => res.json()), {
+    const {data} = useQuery<TaskReturnType>(['task', props.taskId], () => fetch(`${process.env["NEXT_PUBLIC_BASE_URL"]}/api/task/${props.taskId}`).then(res => res.json()), {
         suspense: true,
     })
+
 
     const leftOption = useMemo(() => {
         if (!data) {
             return null
         }
-        const leftOption = data.leftOption as any
-        return {...leftOption, performance: shuffle(JSON.parse(leftOption["performance"]))} as OptionType
+        const leftOption = data?.leftOption as any
+        //@ts-ignore
+        const leftOptionPerformance = JSON.parse(data?.leftOption["performance"])
+        const leftOptionSnapshots = leftOptionPerformance.snapshots
+        const shuffledSnapshots = shuffle(leftOptionSnapshots)
+        return {
+            ...leftOption,
+            performance: {
+                ...leftOptionPerformance,
+                snapshots: shuffledSnapshots
+            }
+        } as OptionType
+        // return {...leftOption, performance: shuffle(leftOptionPerformance)} as OptionType
     }, [data])
+
     const rightOption = useMemo(() => {
         if (!data) {
             return null
         }
-        const rightOption = data.rightOption as any
-        return {...rightOption, performance: shuffle(JSON.parse(rightOption["performance"]))} as OptionType
+        const rightOption = data?.rightOption as any
+        //@ts-ignore
+        const rightOptionPerformance = JSON.parse(data?.rightOption["performance"])
+        const rightOptionSnapshots = rightOptionPerformance.snapshots
+        const shuffledSnapshots = shuffle(rightOptionSnapshots)
+        return {
+            ...rightOption,
+            performance: {
+                ...rightOptionPerformance,
+                snapshots: shuffledSnapshots
+            }
+        } as OptionType
     }, [data])
-
     const reducer = useCallback((state: State, action: Action): State => {
         if (action.type === ActionType.FINISH_SNAPSHOT) {
             if (state.optionSide === "LEFT") {
