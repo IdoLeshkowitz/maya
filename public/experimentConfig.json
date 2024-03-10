@@ -47,204 +47,204 @@
         "overallPreviewName": "Incongruent",
         "options": [
           {
-            "groupName": "Group_High",
-            "simpleName": "Simple_Low",
-            "snapshots": [
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 1"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "cross",
-                "label": "Stock 2"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 3"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 4"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 5"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 6"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "cross",
-                "label": "Stock 7"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 8"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 9"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 10"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 11"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 12"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 13"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 14"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "cross",
-                "label": "Stock 15"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "cross",
-                "label": "Stock 16"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 17"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 18"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 19"
-              }
-            ]
-          },
-          {
             "groupName": "Group_Low",
             "simpleName": "Simple_High",
             "snapshots": [
               {
                 "groupIndex": 0,
                 "indicator": "cross",
-                "label": "Stock 1"
+                "label": "Stock VU"
               },
               {
-                "groupIndex": 0,
+                "groupIndex": 1,
                 "indicator": "cross",
-                "label": "Stock 2"
+                "label": "Stock RR"
               },
               {
                 "groupIndex": 2,
                 "indicator": "check",
-                "label": "Stock 3"
+                "label": "Stock LH"
               },
               {
                 "groupIndex": 0,
                 "indicator": "cross",
-                "label": "Stock 4"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 5"
+                "label": "Stock OSAV"
               },
               {
                 "groupIndex": 2,
                 "indicator": "check",
-                "label": "Stock 6"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 7"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 8"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "check",
-                "label": "Stock 9"
+                "label": "Stock EJDS"
               },
               {
                 "groupIndex": 2,
                 "indicator": "check",
-                "label": "Stock 10"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 11"
+                "label": "Stock TRGA"
               },
               {
                 "groupIndex": 1,
-                "indicator": "check",
-                "label": "Stock 12"
-              },
-              {
-                "groupIndex": 0,
                 "indicator": "cross",
-                "label": "Stock 13"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "check",
-                "label": "Stock 14"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 15"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 16"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "check",
-                "label": "Stock 17"
+                "label": "Stock IOFU"
               },
               {
                 "groupIndex": 2,
                 "indicator": "check",
-                "label": "Stock 18"
+                "label": "Stock SSF"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock ADU"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock OWFM"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock FAZR"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock KSH"
               },
               {
                 "groupIndex": 0,
                 "indicator": "cross",
-                "label": "Stock 19"
+                "label": "Stock RAF"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock CN"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "cross",
+                "label": "Stock JUWI"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "cross",
+                "label": "Stock TDI"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock NME"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock WH"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock ES"
+              }
+            ]
+          },
+          {
+            "groupName": "Group_High",
+            "simpleName": "Simple_Low",
+            "snapshots": [
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock CB"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock LCK"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock OEA"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock OQ"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock MCY"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock RM"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock AUAV"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock HYFP"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "check",
+                "label": "Stock KWW"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock SEQ"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock LE"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "check",
+                "label": "Stock GM"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock SD"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "check",
+                "label": "Stock CR"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock URE"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock DXU"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "check",
+                "label": "Stock HA"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock LNYV"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock GK"
               }
             ]
           }
@@ -260,97 +260,97 @@
               {
                 "groupIndex": 0,
                 "indicator": "cross",
-                "label": "Stock 1"
+                "label": "Stock ZKKL"
               },
               {
                 "groupIndex": 0,
                 "indicator": "cross",
-                "label": "Stock 2"
+                "label": "Stock PI"
               },
               {
                 "groupIndex": 1,
                 "indicator": "check",
-                "label": "Stock 3"
+                "label": "Stock BQM"
               },
               {
                 "groupIndex": 0,
                 "indicator": "cross",
-                "label": "Stock 4"
+                "label": "Stock SJPQ"
               },
               {
                 "groupIndex": 2,
                 "indicator": "check",
-                "label": "Stock 5"
+                "label": "Stock GY"
               },
               {
                 "groupIndex": 1,
                 "indicator": "check",
-                "label": "Stock 6"
+                "label": "Stock OEHX"
               },
               {
                 "groupIndex": 0,
                 "indicator": "cross",
-                "label": "Stock 7"
+                "label": "Stock KG"
               },
               {
                 "groupIndex": 2,
                 "indicator": "check",
-                "label": "Stock 8"
+                "label": "Stock MFG"
               },
               {
                 "groupIndex": 2,
                 "indicator": "check",
-                "label": "Stock 9"
+                "label": "Stock WNJ"
               },
               {
                 "groupIndex": 1,
                 "indicator": "check",
-                "label": "Stock 10"
+                "label": "Stock ZXE"
               },
               {
                 "groupIndex": 2,
                 "indicator": "check",
-                "label": "Stock 11"
+                "label": "Stock BHP"
               },
               {
                 "groupIndex": 1,
                 "indicator": "check",
-                "label": "Stock 12"
+                "label": "Stock ZPJ"
               },
               {
                 "groupIndex": 0,
                 "indicator": "cross",
-                "label": "Stock 13"
+                "label": "Stock YA"
               },
               {
                 "groupIndex": 2,
                 "indicator": "check",
-                "label": "Stock 14"
+                "label": "Stock RBLI"
               },
               {
                 "groupIndex": 0,
                 "indicator": "cross",
-                "label": "Stock 15"
+                "label": "Stock IUS"
               },
               {
                 "groupIndex": 0,
                 "indicator": "cross",
-                "label": "Stock 16"
+                "label": "Stock PHPE"
               },
               {
                 "groupIndex": 2,
                 "indicator": "check",
-                "label": "Stock 17"
+                "label": "Stock AWZT"
               },
               {
                 "groupIndex": 1,
                 "indicator": "check",
-                "label": "Stock 18"
+                "label": "Stock FZKZ"
               },
               {
                 "groupIndex": 0,
                 "indicator": "cross",
-                "label": "Stock 19"
+                "label": "Stock SCX"
               }
             ]
           },
@@ -361,557 +361,97 @@
               {
                 "groupIndex": 0,
                 "indicator": "cross",
-                "label": "Stock 1"
+                "label": "Stock RFW"
               },
               {
                 "groupIndex": 0,
                 "indicator": "cross",
-                "label": "Stock 2"
+                "label": "Stock TLEL"
               },
               {
                 "groupIndex": 2,
                 "indicator": "check",
-                "label": "Stock 3"
+                "label": "Stock XTM"
               },
               {
                 "groupIndex": 0,
                 "indicator": "cross",
-                "label": "Stock 4"
+                "label": "Stock QNH"
               },
               {
                 "groupIndex": 1,
                 "indicator": "cross",
-                "label": "Stock 5"
+                "label": "Stock AOD"
               },
               {
                 "groupIndex": 2,
                 "indicator": "check",
-                "label": "Stock 6"
+                "label": "Stock FASJ"
               },
               {
                 "groupIndex": 0,
                 "indicator": "cross",
-                "label": "Stock 7"
+                "label": "Stock AW"
               },
               {
                 "groupIndex": 1,
                 "indicator": "cross",
-                "label": "Stock 8"
+                "label": "Stock SSWN"
               },
               {
                 "groupIndex": 2,
                 "indicator": "check",
-                "label": "Stock 9"
+                "label": "Stock HEFM"
               },
               {
                 "groupIndex": 2,
                 "indicator": "check",
-                "label": "Stock 10"
+                "label": "Stock ST"
               },
               {
                 "groupIndex": 1,
                 "indicator": "cross",
-                "label": "Stock 11"
+                "label": "Stock JSF"
               },
               {
                 "groupIndex": 2,
                 "indicator": "check",
-                "label": "Stock 12"
+                "label": "Stock DU"
               },
               {
                 "groupIndex": 0,
                 "indicator": "cross",
-                "label": "Stock 13"
+                "label": "Stock NRNQ"
               },
               {
                 "groupIndex": 2,
                 "indicator": "check",
-                "label": "Stock 14"
+                "label": "Stock KM"
               },
               {
                 "groupIndex": 1,
                 "indicator": "cross",
-                "label": "Stock 15"
+                "label": "Stock BFK"
               },
               {
                 "groupIndex": 1,
                 "indicator": "cross",
-                "label": "Stock 16"
+                "label": "Stock PFPP"
               },
               {
                 "groupIndex": 2,
                 "indicator": "check",
-                "label": "Stock 17"
+                "label": "Stock YCO"
               },
               {
                 "groupIndex": 2,
                 "indicator": "check",
-                "label": "Stock 18"
+                "label": "Stock GWAH"
               },
               {
                 "groupIndex": 0,
                 "indicator": "cross",
-                "label": "Stock 19"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "experimentName": "Config B",
-    "experimentVersion": "B",
-    "variantName": "stocks",
-    "numberOfTasks": 2,
-    "optionsColors": [
-      [
-        "blue",
-        "orange"
-      ],
-      [
-        "brown",
-        "green"
-      ]
-    ],
-    "optionsNames": [
-      [
-        "Portfolio ABG",
-        "Portfolio QYN"
-      ],
-      [
-        "Portfolio BGH",
-        "Portfolio ZQN"
-      ]
-    ],
-    "groupsNames": [
-      [
-        "Banking",
-        "Food",
-        "Products",
-        "Insurance",
-        "Materials",
-        "Utilities"
-      ],
-      [
-        "Real Estate",
-        "Fashion",
-        "Automobiles",
-        "Tourism",
-        "Transportation",
-        "Entertainment"
-      ]
-    ],
-    "performance": [
-      {
-        "overallPreviewName": "Incongruent",
-        "options": [
-          {
-            "groupName": "Group_High",
-            "simpleName": "Simple_Low",
-            "snapshots": [
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 1"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "cross",
-                "label": "Stock 2"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 3"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 4"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 5"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 6"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "cross",
-                "label": "Stock 7"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 8"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 9"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 10"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 11"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 12"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 13"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 14"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "cross",
-                "label": "Stock 15"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "cross",
-                "label": "Stock 16"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 17"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 18"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 19"
-              }
-            ]
-          },
-          {
-            "groupName": "Group_Low",
-            "simpleName": "Simple_High",
-            "snapshots": [
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 1"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 2"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 3"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 4"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 5"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 6"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 7"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 8"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "check",
-                "label": "Stock 9"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 10"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 11"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "check",
-                "label": "Stock 12"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 13"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "check",
-                "label": "Stock 14"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 15"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 16"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "check",
-                "label": "Stock 17"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 18"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 19"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "overallPreviewName": "Congruent",
-        "options": [
-          {
-            "groupName": "Group_High",
-            "simpleName": "Simple_High",
-            "snapshots": [
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 1"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 2"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "check",
-                "label": "Stock 3"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 4"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 5"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "check",
-                "label": "Stock 6"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 7"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 8"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 9"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "check",
-                "label": "Stock 10"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 11"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "check",
-                "label": "Stock 12"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 13"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 14"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 15"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 16"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 17"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "check",
-                "label": "Stock 18"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 19"
-              }
-            ]
-          },
-          {
-            "groupName": "Group_Low",
-            "simpleName": "Simple_Low",
-            "snapshots": [
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 1"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 2"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 3"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 4"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "cross",
-                "label": "Stock 5"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 6"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 7"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "cross",
-                "label": "Stock 8"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 9"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 10"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "cross",
-                "label": "Stock 11"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 12"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 13"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 14"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "cross",
-                "label": "Stock 15"
-              },
-              {
-                "groupIndex": 1,
-                "indicator": "cross",
-                "label": "Stock 16"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 17"
-              },
-              {
-                "groupIndex": 2,
-                "indicator": "check",
-                "label": "Stock 18"
-              },
-              {
-                "groupIndex": 0,
-                "indicator": "cross",
-                "label": "Stock 19"
+                "label": "Stock FJ"
               }
             ]
           }
