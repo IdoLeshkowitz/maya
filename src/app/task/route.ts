@@ -6,7 +6,7 @@ import {redirect} from "next/navigation";
 
 async function updateSession(prolificId: string) {
     const session = await prisma.experimentSession.update({
-        where: {prolificId: prolificId}, data: {step: ExperimentStep.TASKS}, include: {tasks: true}
+        where: {prolificId: prolificId}, data: {step: ExperimentStep.TASKS}, include: {tasks: {orderBy: {orderInExperiment: "asc"}}}
     })
     return session
 }

@@ -9,8 +9,10 @@ async function getSession(prolificId: string) {
             prolificId
         },
         include: {
-            tasks: true
-        }
+            tasks: {
+                orderBy: {orderInExperiment: "asc"}
+            }
+        },
     })
 }
 
