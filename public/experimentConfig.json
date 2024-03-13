@@ -1,7 +1,7 @@
 [
   {
     "experimentName": "Econ_Grouping",
-    "experimentVersion": "B",
+    "experimentVersion": "Run_13.3",
     "variantName": "stocks",
     "numberOfTasks": 2,
     "optionsColors": [
