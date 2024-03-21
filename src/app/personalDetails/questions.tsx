@@ -64,7 +64,7 @@ export default function Questions(props: QuestionsProps) {
                 return (
                     <FormGroup key={index}>
                         <label htmlFor={question.id}
-                               className="mb-2 text-lg text-gray-900 whitespace-pre-wrap border border-transparent border-b-black w-full pb-2">{question.label}</label>
+                               className="mb-2 text-lg text-gray-900 whitespace-pre-wrap border border-transparent border-b-black w-full pb-2" dangerouslySetInnerHTML={{ __html: question.label}}/>
                         {
                             question.type === 'checkbox' &&
                             <div className="ps-8">
@@ -102,9 +102,6 @@ export default function Questions(props: QuestionsProps) {
                         {
                             question.type === 'radio' &&
                             <>
-                                {question.img &&
-                                    <Image src={question.img.src} alt="picture" width={800} height={400}
-                                           className="self-center"/>}
                                 <div className="ps-8">
                                     {question.options!.map((option, index) => {
                                         return (
@@ -125,6 +122,9 @@ export default function Questions(props: QuestionsProps) {
                                         )
                                     })}
                                 </div>
+                                {question.img &&
+                                    <Image src={question.img.src} alt="picture" width={800} height={400}
+                                           className="self-center"/>}
                             </>
                         }
                         {
