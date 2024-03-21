@@ -48,15 +48,13 @@ export default function TaskInstructions(props: TaskInstructionsProps) {
 
     if (typeof instructionsSteps.at(currentStep) === "string") {
         return (<CommonLayout
-            footer={<div className="flex justify-center items-center">
+            footer={<div className="flex justify-center items-center" >
                 <CommonButton onClick={next}>
                     Next
                 </CommonButton>
             </div>}
         >
-            <p className="text-start text-black text-base whitespace-break-spaces px-20">
-                {instructionsSteps[currentStep]}
-            </p>
+            <p className="text-start text-black text-base whitespace-break-spaces px-20" dangerouslySetInnerHTML={{ __html:instructionsSteps[currentStep] }}/>
         </CommonLayout>)
     }
     if (typeof instructionsSteps.at(currentStep) === "object") {
