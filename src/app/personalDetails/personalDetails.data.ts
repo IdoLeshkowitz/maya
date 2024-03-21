@@ -15,13 +15,10 @@ export const personalDetailsPages: Page[] = [
         //screen 2
         questions: [
             {
-                label: "In the experiment, the money invested in each portfolio was:",
+                label: "In the instructions, you were told that the money invested in each portfolio was:",
                 options: [
-                    "Split equally between the company stocks.",
-                    "Split equally between the industries.",
-                    "Both of the above.",
-                    "Neither of the above.",
-                    "I don't know. "
+                    "Divided equally between \"several company stocks\"",
+                    "Divided equally between \"several different industries\""
                 ],
                 type: "radio",
                 id: "didSplitEqually",
@@ -49,18 +46,17 @@ export const personalDetailsPages: Page[] = [
         //screen 4
         questions: [
             {
-                label: "What does the information in the image below mean?",
+                label: "Examine the image below. In this image, \"Tourism\" is a type of",
                 options: [
-                    "The value of Portfolio QYN went up.",
-                    "The value of the Materials stocks in Portfolio QYN went up.",
-                    "The value of Company 1 stock from the Materials industry in Portfolio QYN went up.",
-                    "I don't know."
+                    "Portfolio",
+                    "Industry",
+                    "Stock"
                 ],
                 type: "radio",
                 id: "whatInfoInImage",
                 img: {
-                    src: "/form-img.png",
-                    alt: "form-img"
+                    src: "/form-img-new.png",
+                    alt: "form-img-new"
                 },
                 validation: string().required("Please select an option.")
             }
@@ -88,7 +84,7 @@ export const personalDetailsPages: Page[] = [
                 options: [
                     "I selected the portfolio with more rising stocks.",
                     "I selected the portfolio with better-perfoming industries.",
-                    "I went with my intuition. ",
+                    "I went with my intuition.",
                     "I took notes.",
                     "Other: "
                 ],
@@ -154,14 +150,14 @@ export const personalDetailsPages: Page[] = [
                 validation: number().required("Please select an option.")
             },
             {
-                label: "Relative to the population, how well do you understand stock investments on a scale of 0 to 100, where 50 is the population average?",
+                label: "Relative to the population, how well do you understand stock investment?",
                 type: "slider",
                 id: "populationKnowledgeable",
                 labels: ["Below average", "Above average"],
                 validation: number().required("Please select an option.")
             },
             {
-                label: "Relative to the population, how good do you think you are in stock investments on a scale of 0 to 100, where 50 is the population average?",
+                label: "Relative to the population, how good do you think you are in stock investments?",
                 type: "slider",
                 id: "populationGood",
                 labels: ["Below average", "Above average"],
@@ -190,25 +186,25 @@ export const personalDetailsPages: Page[] = [
                 label: "What is the highest level of education you have obtained in the fields of Business, Finance, Accounting, Management, and Economics?",
                 options: [
                     "None",
-                    "Some college (no degree)",
-                    "College degree (BA/BSc/AA/AS)",
+                    "Technical/ Community college ",
+                    "Undergraduate degree (BA/BSc/other)",
                     "Graduate degree/Doctorate (MA/MD/MBA/MSc/PhD)"
                 ],
                 type: "radio",
                 id: "educationBFAMEObtained",
-                validation: string().notRequired()
+                validation: array().of(string()).required("Please select an option.")
             },
             {
                 label: "What is the highest level of education you are currently pursuing in the fields of Business, Finance, Accounting, Management, and Economics?",
                 options: [
-                    "Currently, I do not study these subjects",
-                    "Some college (no degree)",
-                    "College degree (BA/BSc/AA/AS)",
+                    "None",
+                    "Technical/ Community college ",
+                    "Undergraduate degree (BA/BSc/other)",
                     "Graduate degree/Doctorate (MA/MD/MBA/MSc/PhD)"
                 ],
                 type: "radio",
                 id: "educationBFAMEPursue",
-                validation: string().notRequired()
+                validation: array().of(string()).required("Please select an option.")
             },
             {
                 label: "If you are currently studying one of the subjects: Business, Finance, Accounting, Management, and Economics, what year of your program are you in?",
