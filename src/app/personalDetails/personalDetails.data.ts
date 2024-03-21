@@ -157,7 +157,7 @@ export const personalDetailsPages: Page[] = [
                 validation: number().required("Please select an option.")
             },
             {
-                label: "Relative to the population, how good do you think you are in stock investments?",
+                label: "Relative to the population, how good do you think you are in stock investments?",// add <strong> 
                 type: "slider",
                 id: "populationGood",
                 labels: ["Below average", "Above average"],
@@ -180,7 +180,7 @@ export const personalDetailsPages: Page[] = [
                 ],
                 type: "checkbox",
                 id: "subjects",
-                validation: array().of(string()).required("Please select an option.")
+                validation: string().required("Please select an option.")
             },
             {
                 label: "What is the highest level of education you have obtained in the fields of Business, Finance, Accounting, Management, and Economics?",
@@ -192,7 +192,7 @@ export const personalDetailsPages: Page[] = [
                 ],
                 type: "radio",
                 id: "educationBFAMEObtained",
-                validation: array().of(string()).required("Please select an option.")
+                validation: string().required("Please select an option.")
             },
             {
                 label: "What is the highest level of education you are currently pursuing in the fields of Business, Finance, Accounting, Management, and Economics?",
@@ -204,7 +204,7 @@ export const personalDetailsPages: Page[] = [
                 ],
                 type: "radio",
                 id: "educationBFAMEPursue",
-                validation: array().of(string()).required("Please select an option.")
+                validation: string().required("Please select an option.")
             },
             {
                 label: "If you are currently studying one of the subjects: Business, Finance, Accounting, Management, and Economics, what year of your program are you in?",
