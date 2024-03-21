@@ -180,7 +180,7 @@ export const personalDetailsPages: Page[] = [
                 ],
                 type: "checkbox",
                 id: "subjects",
-                validation: string().required("Please select an option.")
+                validation: array().of(string()).required("Please select an option.")
             },
             {
                 label: "What is the highest level of education you have obtained in the fields of Business, Finance, Accounting, Management, and Economics?",
