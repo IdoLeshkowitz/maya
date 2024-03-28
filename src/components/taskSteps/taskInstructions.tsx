@@ -13,7 +13,7 @@ export default function TaskInstructions(props: TaskInstructionsProps) {
     const [currentStep, setCurrentStep] = useState(0)
     const router = useRouter()
     const instructionsSteps = [
-        "There are two stock portfolios. The money invested in each portfolio was divided equally between several company stocks.",
+        "There are two stock portfolios. <strong>The money invested in each portfolio was divided equally between several company stocks.</strong>",
         "Each company belongs to an industry (such as technology or real estate). On the next screen, you will see information about the two stock portfolios, and the industries each portfolio invested in.",
         <Board
             taskId={props.taskId}
@@ -48,15 +48,13 @@ export default function TaskInstructions(props: TaskInstructionsProps) {
 
     if (typeof instructionsSteps.at(currentStep) === "string") {
         return (<CommonLayout
-            footer={<div className="flex justify-center items-center">
+            footer={<div className="flex justify-center items-center" >
                 <CommonButton onClick={next}>
                     Next
                 </CommonButton>
             </div>}
         >
-            <p className="text-start text-black text-base whitespace-break-spaces px-20">
-                {instructionsSteps[currentStep]}
-            </p>
+            <p className="text-start text-black text-base whitespace-break-spaces px-20" dangerouslySetInnerHTML={{ __html:instructionsSteps[currentStep] }}/>
         </CommonLayout>)
     }
     if (typeof instructionsSteps.at(currentStep) === "object") {
