@@ -75,10 +75,19 @@ const Group: FC<GroupProps> = ({groupName, focused, hidden, snapshot}) => {
         </div>
     )
 
+    const indutryTitle = groupName.split("\n")[0]
+    const industryDescription = groupName.split("\n")[1]
     return (
         <div
             className={`flex text-black items-center relative justify-center aspect-square bg-white ${focusedClassName}`}>
-            <span className="text-md lg:text-xl xl:text-2xl" style={{whiteSpace: "nowrap"}}>{groupName}</span>
+            <span className="text-md lg:text-xl xl:text-2xl text-center flex-col flex gap-y-2" style={{whiteSpace: "pre-line"}}>
+                <span>
+                {indutryTitle}
+                </span>
+                <strong>
+                    {industryDescription}
+                </strong>
+            </span>
             {
                 snapshot &&
                 <div className="absolute -bottom-32">

@@ -175,10 +175,25 @@ const Performance: FC<PerformanceProps> = (props) => {
     }, [state])
 
 
+    const stockPrefix = currentSnapshot?.label?.split(" ")[0]
+    const stockName = currentSnapshot?.label?.split(" ")[1]
+
     return (
         <>
             <Board
-                header={<Header centered={true}>{currentSnapshot?.label}</Header>}
+                header={<Header centered={true}>
+                    {currentSnapshot &&
+                        <>
+                        <span>
+                        {stockPrefix}
+                    </span>
+                            :&nbsp;
+                            <span className="font-bold">
+                    {stockName}
+                </span>
+                        </>
+                    }
+                </Header>}
                 snapshot={currentSnapshot}
                 taskId={props.taskId}
             >
