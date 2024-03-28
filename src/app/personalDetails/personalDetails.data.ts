@@ -46,7 +46,7 @@ export const personalDetailsPages: Page[] = [
         //screen 4
         questions: [
             {
-                label: "Examine the image below. In this image, \"Tourism\" is a type of",
+                label: "Examine the image below. In this image, \"Real Estate\" is a type of",
                 options: [
                     "Portfolio",
                     "Industry",
@@ -55,8 +55,8 @@ export const personalDetailsPages: Page[] = [
                 type: "radio",
                 id: "whatInfoInImage",
                 img: {
-                    src: "/form-img-new.png",
-                    alt: "form-img-new"
+                    src: "/presentation_stock.png",
+                    alt: "presentation_stock"
                 },
                 validation: string().required("Please select an option.")
             }
