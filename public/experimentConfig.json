@@ -26,20 +26,20 @@
     ],
     "groupsNames": [
       [
-        "Banking",
-        "Food",
-        "Products",
-        "Insurance",
-        "Materials",
-        "Utilities"
+        "Industry: \n Banking",
+        "Industry: \n Food",
+        "Industry: \n Products",
+        "Industry: \n Insurance",
+        "Industry: \n Materials",
+        "Industry: \n Utilities"
       ],
       [
-        "Real Estate",
-        "Fashion",
-        "Automobiles",
-        "Tourism",
-        "Transportation",
-        "Entertainment"
+        "Industry: \n Real Estate",
+        "Industry: \n Fashion",
+        "Industry: \n Automobiles",
+        "Industry: \n Tourism",
+        "Industry: \n Transportation",
+        "Industry: \n Entertainment"
       ]
     ],
     "performance": [
