@@ -4,7 +4,6 @@ import {useQuery, useQueryClient} from "@tanstack/react-query";
 import {TaskReturnType} from "@/app/api/task/[id]/route";
 import {Option as OptionType} from "@/types/option";
 import {useRouter} from "next/navigation";
-import {shuffle} from "@/utils/shuffle";
 import {SnapshotIndicator} from "@/types/performance";
 import Board from "@components/board";
 import Header from "@components/header";
@@ -62,12 +61,11 @@ const Performance: FC<PerformanceProps> = (props) => {
         //@ts-ignore
         const leftOptionPerformance = JSON.parse(data?.leftOption["performance"])
         const leftOptionSnapshots = leftOptionPerformance.snapshots
-        const shuffledSnapshots = shuffle(leftOptionSnapshots)
         shuffledLeftOption.current = {
             ...leftOption,
             performance: {
                 ...leftOptionPerformance,
-                snapshots: shuffledSnapshots
+                snapshots: leftOptionSnapshots
             }
         } as OptionType
 
@@ -75,7 +73,7 @@ const Performance: FC<PerformanceProps> = (props) => {
             ...leftOption,
             performance: {
                 ...leftOptionPerformance,
-                snapshots: shuffledSnapshots
+                snapshots: leftOptionSnapshots
             }
         } as OptionType
         // return {...leftOption, performance: shuffle(leftOptionPerformance)} as OptionType
@@ -89,19 +87,18 @@ const Performance: FC<PerformanceProps> = (props) => {
         //@ts-ignore
         const rightOptionPerformance = JSON.parse(data?.rightOption["performance"])
         const rightOptionSnapshots = rightOptionPerformance.snapshots
-        const shuffledSnapshots = shuffle(rightOptionSnapshots)
         shuffledRightOption.current = {
             ...rightOption,
             performance: {
                 ...rightOptionPerformance,
-                snapshots: shuffledSnapshots
+                snapshots: rightOptionSnapshots
             }
         } as OptionType
         return {
             ...rightOption,
             performance: {
                 ...rightOptionPerformance,
-                snapshots: shuffledSnapshots
+                snapshots: rightOptionSnapshots
             }
         } as OptionType
     }, [data])
