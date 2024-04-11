@@ -33,8 +33,7 @@ export const personalDetailsPages: Page[] = [
                 label: "What portfolio were you asked to choose in the experiment?",
                 options: [
                     "The portfolio that performed better.",
-                    "The portfolio that will perform better in the future.",
-                    "I don't know."
+                    "The portfolio that will perform better in the future."
                 ],
                 type: "radio",
                 id: "whatAskedToChoose",
@@ -223,6 +222,18 @@ export const personalDetailsPages: Page[] = [
                 type: "text",
                 id: "age",
                 validation: string().notRequired()
+            },
+            {
+                label: "With what gender do you most identify?",
+                options: [
+                    "Male",
+                    "Female",
+                    "Non-binary/genderqueer",
+                    "Other"
+                ],
+                type: "radio",
+                id: "gender",
+                validation: string().required("Please select an option.")
             },
             {
                 label: "What is your English level?",
