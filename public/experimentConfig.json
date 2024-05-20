@@ -1,7 +1,7 @@
 [
   {
-    "experimentName": "Econ_Grouping",
-    "experimentVersion": "Run_11.4",
+    "experimentName": "Incentive",
+    "experimentVersion": "testing",
     "variantName": "stocks",
     "numberOfTasks": 2,
     "optionsColors": [
