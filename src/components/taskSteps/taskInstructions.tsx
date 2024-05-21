@@ -19,8 +19,8 @@ export default function TaskInstructions(props: TaskInstructionsProps) {
             taskId={props.taskId}
             key={2}
         />,
-        `For each company stock, you will see: \n(1) the portfolio that invested in this stock \n(2) the stock's industry \n(3) whether the stock's value rose or fell over the last week. \nThis is how it would look  
-        if the value of a company's stock from a certain portfolio and industry rose over the last week.`,
+        `For each company stock, you will see: \n(1) the portfolio that invested in this stock \n(2) the stock's industry \n(3) whether the stock's value rose or fell over the last week.`,
+        `This is how it would look if the value of a company's stock from a certain portfolio and industry rose over the last week.`,
         <Board
             key={4}
             taskId={props.taskId}
@@ -34,8 +34,9 @@ export default function TaskInstructions(props: TaskInstructionsProps) {
             snapshot={{indicator: 'cross', groupIndex: 0, optionSide: 'RIGHT', label: 'company 2'}}
             header={<Header centered={true}>Stock: ACY</Header>}
         />,
-        `Stocks that rose in value rose by 10%, and stocks that fell in value fell by 10%. This means that the value of a stock that was worth 100$ changes to 110$ if its value rises and 90$ if its value drops. \n The performance of all the stocks in the portfolios will be presented one after the other.`,
-        `After the presentation, you will be asked to determine which portfolio performed better. If you answer this question correctly, you will enter a lottery with two prizes, one of 20$ and another of 10$.  \n When you are ready, please start the task.`
+        `Stocks that rose in value rose by 10%, and stocks that fell in value fell by 10%. This means that a stock worth 100$ before will now be worth 110$ if its value rises and 90$ if its value drops.`,
+        `After the presentation, you will be asked to determine which portfolio performed better. If you answer this question correctly, you will enter a lottery with two prizes, one of 20$ and another of 10$.`,
+        `The performance of all the stocks in the portfolios will be presented one after the other. When you are ready, please start the task.`
     ]
 
     function next() {
