@@ -35,7 +35,7 @@ export default function TaskInstructions(props: TaskInstructionsProps) {
             header={<Header centered={true}>Stock: ACY</Header>}
         />,
         `Stocks that rose in value rose by 10%, and stocks that fell in value fell by 10%. This means that a stock worth 100$ before will now be worth 110$ if its value rises and 90$ if its value drops.`,
-        `After the presentation, you will be asked to determine which portfolio performed better. If you answer this question correctly, you will enter a lottery with two prizes, one of 20$ and another of 10$.`,
+        `After the presentation, you will be asked to determine which portfolio performed better. \nIf you answer this question correctly, you will enter a lottery with two prizes, one of 20$ and another of 10$.`,
         `The performance of all the stocks in the portfolios will be presented one after the other. When you are ready, please start the task.`
     ]
 
