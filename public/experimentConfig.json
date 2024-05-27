@@ -1,7 +1,7 @@
 [
   {
     "experimentName": "Incentive",
-    "experimentVersion": "testing",
+    "experimentVersion": "Run",
     "variantName": "stocks",
     "numberOfTasks": 2,
     "optionsColors": [
