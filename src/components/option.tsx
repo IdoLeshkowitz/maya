@@ -21,12 +21,17 @@ const Option: FC<OptionProps> = (props) => {
     const colors: Record<string, string> = {
         "green": "bg-[#005F2C]",
         "blue": "bg-[#000080]",
-        "orange": "bg-[#FF7F2A]",
+        "orange": "bg-[#FF6600]",
         "brown": "bg-[#43141A]",
         "red": "bg-[#E0245E]",
         "yellow": "bg-[#FFD700]",
+        "lightblue": "bg-[#99d9ea]",
+        "gray": "bg-[#c3c3c3]",
+        "purple": "bg-[#440055]"
     }
 
+    const portfolio = optionName.split(" ")[0]
+    const option = optionName.split(" ")[1]
     return (
         <div className="flex flex-col justify-center">
             <div
@@ -40,7 +45,15 @@ const Option: FC<OptionProps> = (props) => {
                     }
                 })}
             >
-                <h2 className="text-base font-bold text-black text-center py-2 justify-self-center mt-8 bg-white">{optionName}</h2>
+                <div className="text-base text-black text-center py-2 justify-self-center mt-8 bg-white">
+                    <span>
+                        {portfolio}
+                    </span>
+                    :&nbsp;
+                    <span className="font-bold">
+                        {option}
+                    </span>
+                </div>
                 <GroupsContainer>
                     {children}
                 </GroupsContainer>

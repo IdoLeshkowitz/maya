@@ -48,6 +48,7 @@ export default function Board(props: BoardProps) {
         return {...rightOption, performance: JSON.parse(rightOption["performance"])} as OptionType
     }, [data])
 
+
     return (
         <main className="py-8 px-10 bg-white h-screen" style={boardContainerStyle}>
             {/* header */}

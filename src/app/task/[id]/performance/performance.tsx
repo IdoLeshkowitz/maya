@@ -1,10 +1,10 @@
 "use client"
-import {FC, useCallback, useMemo, useReducer} from "react";
+import {FC, useCallback, useMemo, useReducer, useRef} from "react";
 import {useQuery, useQueryClient} from "@tanstack/react-query";
 import {TaskReturnType} from "@/app/api/task/[id]/route";
 import {Option as OptionType} from "@/types/option";
-import {SnapshotIndicator} from "@/types/performance";
 import {useRouter} from "next/navigation";
+import {SnapshotIndicator} from "@/types/performance";
 import Board from "@components/board";
 import Header from "@components/header";
 import {CommonButton, CommonButtonLink} from "@components/button";
@@ -50,25 +50,63 @@ const Performance: FC<PerformanceProps> = (props) => {
         suspense: true,
     })
 
+    const shuffledLeftOption = useRef<OptionType | null>(null)
+    const shuffledRightOption = useRef<OptionType | null>(null)
+
     const leftOption = useMemo(() => {
         if (!data) {
             return null
         }
-        const leftOption = data.leftOption as any
-        return {...leftOption, performance: JSON.parse(leftOption["performance"])} as OptionType
+        const leftOption = data?.leftOption as any
+        //@ts-ignore
+        const leftOptionPerformance = JSON.parse(data?.leftOption["performance"])
+        const leftOptionSnapshots = leftOptionPerformance.snapshots
+        shuffledLeftOption.current = {
+            ...leftOption,
+            performance: {
+                ...leftOptionPerformance,
+                snapshots: leftOptionSnapshots
+            }
+        } as OptionType
+
+        return {
+            ...leftOption,
+            performance: {
+                ...leftOptionPerformance,
+                snapshots: leftOptionSnapshots
+            }
+        } as OptionType
+        // return {...leftOption, performance: shuffle(leftOptionPerformance)} as OptionType
     }, [data])
+
     const rightOption = useMemo(() => {
         if (!data) {
             return null
         }
-        const rightOption = data.rightOption as any
-        return {...rightOption, performance: JSON.parse(rightOption["performance"])} as OptionType
+        const rightOption = data?.rightOption as any
+        //@ts-ignore
+        const rightOptionPerformance = JSON.parse(data?.rightOption["performance"])
+        const rightOptionSnapshots = rightOptionPerformance.snapshots
+        shuffledRightOption.current = {
+            ...rightOption,
+            performance: {
+                ...rightOptionPerformance,
+                snapshots: rightOptionSnapshots
+            }
+        } as OptionType
+        return {
+            ...rightOption,
+            performance: {
+                ...rightOptionPerformance,
+                snapshots: rightOptionSnapshots
+            }
+        } as OptionType
     }, [data])
 
     const reducer = useCallback((state: State, action: Action): State => {
         if (action.type === ActionType.FINISH_SNAPSHOT) {
             if (state.optionSide === "LEFT") {
-                if (leftOption?.performance.snapshots && state.snapshotIndex < leftOption?.performance.snapshots.length - 1) {
+                if (leftOption?.performance.snapshots && state.snapshotIndex < shuffledLeftOption.current!.performance.snapshots.length - 1) {
                     return {
                         ...state,
                         snapshotIndex: state.snapshotIndex + 1,
@@ -83,7 +121,7 @@ const Performance: FC<PerformanceProps> = (props) => {
                     }
                 }
             } else {
-                if (rightOption?.performance.snapshots && state.snapshotIndex < rightOption?.performance.snapshots.length - 1) {
+                if (rightOption?.performance.snapshots && state.snapshotIndex < shuffledRightOption.current!.performance.snapshots.length - 1) {
                     return {
                         ...state,
                         snapshotIndex: state.snapshotIndex + 1,
@@ -114,9 +152,15 @@ const Performance: FC<PerformanceProps> = (props) => {
             return undefined
         }
         if (state.optionSide === "LEFT") {
-            output = {...leftOption?.performance?.snapshots[state.snapshotIndex]!, optionSide: "LEFT" as PerformanceSide}
+            output = {
+                ...shuffledLeftOption.current?.performance?.snapshots[state.snapshotIndex]!,
+                optionSide: "LEFT" as PerformanceSide
+            }
         } else {
-            output = {...rightOption?.performance?.snapshots[state.snapshotIndex]!, optionSide: "RIGHT" as PerformanceSide}
+            output = {
+                ...shuffledRightOption.current?.performance?.snapshots[state.snapshotIndex]!,
+                optionSide: "RIGHT" as PerformanceSide
+            }
         }
         if (state.finished) {
             return undefined
@@ -125,13 +169,28 @@ const Performance: FC<PerformanceProps> = (props) => {
             output = {...output, indicator: SnapshotIndicator.LOADING}
         }
         return output
-    }, [leftOption?.performance?.snapshots, rightOption?.performance?.snapshots, state])
+    }, [state])
 
+
+    const stockPrefix = currentSnapshot?.label?.split(" ")[0]
+    const stockName = currentSnapshot?.label?.split(" ")[1]
 
     return (
         <>
             <Board
-                header={<Header centered={true}>{currentSnapshot?.label}</Header>}
+                header={<Header centered={true}>
+                    {currentSnapshot &&
+                        <>
+                        <span>
+                        {stockPrefix}
+                    </span>
+                            :&nbsp;
+                            <span className="font-bold">
+                    {stockName}
+                </span>
+                        </>
+                    }
+                </Header>}
                 snapshot={currentSnapshot}
                 taskId={props.taskId}
             >
