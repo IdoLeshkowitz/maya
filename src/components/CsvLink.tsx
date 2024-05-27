@@ -3,15 +3,14 @@ import {FC, ReactNode} from "react";
 import {CSVLink} from "react-csv";
 
 interface CsvLinkProps {
-    children : ReactNode
-    data :any
+    children: ReactNode
+    data: string
+    fileName: string
+    headers ?: any[]
 }
-const csvData = [
-    ["firstname", "lastname", "email"],
-    ["Ahmed", "Tomi", "ah@smthing.co.com"],
-    ["Raed", "Labes", "rl@smthing.co.com"],
-    ["Yezzi", "Min l3b", "ymin@cocococo.com"]
-];
-export const CsvLink : FC<CsvLinkProps> = (props) => {
-    return <CSVLink data={props.data} className="bg-blue-500 rounded-md text-white px-5 py-2">{props.children}</CSVLink>
+
+export const CsvLink: FC<CsvLinkProps> = (props) => {
+    const parsedData = JSON.parse(props.data)
+    return <CSVLink filename={props.fileName} data={parsedData} headers={props.headers} target={"_blank"} href={"#"}
+                    className="bg-blue-500 rounded-md text-white px-5 py-2">{props.children}</CSVLink>
 }

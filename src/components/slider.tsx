@@ -4,7 +4,7 @@ interface SliderProps {
     onChange?: (value: number) => void
     min?: number
     max?: number
-    value?: number
+    value: number | null
     [key: string]: any
 }
 
@@ -31,7 +31,7 @@ const Slider: FC<SliderProps> = (props) => {
                 />
             </div>
             <p className={`text-2xl font-bold text-black ${value === undefined && 'opacity-0'}`}>
-                {value ?? 'no value'}
+                {value ?? <span>&nbsp;</span>}
             </p>
         </div>
     )

@@ -1,58 +1,462 @@
-{
-  "colors"        : {
-    "blue"  : "#1fb6ff",
-    "red"   : "#E0245E",
-    "yellow": "#FFD700",
-    "green" : "#17BF63",
-    "white" : "#FFFFFF",
-    "black" : "#000000"
-  },
-  "experimentName": "alpha experiment",
-  "experimentVersion": "1.0.0",
-  "variantName"   : "alpha variant",
-  "numberOfTasks" : 2,
-  "optionsColors" : [
-    ["red", "green"],
-    ["blue", "yellow"]
-  ],
-  "optionsNames"  : [
-    ["Portfolio ABG", "Portfolio QYN"],
-    ["Portfolio BGH", "Portfolio ZQN"]
-  ],
-  "groupsNames"   : [
-    ["Banking", "Food", "Products", "Insurance", "Materials", "Utilities"],
-    ["Real Estate", "Fashion", "Automobiles", "Tourism", "Transportation", "Entertainment"]
-  ],
-  "previews"      : [
-    {
-      "previewName"           : "preview1",
-      "leftPreviewGroupName"  : "left preview group name",
-      "rightPreviewGroupName" : "right preview group name",
-      "leftPreviewSimpleName" : "left preview simple name",
-      "rightPreviewSimpleName": "right preview simple name",
-      "snapshots"             : [
-        {"groupIndex": 0, "label": "Company 1", "indicator": "check", "optionSide": "left"},
-        {"groupIndex": 1, "label": "Company 2", "indicator": "check", "optionSide": "left"},
-        {"groupIndex": 2, "label": "Company 3", "indicator": "check", "optionSide": "left"},
-        {"groupIndex": 1, "label": "Company 4", "indicator": "cross", "optionSide": "right"},
-        {"groupIndex": 2, "label": "Company 5", "indicator": "cross", "optionSide": "right"},
-        {"groupIndex": 0, "label": "Company 6", "indicator": "cross", "optionSide": "right"}
+[
+  {
+    "experimentName": "Incentive",
+    "experimentVersion": "Run",
+    "variantName": "stocks",
+    "numberOfTasks": 2,
+    "optionsColors": [
+      [
+        "purple",
+        "orange"
+      ],
+      [
+        "lightblue",
+        "gray"
       ]
-    },
-    {
-      "previewName"           : "preview2",
-      "leftPreviewGroupName"  : "left preview group name",
-      "rightPreviewGroupName" : "right preview group name",
-      "leftPreviewSimpleName" : "left preview simple name",
-      "rightPreviewSimpleName": "right preview simple name",
-      "snapshots"             : [
-        {"groupIndex": 0, "label": "Company 1", "indicator": "check", "optionSide": "right"},
-        {"groupIndex": 1, "label": "Company 2", "indicator": "check", "optionSide": "right"},
-        {"groupIndex": 2, "label": "Company 3", "indicator": "check", "optionSide": "right"},
-        {"groupIndex": 1, "label": "Company 4", "indicator": "cross", "optionSide": "left"},
-        {"groupIndex": 0, "label": "Company 5", "indicator": "cross", "optionSide": "left"},
-        {"groupIndex": 2, "label": "Company 6", "indicator": "cross", "optionSide": "left"}
+    ],
+    "optionsNames": [
+      [
+        "Portfolio ABG",
+        "Portfolio QYN"
+      ],
+      [
+        "Portfolio BGH",
+        "Portfolio ZQN"
       ]
-    }
-  ]
-}
+    ],
+    "groupsNames": [
+      [
+        "Industry: \n Banking",
+        "Industry: \n Food",
+        "Industry: \n Products",
+        "Industry: \n Insurance",
+        "Industry: \n Materials",
+        "Industry: \n Utilities"
+      ],
+      [
+        "Industry: \n Real Estate",
+        "Industry: \n Fashion",
+        "Industry: \n Automobiles",
+        "Industry: \n Tourism",
+        "Industry: \n Transportation",
+        "Industry: \n Entertainment"
+      ]
+    ],
+    "performance": [
+      {
+        "overallPreviewName": "Incongruent",
+        "options": [
+          {
+            "groupName": "Group_Low",
+            "simpleName": "Simple_High",
+            "snapshots": [
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock VU"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "cross",
+                "label": "Stock RR"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock LH"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock OSAV"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock EJDS"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock TRGA"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "cross",
+                "label": "Stock IOFU"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock SSF"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock ADU"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock OWFM"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock FAZR"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock KSH"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock RAF"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock CN"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "cross",
+                "label": "Stock JUWI"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "cross",
+                "label": "Stock TDI"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock NME"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock WH"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock ES"
+              }
+            ]
+          },
+          {
+            "groupName": "Group_High",
+            "simpleName": "Simple_Low",
+            "snapshots": [
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock CB"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock LCK"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock OEA"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock OQ"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock MCY"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock RM"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock AUAV"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock HYFP"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "check",
+                "label": "Stock KWW"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock SEQ"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock LE"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "check",
+                "label": "Stock GM"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock SD"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "check",
+                "label": "Stock CR"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock URE"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock DXU"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "check",
+                "label": "Stock HA"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock LNYV"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock GK"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "overallPreviewName": "Congruent",
+        "options": [
+          {
+            "groupName": "Group_High",
+            "simpleName": "Simple_High",
+            "snapshots": [
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock ZKKL"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock PI"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "check",
+                "label": "Stock BQM"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock SJPQ"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock GY"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "check",
+                "label": "Stock OEHX"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock KG"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock MFG"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock WNJ"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "check",
+                "label": "Stock ZXE"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock BHP"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "check",
+                "label": "Stock ZPJ"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock YA"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock RBLI"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock IUS"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock PHPE"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock AWZT"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "check",
+                "label": "Stock FZKZ"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock SCX"
+              }
+            ]
+          },
+          {
+            "groupName": "Group_Low",
+            "simpleName": "Simple_Low",
+            "snapshots": [
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock RFW"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock TLEL"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock XTM"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock QNH"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "cross",
+                "label": "Stock AOD"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock FASJ"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock AW"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "cross",
+                "label": "Stock SSWN"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock HEFM"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock ST"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "cross",
+                "label": "Stock JSF"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock DU"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock NRNQ"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock KM"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "cross",
+                "label": "Stock BFK"
+              },
+              {
+                "groupIndex": 1,
+                "indicator": "cross",
+                "label": "Stock PFPP"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock YCO"
+              },
+              {
+                "groupIndex": 2,
+                "indicator": "check",
+                "label": "Stock GWAH"
+              },
+              {
+                "groupIndex": 0,
+                "indicator": "cross",
+                "label": "Stock FJ"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

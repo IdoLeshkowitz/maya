@@ -1,34 +1,58 @@
-import {TaskMeta} from "@/types/taskMeta";
-import Option from "@components/option";
-import Group from "@components/group";
-import {Snapshot} from "@/types/preview";
-import React, {ReactNode} from "react";
+"use client"
+import {Snapshot} from "@/types/performance";
+import React, {ReactNode, useMemo} from "react";
 import '../app/globals.css'
+import {useQuery, useQueryClient} from "@tanstack/react-query";
+import {TaskReturnType} from "@/app/api/task/[id]/route";
+import {Option as OptionType} from "@/types/option";
+import Option from "@/components/option";
+import Group from "@components/group";
 
 interface BoardProps {
-    taskMeta: TaskMeta,
-    snapshot?: Snapshot
+    taskId: string
+    snapshot?: Snapshot & { optionSide: 'LEFT' | 'RIGHT' }
     children?: ReactNode
     header?: ReactNode
-    onOptionSelected?: (side: 'left' | 'right') => void
+    onOptionSelected?: (side: 'LEFT' | 'RIGHT') => void
 }
 
 export default function Board(props: BoardProps) {
-    const {taskMeta, children, snapshot, header, onOptionSelected} = props
+    const {children, snapshot, header, onOptionSelected} = props
+    const queryClient = useQueryClient()
+    const {data} = useQuery<TaskReturnType>(['task', props.taskId], () => fetch(`/api/task/${props.taskId}`).then(res => res.json()), {
+        suspense: true,
+    })
+
     const optionsContainerStyle = {
-        display            : 'grid',
+        display: 'grid',
         gridTemplateColumns: "repeat(2,1fr)",
-        gridGap            : "1rem",
+        gridGap: "1rem",
     }
     const boardContainerStyle = {
-        display         : 'grid',
+        display: 'grid',
         gridTemplateRows: ".5fr 3fr 1fr",
-        gridGap         : "1rem",
+        gridGap: "1rem",
     }
+    const leftOption = useMemo(() => {
+        if (!data) {
+            return null
+        }
+        const leftOption = data.leftOption as any
+        return {...leftOption, performance: JSON.parse(leftOption["performance"])} as OptionType
+    }, [data])
+    const rightOption = useMemo(() => {
+        if (!data) {
+            return null
+        }
+        const rightOption = data.rightOption as any
+        return {...rightOption, performance: JSON.parse(rightOption["performance"])} as OptionType
+    }, [data])
+
+
     return (
         <main className="py-8 px-10 bg-white h-screen" style={boardContainerStyle}>
             {/* header */}
-            <div className="px-20">
+            <div className="px-20 flex justify-center items-center">
                 {header ?? <div/>}
             </div>
             {/*options*/}
@@ -36,18 +60,18 @@ export default function Board(props: BoardProps) {
                 {/*left option*/}
                 <Option
                     tabIndex={0}
-                    onClick={onOptionSelected ? () => onOptionSelected("left") : undefined}
-                    optionName={taskMeta.leftOption.optionName}
-                    optionColor={taskMeta.leftOption.optionColor}
+                    optionName={leftOption?.name ?? ""}
+                    color={leftOption?.color ?? ""}
+                    onClick={() => onOptionSelected && onOptionSelected('LEFT')}
                 >
                     {
-                        taskMeta.leftOption.groupsNames.map((groupName, index) => {
+                        leftOption?.groupsNames.map((groupName, index) => {
                             return (
                                 <Group
                                     key={index}
                                     groupName={groupName}
-                                    snapshot={(snapshot && snapshot.optionSide === "left" && snapshot.groupIndex === index) ? snapshot : undefined}
-                                    hidden={snapshot && (snapshot?.optionSide === "right" || snapshot?.groupIndex !== index)}
+                                    snapshot={(snapshot && snapshot.optionSide === "LEFT" && snapshot.groupIndex === index) ? snapshot : undefined}
+                                    hidden={snapshot && (snapshot?.optionSide === "RIGHT" || snapshot?.groupIndex !== index)}
                                 />
                             )
                         })
@@ -56,25 +80,24 @@ export default function Board(props: BoardProps) {
                 {/*right option*/}
                 <Option
                     tabIndex={1}
-                    onClick={onOptionSelected ? () => onOptionSelected("right") : undefined}
-                    optionName={taskMeta.rightOption.optionName}
-                    optionColor={taskMeta.rightOption.optionColor}
+                    optionName={rightOption?.name ?? ""}
+                    color={rightOption?.color ?? ""}
+                    onClick={() => onOptionSelected && onOptionSelected('RIGHT')}
                 >
                     {
-                        taskMeta.rightOption.groupsNames.map((groupName, index) => {
+                        rightOption?.groupsNames.map((groupName, index) => {
                             return (
                                 <Group
                                     key={index}
                                     groupName={groupName}
-                                    snapshot={(snapshot && snapshot.optionSide === "right" && snapshot.groupIndex === index) ? snapshot : undefined}
-                                    hidden={snapshot && (snapshot?.optionSide === "left" || snapshot?.groupIndex !== index)}
+                                    snapshot={(snapshot && snapshot.optionSide === "RIGHT" && snapshot.groupIndex === index) ? snapshot : undefined}
+                                    hidden={snapshot && (snapshot?.optionSide === "LEFT" || snapshot?.groupIndex !== index)}
                                 />
                             )
                         })
                     }
                 </Option>
             </div>
-
             {/*footer*/}
             {children}
         </main>
