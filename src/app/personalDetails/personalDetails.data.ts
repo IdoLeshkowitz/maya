@@ -9,7 +9,7 @@ export interface Page {
 export const personalDetailsPages: Page[] = [
     {
         //screen 1
-        title: "Dear participant, we want to ask you a few questions to understand how you performed the task.",
+        title: "Dear participant, we want to ask you a few questions to understand how you performed the task. Your answers to these questions will not affect your chances of winning the lottery.",
     },
     {
         //screen 2
